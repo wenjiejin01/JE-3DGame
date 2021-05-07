@@ -1,5 +1,3 @@
 .vs/*
 xcode/*
 visualstudio/.vs
-visualstudio/libs
-visualstudio/VS2015/Debug/*
