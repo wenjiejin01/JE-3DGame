@@ -12,6 +12,7 @@
 #include "shader.h"
 #include "input.h"
 #include "animation.h"
+#include "entity.h"
 
 class Stage {
 public:
@@ -48,7 +49,7 @@ public:
 	Animation* anim = NULL;
 
 	FBO* fbo = NULL;
-
+	std::vector<EntityMesh*> mesh_List;
 
 	PlayStage();
 	virtual void render(Camera* camera);
