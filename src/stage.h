@@ -43,10 +43,10 @@ public:
 
 class PlayStage : public Stage {
 public:
-	Mesh* mesh = NULL;
-	Texture* texture;
-	Shader* shader = NULL;
-	Animation* anim = NULL;
+	//Mesh* mesh = NULL;
+	//Texture* texture;
+	//Shader* shader = NULL;
+	//Animation* anim = NULL;
 
 	FBO* fbo = NULL;
 	std::vector<EntityMesh*> mesh_List;

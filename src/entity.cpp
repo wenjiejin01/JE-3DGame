@@ -22,10 +22,6 @@ void EntityMesh::render(Camera* camera)
 {
 	Game* game = Game::instance;
 
-	//create model matrix for cube
-	Matrix44 m;
-	m.rotate(angle * DEG2RAD, Vector3(0, 1, 0));
-
 	if (shader)
 	{
 		//enable shader
@@ -34,8 +30,8 @@ void EntityMesh::render(Camera* camera)
 		//upload uniforms
 		shader->setUniform("u_color", Vector4(1, 1, 1, 1));
 		shader->setUniform("u_viewprojection", camera->viewprojection_matrix);
-		shader->setUniform("u_texture", texture, 0);
-		shader->setUniform("u_model", m);
+		if (texture != NULL) shader->setUniform("u_texture", texture, 0);
+		shader->setUniform("u_model", model);
 		shader->setUniform("u_time", time);
 
 		//do the draw call
@@ -51,7 +47,7 @@ void EntityMesh::update(float seconds_elapsed) {
 	Camera* camera = game->camera;
 
 	float speed = seconds_elapsed * game->mouse_speed; //the speed is defined by the seconds_elapsed so it goes constant
-
+	this->moving = false;
 		//example
 	angle += (float)seconds_elapsed * 10.0f;
 
@@ -62,14 +58,33 @@ void EntityMesh::update(float seconds_elapsed) {
 		camera->rotate(Input::mouse_delta.y * 0.005f, camera->getLocalVector(Vector3(-1.0f, 0.0f, 0.0f)));
 	}
 
-	//async input to move the camera around
-	if (Input::isKeyPressed(SDL_SCANCODE_LSHIFT)) speed *= 10; //move faster with left shift
-	if (Input::isKeyPressed(SDL_SCANCODE_W) || Input::isKeyPressed(SDL_SCANCODE_UP)) camera->move(Vector3(0.0f, 0.0f, 1.0f) * speed);
-	if (Input::isKeyPressed(SDL_SCANCODE_S) || Input::isKeyPressed(SDL_SCANCODE_DOWN)) camera->move(Vector3(0.0f, 0.0f, -1.0f) * speed);
-	if (Input::isKeyPressed(SDL_SCANCODE_A) || Input::isKeyPressed(SDL_SCANCODE_LEFT)) camera->move(Vector3(1.0f, 0.0f, 0.0f) * speed);
-	if (Input::isKeyPressed(SDL_SCANCODE_D) || Input::isKeyPressed(SDL_SCANCODE_RIGHT)) camera->move(Vector3(-1.0f, 0.0f, 0.0f) * speed);
+	////async input to move the camera around
+	//if (Input::isKeyPressed(SDL_SCANCODE_LSHIFT)) speed *= 10; //move faster with left shift
+	//if (Input::isKeyPressed(SDL_SCANCODE_W) || Input::isKeyPressed(SDL_SCANCODE_UP)) camera->move(Vector3(0.0f, 0.0f, 1.0f) * speed);
+	//if (Input::isKeyPressed(SDL_SCANCODE_S) || Input::isKeyPressed(SDL_SCANCODE_DOWN)) camera->move(Vector3(0.0f, 0.0f, -1.0f) * speed);
+	//if (Input::isKeyPressed(SDL_SCANCODE_A) || Input::isKeyPressed(SDL_SCANCODE_LEFT)) camera->move(Vector3(1.0f, 0.0f, 0.0f) * speed);
+	//if (Input::isKeyPressed(SDL_SCANCODE_D) || Input::isKeyPressed(SDL_SCANCODE_RIGHT)) camera->move(Vector3(-1.0f, 0.0f, 0.0f) * speed);
+	// Mesh movimente.
+	float model_speed = seconds_elapsed * 200.0f;
+	if (Input::isKeyPressed(SDL_SCANCODE_W)) {
+		moving = true;
+		this->model.translate(0.0f, 0.0f, -1.0f * model_speed);
+	}
+	if (Input::isKeyPressed(SDL_SCANCODE_S)) {
+		moving = true;
+		this->model.translate(0.0f, 0.0f, 1.0f * model_speed);
+	}
+	// rotate only when is moving 
+	if (Input::isKeyPressed(SDL_SCANCODE_D) && moving) model.rotate(90.0f * seconds_elapsed * DEG2RAD, Vector3(0.0f, 1.0f, 0.0f));
+	if (Input::isKeyPressed(SDL_SCANCODE_A) && moving) model.rotate(-90.0f * seconds_elapsed * DEG2RAD, Vector3(0.0f, 1.0f, 0.0f));
+
 
 	//to navigate with the mouse fixed in the middle
 	if (game->mouse_locked)
 		Input::centerMouse();
+
+	if (Input::wasKeyPressed(SDL_SCANCODE_TAB))
+	{
+		free_camera = !free_camera;
+	}
 }

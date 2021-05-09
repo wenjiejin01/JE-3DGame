@@ -27,13 +27,22 @@ class Entity
 class EntityMesh : public Entity
 {
     public:
+        enum meshType
+        {
+            CAR,
+            HOUSE
+        };
         //Attributes of this class 
-        std::string name;
-    
+        meshType meshType;
+        bool moving = false;
+
         Mesh* mesh;
         Texture* texture;
         Shader* shader;
+        Matrix44 model;
         Vector4 color;
+
+        bool free_camera = false;
 
         //standar variable
         float angle = 0;
