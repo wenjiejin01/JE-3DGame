@@ -1,6 +1,6 @@
 ﻿  stage.cpp
 C:\Users\Wenjie\Desktop\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\framework.h(372,105): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
-C:\Users\Wenjie\Desktop\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(47,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Wenjie\Desktop\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(49,23): warning C4018: '<': signed/unsigned mismatch
 animation.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/INCREMENTAL:NO' specification
 LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
 glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'C:\Users\Wenjie\Desktop\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\vc120.pdb'; linking object as if no debug info

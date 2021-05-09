@@ -43,7 +43,9 @@ void PlayStage::render(Camera* camera){
 	EntityMesh* currentMesh = NULL;
 	int count = mesh_List.size();
 	Vector3 eye, center, up, padding;
-
+	Vector3 current_pos_world;
+	Mesh* usedMesh;
+	Texture* usedTex;
 	for (size_t i = 0; i < count; i++)
 	{
 		currentMesh = mesh_List.at(i);
@@ -67,7 +69,11 @@ void PlayStage::render(Camera* camera){
 			{
 				for (size_t j = 0; j < 40; j++)
 				{
-					currentMesh->model.setTranslation(i * padding.x + 50.0f, 0.0f, j * padding.y + 50.0f);
+					currentMesh->model.setTranslation(i * padding.x + 10.0f, 0.0f, j * padding.y + 10.0f);
+					current_pos_world = currentMesh->model * Vector3(0.0f, 0.0f, 0.0f);
+					usedMesh = currentMesh->mesh;
+					usedTex = currentMesh->texture;
+					if (!camera->testSphereInFrustum(current_pos_world, usedMesh->radius)) continue;
 					currentMesh->render(camera);
 				}
 
