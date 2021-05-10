@@ -2,10 +2,12 @@
 #include "input.h"
 #include "stage.h"
 #include "entity.h"
+#include "scene.h"
 
 Stage::Stage() {}
 
 PlayStage::PlayStage() {
+
 	//Load Entity
 	EntityMesh* truck = new EntityMesh();
 	truck->meshType = EntityMesh::meshType::CAR;
