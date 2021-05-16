@@ -6,6 +6,11 @@
 #include "texture.h"
 #include "shader.h"
 
+enum ENTITY_TYPE_ID {
+    MESH,
+    SOUND,
+};
+
 class Entity
 {
     public:
@@ -19,37 +24,36 @@ class Entity
         //methods overwritten by derived classes 
         virtual void render(Camera* camera);
         virtual void update(float elapsed_time);
+        virtual ENTITY_TYPE_ID getType() = 0;
 
-        //some useful methods...
-        Vector3 getPosition();
+        ////some useful methods...
+        //Vector3 getPosition();
 };
 
 class EntityMesh : public Entity
 {
-    public:
-        enum meshType
-        {
-            CAR,
-            HOUSE
-        };
-        //Attributes of this class 
-        meshType meshType;
-        bool moving = false;
+public:
+    enum meshType
+    {
+        CAR,
+        HOUSE
+    };
+    //Attributes of this class 
+    meshType meshType;
+    bool moving = false;
 
-        Mesh* mesh;
-        Texture* texture;
-        Shader* shader;
-        Matrix44 model;
-        Vector4 color;
+    Mesh* mesh;
+    Texture* texture;
+    Shader* shader;
+    Matrix44 model;
+    Vector4 color;
 
-        bool free_camera = false;
 
-        //standar variable
-        float angle = 0;
 
-        //methods overwritten 
-        void render(Camera* camera);
-        void update(float dt);
+    //methods overwritten 
+    void render(Camera* camera);
+    void update(float dt);
+    ENTITY_TYPE_ID getType() { return ENTITY_TYPE_ID::MESH;};
 };
 
 #endif // ENTITY_H

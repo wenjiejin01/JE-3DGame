@@ -49,7 +49,7 @@ public:
 	//Animation* anim = NULL;
 
 	FBO* fbo = NULL;
-	std::vector<EntityMesh*> mesh_List;
+	std::vector<Entity*> mesh_List;
 
 	PlayStage();
 	virtual void render(Camera* camera);

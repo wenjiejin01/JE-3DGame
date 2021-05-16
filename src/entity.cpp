@@ -1,5 +1,6 @@
 #include "entity.h"
 #include "game.h"
+#include "scene.h"
 
 Entity::Entity(){
 
@@ -8,12 +9,12 @@ Entity::~Entity() {
 
 }
 
-void Entity::render(Camera* camera) {}
+void Entity::render(Camera* camera) {
+	std::cout << "this is entity render" << std::endl;
+}
 
-void Entity::update(float elapsed_time) {}
-
-Vector3 Entity::getPosition() {
-	return Vector3(0.0f, 0.0f, 0.0f);
+void Entity::update(float elapsed_time) {
+	std::cout << "this is entity update" << std::endl;
 }
 
 
@@ -21,7 +22,7 @@ Vector3 Entity::getPosition() {
 void EntityMesh::render(Camera* camera)
 {
 	Game* game = Game::instance;
-
+	
 	if (shader)
 	{
 		//enable shader
@@ -45,11 +46,12 @@ void EntityMesh::render(Camera* camera)
 void EntityMesh::update(float seconds_elapsed) {
 	Game* game = Game::instance;
 	Camera* camera = game->camera;
+	Scene* world = Scene::instance;
 
 	float speed = seconds_elapsed * game->mouse_speed; //the speed is defined by the seconds_elapsed so it goes constant
 	this->moving = false;
 		//example
-	angle += (float)seconds_elapsed * 10.0f;
+	world->angle += (float)seconds_elapsed * 10.0f;
 
 	//mouse input to rotate the cam
 	if ((Input::mouse_state & SDL_BUTTON_LEFT) || game->mouse_locked) //is left button pressed?
@@ -85,6 +87,6 @@ void EntityMesh::update(float seconds_elapsed) {
 
 	if (Input::wasKeyPressed(SDL_SCANCODE_TAB))
 	{
-		free_camera = !free_camera;
+		world->free_camera = !(world->free_camera);
 	}
 }

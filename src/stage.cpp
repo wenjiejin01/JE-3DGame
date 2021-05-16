@@ -7,11 +7,12 @@
 Stage::Stage() {}
 
 PlayStage::PlayStage() {
+	Scene* world = new Scene();
 
 	//Load Entity
 	EntityMesh* truck = new EntityMesh();
 	truck->meshType = EntityMesh::meshType::CAR;
-	mesh_List.push_back(truck);
+	world->entity_list.push_back(truck);
 
 	//load one texture without using the Texture Manager (Texture::Get would use the manager)
 	truck->texture = new Texture();
@@ -26,7 +27,7 @@ PlayStage::PlayStage() {
 	// House entity
 	EntityMesh* house = new EntityMesh();
 	house->meshType = EntityMesh::meshType::HOUSE;
-	mesh_List.push_back(house);
+	world->entity_list.push_back(house);
 
 	//load one texture without using the Texture Manager (Texture::Get would use the manager)
 	house->texture = new Texture();
@@ -43,15 +44,28 @@ PlayStage::PlayStage() {
 
 void PlayStage::render(Camera* camera){
 	EntityMesh* currentMesh = NULL;
-	int count = mesh_List.size();
+	Scene* world = Scene::instance;
+
+
+	int count = world->entity_list.size();
 	Vector3 eye, center, up, padding;
 	Vector3 current_pos_world;
 	Mesh* usedMesh;
 	Texture* usedTex;
+
 	for (size_t i = 0; i < count; i++)
 	{
-		currentMesh = mesh_List.at(i);
+		// Break the game and show error.
+		assert(world->entity_list.at(i) != NULL);
 
+		// Check entity type
+		if (world->entity_list.at(i)->getType() == ENTITY_TYPE_ID::MESH)
+		{			
+			//DOWNCAST, BY STATIC_CAST
+			currentMesh = static_cast<EntityMesh*>(world->entity_list.at(i));
+		}
+
+		// 
 		switch (currentMesh->meshType)
 		{
 		case EntityMesh::meshType::CAR:
@@ -90,6 +104,8 @@ void PlayStage::render(Camera* camera){
 }
 
 void PlayStage::update(float seconds_elapsed) {
-	EntityMesh* currentMesh = mesh_List.at(0);
+	Scene* world = Scene::instance;
+
+	EntityMesh* currentMesh = static_cast<EntityMesh*>(world->entity_list.at(0));
 	currentMesh->update(seconds_elapsed);
 }

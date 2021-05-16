@@ -5,15 +5,16 @@
 
 class Scene //igual que World
 {
-protected:
-	Scene* scene; //singleton
+public:
+	static Scene* instance; //singleton
+	bool free_camera = false;
+
+	//standar variable
+	float angle = 0;
 	Scene();
 
-public:
-	Scene* getScene();
-
 	//current scene
-	std::vector<Entity*> entities;
+	std::vector<Entity*> entity_list;
 
 };
 

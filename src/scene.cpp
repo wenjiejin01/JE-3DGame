@@ -1,10 +1,9 @@
 #include "scene.h"
 
+Scene* Scene::instance = NULL;
 
 Scene::Scene() {
-}
+	assert(instance == NULL);
 
-Scene* Scene::getScene()
-{
-	return scene;
+	instance = this;
 }
