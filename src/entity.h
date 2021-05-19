@@ -36,7 +36,11 @@ public:
     enum meshType
     {
         CAR,
-        HOUSE
+        HOUSE,
+        ROAD,
+        GRASS,
+        SKY
+
     };
     //Attributes of this class 
     meshType meshType;
@@ -47,11 +51,10 @@ public:
     Shader* shader;
     Matrix44 model;
     Vector4 color;
-
-
+   
 
     //methods overwritten 
-    void render(Camera* camera);
+    void render(Camera* camera , float tiling = 1.0f);
     void update(float dt);
     ENTITY_TYPE_ID getType() { return ENTITY_TYPE_ID::MESH;};
 };

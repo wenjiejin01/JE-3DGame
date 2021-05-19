@@ -8,36 +8,58 @@ Stage::Stage() {}
 
 PlayStage::PlayStage() {
 	Scene* world = new Scene();
+	//GRASS
+	EntityMesh* grass = new EntityMesh();
+	grass->meshType = EntityMesh::GRASS;
+	world->entity_list.push_back(grass);
+	grass->mesh = new Mesh();
+	grass->mesh->createPlane(600.0f);
+	grass->texture = new Texture();
+	grass->texture->load("data/grass.tga");
+	grass->model.translate(0.0f, 0.0f, 0.0f);
+	// example of shader loading using the shaders manager
+	grass->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/texture.fs");
 
-	//Load Entity
-	EntityMesh* truck = new EntityMesh();
-	truck->meshType = EntityMesh::meshType::CAR;
-	world->entity_list.push_back(truck);
+	//ROAD
+	EntityMesh* road = new EntityMesh();
+	road->meshType = EntityMesh::ROAD;
+	world->entity_list.push_back(road);
+	//load one texture without using the Texture Manager (Texture::Get would use the manager)
+	road->texture = new Texture();
+	road->texture->load("data/biglib/GiantGeneralPack/color-atlas-new.png");
+	// example of loading Mesh from Mesh Manager
+	//road->mesh = Mesh::Get("data/map_road.obj");
+	road->mesh = Mesh::Get("data/mapa_carretera.obj");
+	road->model.translate(0.0f, 0.0f, 0.0f);
+	// example of shader loading using the shaders manager
+	road->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/texture.fs");
+
+	//CAR
+	EntityMesh* car = new EntityMesh();
+	car->meshType = EntityMesh::CAR;
+	world->entity_list.push_back(car);
 
 	//load one texture without using the Texture Manager (Texture::Get would use the manager)
-	truck->texture = new Texture();
-	truck->texture->load("data/truck/truck.tga");
+	car->texture = new Texture();
+	car->texture->load("data/biglib/GiantGeneralPack/color-atlas-new.png");
 
 	// example of loading Mesh from Mesh Manager
-	truck->mesh = Mesh::Get("data/truck/truck.ASE");
-	truck->model.translate(0.0f, 0.0f, 0.0f);
+	car->mesh = Mesh::Get("data/biglib/GiantGeneralPack/Cars_T/car-passenger_1.obj");
+	car->model.translate(0.0f, 0.0f, 0.0f);
 	// example of shader loading using the shaders manager
-	truck->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/texture.fs");
+	car->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/texture.fs");
 
-	// House entity
-	EntityMesh* house = new EntityMesh();
-	house->meshType = EntityMesh::meshType::HOUSE;
-	world->entity_list.push_back(house);
+	//SKY
+	EntityMesh* sky = new EntityMesh();
+	sky->meshType = EntityMesh::SKY;
+	world->entity_list.push_back(sky);
 
 	//load one texture without using the Texture Manager (Texture::Get would use the manager)
-	house->texture = new Texture();
-	house->texture->load("data/truck/houses_and_windows.tga");
-
-	// example of loading Mesh from Mesh Manager
-	house->mesh = Mesh::Get("data/truck/house2.ASE");
-	house->model.translate(50.0f, 0.0f, 0.0f);
-	// example of shader loading using the shaders manager
-	house->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/texture.fs");
+	sky->texture = new Texture();
+	sky->mesh = Mesh::Get("data/cielo.ASE");
+	sky->texture->load("data/cielo.tga");
+	sky->model.translate(0.0f, 0.0f, 0.0f);
+	sky->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/texture.fs");
 
 }
 
@@ -68,17 +90,9 @@ void PlayStage::render(Camera* camera){
 		// 
 		switch (currentMesh->meshType)
 		{
-		case EntityMesh::meshType::CAR:
-			//fix camera
-			eye = currentMesh->model * Vector3(0.0f, 6.0f, 10.0f);
-			center = currentMesh->model * Vector3(0.0f, 0.0f, -2.0f);
-			up = currentMesh->model.rotateVector(Vector3(0.0f, 1.0f, 0.0f));
-			camera->lookAt(eye, center, up);
+		
 
-			currentMesh->render(camera);
-			break;
-
-		case EntityMesh::meshType::HOUSE:
+		/*case EntityMesh::meshType::HOUSE:
 			padding = currentMesh->mesh->box.halfsize * 2;
 
 			for (size_t i = 0; i < 40; i++)
@@ -94,7 +108,35 @@ void PlayStage::render(Camera* camera){
 				}
 
 			}
+			break;*/
+		case EntityMesh::SKY:
+			//currentMesh->model.translate(camera->eye.x, camera->eye.y, camera->eye.z);
+			eye = currentMesh->model * Vector3(camera->eye.x, camera->eye.y, camera->eye.z);
+			center = currentMesh->model * Vector3(camera->center.x, camera->center.y, camera->center.z);
+			up = currentMesh->model * Vector3(camera->up.x, camera->up.y, camera->up.z);
+			camera->lookAt(eye, center, up);
+			currentMesh->render(camera);
 			break;
+
+		case EntityMesh::GRASS:
+			currentMesh->render(camera, 100);
+			break;
+
+		case EntityMesh::ROAD:
+			currentMesh->moving = false;
+			currentMesh->render(camera);
+			break;
+
+		case EntityMesh::meshType::CAR:
+			//fix camera
+			eye = currentMesh->model * Vector3(0.0f, 6.0f, 10.0f);
+			center = currentMesh->model * Vector3(0.0f, 0.0f, -2.0f);
+			up = currentMesh->model.rotateVector(Vector3(0.0f, 1.0f, 0.0f));
+			camera->lookAt(eye, center, up);
+
+			currentMesh->render(camera);
+			break;
+
 
 		default:
 			break;

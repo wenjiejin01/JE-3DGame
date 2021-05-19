@@ -19,7 +19,7 @@ void Entity::update(float elapsed_time) {
 
 
 
-void EntityMesh::render(Camera* camera)
+void EntityMesh::render(Camera* camera, float tiling)
 {
 	Game* game = Game::instance;
 	
@@ -34,6 +34,7 @@ void EntityMesh::render(Camera* camera)
 		if (texture != NULL) shader->setUniform("u_texture", texture, 0);
 		shader->setUniform("u_model", model);
 		shader->setUniform("u_time", time);
+		shader->setUniform("u_texture_tiled", tiling);
 
 		//do the draw call
 		mesh->render(GL_TRIANGLES);
@@ -53,14 +54,14 @@ void EntityMesh::update(float seconds_elapsed) {
 		//example
 	world->angle += (float)seconds_elapsed * 10.0f;
 
-	//mouse input to rotate the cam
-	if ((Input::mouse_state & SDL_BUTTON_LEFT) || game->mouse_locked) //is left button pressed?
-	{
-		camera->rotate(Input::mouse_delta.x * 0.005f, Vector3(0.0f, -1.0f, 0.0f));
-		camera->rotate(Input::mouse_delta.y * 0.005f, camera->getLocalVector(Vector3(-1.0f, 0.0f, 0.0f)));
-	}
+	////mouse input to rotate the cam
+	//if ((Input::mouse_state & SDL_BUTTON_LEFT) || game->mouse_locked) //is left button pressed?
+	//{
+	//	camera->rotate(Input::mouse_delta.x * 0.005f, Vector3(0.0f, -1.0f, 0.0f));
+	//	camera->rotate(Input::mouse_delta.y * 0.005f, camera->getLocalVector(Vector3(-1.0f, 0.0f, 0.0f)));
+	//}
 
-	////async input to move the camera around
+	//////async input to move the camera around
 	//if (Input::isKeyPressed(SDL_SCANCODE_LSHIFT)) speed *= 10; //move faster with left shift
 	//if (Input::isKeyPressed(SDL_SCANCODE_W) || Input::isKeyPressed(SDL_SCANCODE_UP)) camera->move(Vector3(0.0f, 0.0f, 1.0f) * speed);
 	//if (Input::isKeyPressed(SDL_SCANCODE_S) || Input::isKeyPressed(SDL_SCANCODE_DOWN)) camera->move(Vector3(0.0f, 0.0f, -1.0f) * speed);
