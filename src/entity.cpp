@@ -55,31 +55,38 @@ void EntityMesh::update(float seconds_elapsed) {
 	world->angle += (float)seconds_elapsed * 10.0f;
 
 	////mouse input to rotate the cam
-	//if ((Input::mouse_state & SDL_BUTTON_LEFT) || game->mouse_locked) //is left button pressed?
-	//{
-	//	camera->rotate(Input::mouse_delta.x * 0.005f, Vector3(0.0f, -1.0f, 0.0f));
-	//	camera->rotate(Input::mouse_delta.y * 0.005f, camera->getLocalVector(Vector3(-1.0f, 0.0f, 0.0f)));
-	//}
+	if (world->free_camera)
+	{
+		if ((Input::mouse_state & SDL_BUTTON_LEFT) || game->mouse_locked) //is left button pressed?
+		{
+			camera->rotate(Input::mouse_delta.x * 0.005f, Vector3(0.0f, -1.0f, 0.0f));
+			camera->rotate(Input::mouse_delta.y * 0.005f, camera->getLocalVector(Vector3(-1.0f, 0.0f, 0.0f)));
+		}
 
-	//////async input to move the camera around
-	//if (Input::isKeyPressed(SDL_SCANCODE_LSHIFT)) speed *= 10; //move faster with left shift
-	//if (Input::isKeyPressed(SDL_SCANCODE_W) || Input::isKeyPressed(SDL_SCANCODE_UP)) camera->move(Vector3(0.0f, 0.0f, 1.0f) * speed);
-	//if (Input::isKeyPressed(SDL_SCANCODE_S) || Input::isKeyPressed(SDL_SCANCODE_DOWN)) camera->move(Vector3(0.0f, 0.0f, -1.0f) * speed);
-	//if (Input::isKeyPressed(SDL_SCANCODE_A) || Input::isKeyPressed(SDL_SCANCODE_LEFT)) camera->move(Vector3(1.0f, 0.0f, 0.0f) * speed);
-	//if (Input::isKeyPressed(SDL_SCANCODE_D) || Input::isKeyPressed(SDL_SCANCODE_RIGHT)) camera->move(Vector3(-1.0f, 0.0f, 0.0f) * speed);
-	// Mesh movimente.
-	float model_speed = seconds_elapsed * 200.0f;
-	if (Input::isKeyPressed(SDL_SCANCODE_W)) {
-		moving = true;
-		this->model.translate(0.0f, 0.0f, -1.0f * model_speed);
+		//////async input to move the camera around
+		if (Input::isKeyPressed(SDL_SCANCODE_LSHIFT)) speed *= 10; //move faster with left shift
+		if (Input::isKeyPressed(SDL_SCANCODE_W) || Input::isKeyPressed(SDL_SCANCODE_UP)) camera->move(Vector3(0.0f, 0.0f, 1.0f) * speed);
+		if (Input::isKeyPressed(SDL_SCANCODE_S) || Input::isKeyPressed(SDL_SCANCODE_DOWN)) camera->move(Vector3(0.0f, 0.0f, -1.0f) * speed);
+		if (Input::isKeyPressed(SDL_SCANCODE_A) || Input::isKeyPressed(SDL_SCANCODE_LEFT)) camera->move(Vector3(1.0f, 0.0f, 0.0f) * speed);
+		if (Input::isKeyPressed(SDL_SCANCODE_D) || Input::isKeyPressed(SDL_SCANCODE_RIGHT)) camera->move(Vector3(-1.0f, 0.0f, 0.0f) * speed);
 	}
-	if (Input::isKeyPressed(SDL_SCANCODE_S)) {
-		moving = true;
-		this->model.translate(0.0f, 0.0f, 1.0f * model_speed);
+	else {
+		// Mesh movimente.
+		float model_speed = seconds_elapsed * 200.0f;
+		if (Input::isKeyPressed(SDL_SCANCODE_W)) {
+			moving = true;
+			model.translate(0.0f, 0.0f, -1.0f * model_speed);
+		}
+		if (Input::isKeyPressed(SDL_SCANCODE_S)) {
+			moving = true;
+			model.translate(0.0f, 0.0f, 1.0f * model_speed);
+		}
+		// rotate only when is moving 
+		if (Input::isKeyPressed(SDL_SCANCODE_D) && moving) model.rotate(90.0f * seconds_elapsed * DEG2RAD, Vector3(0.0f, 1.0f, 0.0f));
+		if (Input::isKeyPressed(SDL_SCANCODE_A) && moving) model.rotate(-90.0f * seconds_elapsed * DEG2RAD, Vector3(0.0f, 1.0f, 0.0f));
+
 	}
-	// rotate only when is moving 
-	if (Input::isKeyPressed(SDL_SCANCODE_D) && moving) model.rotate(90.0f * seconds_elapsed * DEG2RAD, Vector3(0.0f, 1.0f, 0.0f));
-	if (Input::isKeyPressed(SDL_SCANCODE_A) && moving) model.rotate(-90.0f * seconds_elapsed * DEG2RAD, Vector3(0.0f, 1.0f, 0.0f));
+	
 
 
 	//to navigate with the mouse fixed in the middle

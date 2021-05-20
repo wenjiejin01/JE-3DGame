@@ -8,6 +8,21 @@ Stage::Stage() {}
 
 PlayStage::PlayStage() {
 	Scene* world = new Scene();
+	//CAR
+	EntityMesh* car = new EntityMesh();
+	car->meshType = EntityMesh::CAR;
+	world->entity_list.push_back(car);
+
+	//load one texture without using the Texture Manager (Texture::Get would use the manager)
+	car->texture = new Texture();
+	car->texture->load("data/biglib/GiantGeneralPack/color-atlas-new.png");
+
+	// example of loading Mesh from Mesh Manager
+	car->mesh = Mesh::Get("data/biglib/GiantGeneralPack/Cars_T/car-passenger_1.obj");
+	car->model.translate(0.0f, 0.0f, 0.0f);
+	// example of shader loading using the shaders manager
+	car->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/texture.fs");
+
 	//GRASS
 	EntityMesh* grass = new EntityMesh();
 	grass->meshType = EntityMesh::GRASS;
@@ -33,21 +48,6 @@ PlayStage::PlayStage() {
 	road->model.translate(0.0f, 0.0f, 0.0f);
 	// example of shader loading using the shaders manager
 	road->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/texture.fs");
-
-	//CAR
-	EntityMesh* car = new EntityMesh();
-	car->meshType = EntityMesh::CAR;
-	world->entity_list.push_back(car);
-
-	//load one texture without using the Texture Manager (Texture::Get would use the manager)
-	car->texture = new Texture();
-	car->texture->load("data/biglib/GiantGeneralPack/color-atlas-new.png");
-
-	// example of loading Mesh from Mesh Manager
-	car->mesh = Mesh::Get("data/biglib/GiantGeneralPack/Cars_T/car-passenger_1.obj");
-	car->model.translate(0.0f, 0.0f, 0.0f);
-	// example of shader loading using the shaders manager
-	car->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/texture.fs");
 
 	//SKY
 	EntityMesh* sky = new EntityMesh();
@@ -90,49 +90,32 @@ void PlayStage::render(Camera* camera){
 		// 
 		switch (currentMesh->meshType)
 		{
-		
-
-		/*case EntityMesh::meshType::HOUSE:
-			padding = currentMesh->mesh->box.halfsize * 2;
-
-			for (size_t i = 0; i < 40; i++)
-			{
-				for (size_t j = 0; j < 40; j++)
-				{
-					currentMesh->model.setTranslation(i * padding.x + 10.0f, 0.0f, j * padding.y + 10.0f);
-					current_pos_world = currentMesh->model * Vector3(0.0f, 0.0f, 0.0f);
-					usedMesh = currentMesh->mesh;
-					usedTex = currentMesh->texture;
-					if (!camera->testSphereInFrustum(current_pos_world, usedMesh->radius)) continue;
-					currentMesh->render(camera);
-				}
-
-			}
-			break;*/
+		//Cielo
 		case EntityMesh::SKY:
-			//currentMesh->model.translate(camera->eye.x, camera->eye.y, camera->eye.z);
-			eye = currentMesh->model * Vector3(camera->eye.x, camera->eye.y, camera->eye.z);
-			center = currentMesh->model * Vector3(camera->center.x, camera->center.y, camera->center.z);
-			up = currentMesh->model * Vector3(camera->up.x, camera->up.y, camera->up.z);
-			camera->lookAt(eye, center, up);
 			currentMesh->render(camera);
 			break;
 
+		//cesped
 		case EntityMesh::GRASS:
 			currentMesh->render(camera, 100);
 			break;
 
+		//carretera
 		case EntityMesh::ROAD:
 			currentMesh->moving = false;
 			currentMesh->render(camera);
 			break;
 
+		//coche
 		case EntityMesh::meshType::CAR:
 			//fix camera
-			eye = currentMesh->model * Vector3(0.0f, 6.0f, 10.0f);
-			center = currentMesh->model * Vector3(0.0f, 0.0f, -2.0f);
-			up = currentMesh->model.rotateVector(Vector3(0.0f, 1.0f, 0.0f));
-			camera->lookAt(eye, center, up);
+			if (!world->free_camera)
+			{
+				eye = currentMesh->model * Vector3(0.0f, 6.0f, 10.0f);
+				center = currentMesh->model * Vector3(0.0f, 0.0f, -2.0f);
+				up = currentMesh->model.rotateVector(Vector3(0.0f, 1.0f, 0.0f));
+				camera->lookAt(eye, center, up);
+			}
 
 			currentMesh->render(camera);
 			break;

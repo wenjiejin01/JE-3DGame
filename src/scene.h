@@ -7,7 +7,7 @@ class Scene //igual que World
 {
 public:
 	static Scene* instance; //singleton
-	bool free_camera = false;
+	bool free_camera = true;
 
 	//standar variable
 	float angle = 0;
