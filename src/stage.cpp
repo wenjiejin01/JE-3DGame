@@ -15,10 +15,10 @@ PlayStage::PlayStage() {
 
 	//load one texture without using the Texture Manager (Texture::Get would use the manager)
 	car->texture = new Texture();
-	car->texture->load("data/biglib/GiantGeneralPack/color-atlas-new.png");
+	car->texture->load("data/assets/color-atlas-new.png");
 
 	// example of loading Mesh from Mesh Manager
-	car->mesh = Mesh::Get("data/biglib/GiantGeneralPack/Cars_T/car-passenger_1.obj");
+	car->mesh = Mesh::Get("data/assets/coches/car-passenger_1.obj");
 	car->model.translate(0.0f, 0.0f, 0.0f);
 	// example of shader loading using the shaders manager
 	car->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/texture.fs");
@@ -41,10 +41,10 @@ PlayStage::PlayStage() {
 	world->entity_list.push_back(road);
 	//load one texture without using the Texture Manager (Texture::Get would use the manager)
 	road->texture = new Texture();
-	road->texture->load("data/biglib/GiantGeneralPack/color-atlas-new.png");
+	road->texture->load("data/assets/color-atlas-new.png");
 	// example of loading Mesh from Mesh Manager
 	//road->mesh = Mesh::Get("data/map_road.obj");
-	road->mesh = Mesh::Get("data/mapa_carretera.obj");
+	road->mesh = Mesh::Get("data/assets/carretera/mapa_carretera.obj");
 	road->model.translate(0.0f, 0.0f, 0.0f);
 	// example of shader loading using the shaders manager
 	road->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/texture.fs");
@@ -56,8 +56,8 @@ PlayStage::PlayStage() {
 
 	//load one texture without using the Texture Manager (Texture::Get would use the manager)
 	sky->texture = new Texture();
-	sky->mesh = Mesh::Get("data/cielo.ASE");
-	sky->texture->load("data/cielo.tga");
+	sky->mesh = Mesh::Get("data/assets/cielo/cielo.ASE");
+	sky->texture->load("data/assets/cielo/cielo.tga");
 	sky->model.translate(0.0f, 0.0f, 0.0f);
 	sky->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/texture.fs");
 
@@ -97,7 +97,7 @@ void PlayStage::render(Camera* camera){
 
 		//cesped
 		case EntityMesh::GRASS:
-			currentMesh->render(camera, 100);
+			//currentMesh->render(camera, 100);
 			break;
 
 		//carretera
