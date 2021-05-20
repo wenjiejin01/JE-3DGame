@@ -23,6 +23,11 @@ void EntityMesh::render(Camera* camera, float tiling)
 {
 	Game* game = Game::instance;
 	
+	// frustum check
+	BoundingBox box = transformBoundingBox(model, mesh->box);
+	if (!camera->testBoxInFrustum(box.center, box.halfsize)) return;
+
+
 	if (shader)
 	{
 		//enable shader
