@@ -17,12 +17,10 @@ void Entity::update(float elapsed_time) {
 	std::cout << "this is entity update" << std::endl;
 }
 
-
-
 void EntityMesh::render(Camera* camera, float tiling)
 {
 	Game* game = Game::instance;
-	
+
 	// frustum check
 	BoundingBox box = transformBoundingBox(model, mesh->box);
 	if (!camera->testBoxInFrustum(box.center, box.halfsize)) return;
@@ -56,7 +54,7 @@ void EntityMesh::update(float seconds_elapsed) {
 
 	float speed = seconds_elapsed * game->mouse_speed; //the speed is defined by the seconds_elapsed so it goes constant
 	this->moving = false;
-		//example
+	//example
 	world->angle += (float)seconds_elapsed * 10.0f;
 
 	////mouse input to rotate the cam
@@ -91,7 +89,7 @@ void EntityMesh::update(float seconds_elapsed) {
 		if (Input::isKeyPressed(SDL_SCANCODE_A) && moving) model.rotate(-90.0f * seconds_elapsed * DEG2RAD, Vector3(0.0f, 1.0f, 0.0f));
 
 	}
-	
+
 
 
 	//to navigate with the mouse fixed in the middle
@@ -103,3 +101,4 @@ void EntityMesh::update(float seconds_elapsed) {
 		world->free_camera = !(world->free_camera);
 	}
 }
+

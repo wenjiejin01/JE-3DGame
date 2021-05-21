@@ -54,8 +54,8 @@ public:
    
 
     //methods overwritten 
-    void render(Camera* camera , float tiling = 1.0f);
-    void update(float dt);
+    virtual void render(Camera* camera , float tiling = 1.0f);
+    virtual void update(float dt);
     ENTITY_TYPE_ID getType() { return ENTITY_TYPE_ID::MESH;};
 };
 
@@ -68,8 +68,8 @@ public:
     float yaw;
 
     //methods overwritten 
-    void render(Camera* camera, float tiling = 1.0f);
-    void update(float dt);
+    void render(Camera* camera, float tiling = 1.0f) {};
+    void update(float dt) {};
     ENTITY_TYPE_ID getType() { return ENTITY_TYPE_ID::MESH; };
 };
 

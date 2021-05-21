@@ -48,7 +48,7 @@ PlayStage::PlayStage() {
 
 
 	//CAR
-	EntityMesh* car = new EntityMesh();
+	EntityCar* car = new EntityCar();
 	car->meshType = EntityMesh::CAR;
 	world->dynamic_list.push_back(car);
 	//load one texture without using the Texture Manager (Texture::Get would use the manager)
@@ -127,7 +127,7 @@ void PlayStage::render(Camera* camera){
 			up = currentMesh->model.rotateVector(Vector3(0.0f, 1.0f, 0.0f));
 			camera->lookAt(eye, center, up);
 		}
-		currentMesh->render(camera);
+		currentMesh->EntityMesh::render(camera);
 	}
 }
 
@@ -135,5 +135,5 @@ void PlayStage::update(float seconds_elapsed) {
 	Scene* world = Scene::instance;
 
 	EntityMesh* currentMesh = static_cast<EntityMesh*>(world->dynamic_list.at(0));
-	currentMesh->update(seconds_elapsed);
+	currentMesh->EntityMesh::update(seconds_elapsed);
 }
