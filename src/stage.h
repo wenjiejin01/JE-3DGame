@@ -24,6 +24,7 @@ public:
 	virtual void update(float elapsed_time) {}; //empty body
 	void getKeyDownEvent(Camera* camera, int key_num);
 	void AddObjectInFont(Camera* camera, Mesh* mesh, Texture* texture);
+	void SelectEntity(Camera* camera);
 };
 
 //class IntroStage : public Stage {

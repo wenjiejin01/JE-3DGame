@@ -96,10 +96,10 @@ void Game::onKeyDown( SDL_KeyboardEvent event )
 	{
 		case SDLK_ESCAPE: must_exit = true; break; //ESC key, kill the app
 		case SDLK_F1: Shader::ReloadAll(); break; 
-		case SDLK_1: current_Stage->getKeyDownEvent(camera, 1);
-		case SDLK_2: current_Stage->getKeyDownEvent(camera, 2);
-		case SDLK_3: current_Stage->getKeyDownEvent(camera, 3);
-
+		case SDLK_1: current_Stage->getKeyDownEvent(camera, 1); break;
+		case SDLK_2: current_Stage->getKeyDownEvent(camera, 2); break;
+		case SDLK_3: current_Stage->getKeyDownEvent(camera, 3); break;
+		case SDLK_4: current_Stage->getKeyDownEvent(camera, 4); break;
 	}
 }
 

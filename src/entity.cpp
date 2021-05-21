@@ -47,6 +47,8 @@ void EntityMesh::render(Camera* camera, float tiling)
 		//disable shader
 		shader->disable();
 	}
+
+	mesh->renderBounding(model);
 }
 
 void EntityMesh::update(float seconds_elapsed) {
