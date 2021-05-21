@@ -22,7 +22,8 @@ public:
 
 	virtual void render(Camera* camera) {}; //empty body
 	virtual void update(float elapsed_time) {}; //empty body
-
+	void getKeyDownEvent(Camera* camera, int key_num);
+	void AddObjectInFont(Camera* camera, Mesh* mesh, Texture* texture);
 };
 
 //class IntroStage : public Stage {
@@ -54,11 +55,6 @@ public:
 	PlayStage();
 	virtual void render(Camera* camera);
 	virtual void update(float elapsed_time);
-	/*bool isValid(Vector2 target);
-	void posUpdate(Vector2 target, Player* player);
-	bool isStepOn();
-	bool isFinished();
-	void restart();*/
 };
 
 //class EndStage : public Stage {

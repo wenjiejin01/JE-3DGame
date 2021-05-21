@@ -7,6 +7,7 @@
 #include "shader.h"
 
 enum ENTITY_TYPE_ID {
+    ENTITY,
     MESH,
     SOUND,
 };

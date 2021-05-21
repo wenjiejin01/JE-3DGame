@@ -19,6 +19,8 @@ void Entity::update(float elapsed_time) {
 
 void EntityMesh::render(Camera* camera, float tiling)
 {
+	if(this->meshType == EntityMesh::GRASS) tiling = 100.0f;
+
 	Game* game = Game::instance;
 
 	// frustum check
@@ -37,7 +39,7 @@ void EntityMesh::render(Camera* camera, float tiling)
 		if (texture != NULL) shader->setUniform("u_texture", texture, 0);
 		shader->setUniform("u_model", model);
 		shader->setUniform("u_time", time);
-		shader->setUniform("u_texture_tiled", tiling);
+		shader->setUniform("u_texture_tiling", tiling);
 
 		//do the draw call
 		mesh->render(GL_TRIANGLES);

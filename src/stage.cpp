@@ -6,19 +6,20 @@
 
 Stage::Stage() {}
 
+
 PlayStage::PlayStage() {
-	Scene* world = new Scene();
-	//GRASS
-	EntityMesh* grass = new EntityMesh();
-	grass->meshType = EntityMesh::GRASS;
-	world->static_list.push_back(grass);
-	grass->mesh = new Mesh();
-	grass->mesh->createPlane(600.0f);
-	grass->texture = new Texture();
-	grass->texture->load("data/grass.tga");
-	grass->model.translate(0.0f, 0.0f, 0.0f);
-	// example of shader loading using the shaders manager
-	grass->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/texture.fs");
+	Scene* world = Scene::instance;
+	////GRASS
+	//EntityMesh* grass = new EntityMesh();
+	//grass->meshType = EntityMesh::GRASS;
+	//world->static_list.push_back(grass);
+	//grass->mesh = new Mesh();
+	//grass->mesh->createPlane(600.0f);
+	//grass->texture = new Texture();
+	//grass->texture->load("data/grass.tga");
+	//grass->model.translate(0.0f, 0.0f, 0.0f);
+	//// example of shader loading using the shaders manager
+	//grass->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/texture.fs");
 
 	//ROAD
 	EntityMesh* road = new EntityMesh();
@@ -59,13 +60,12 @@ PlayStage::PlayStage() {
 	car->model.translate(0.0f, 0.0f, 0.0f);
 	// example of shader loading using the shaders manager
 	car->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/texture.fs");
-}
 
+}
 
 void PlayStage::render(Camera* camera){
 	EntityMesh* currentMesh = NULL;
 	Scene* world = Scene::instance;
-
 
 	int count = world->static_list.size();
 	Vector3 eye, center, up, padding;
@@ -85,28 +85,7 @@ void PlayStage::render(Camera* camera){
 			currentMesh = static_cast<EntityMesh*>(world->static_list.at(i));
 		}
 
-		// 
-		switch (currentMesh->meshType)
-		{
-		//Cielo
-		case EntityMesh::SKY:
-			currentMesh->render(camera);
-			break;
-
-		//cesped
-		case EntityMesh::GRASS:
-			//currentMesh->render(camera, 100);
-			break;
-
-		//carretera
-		case EntityMesh::ROAD:
-			currentMesh->moving = false;
-			currentMesh->render(camera);
-			break;
-
-		default:
-			break;
-		}
+		currentMesh->render(camera);
 	}
 
 	for (size_t i = 0; i < world->dynamic_list.size(); i++)	{
@@ -137,3 +116,29 @@ void PlayStage::update(float seconds_elapsed) {
 	EntityMesh* currentMesh = static_cast<EntityMesh*>(world->dynamic_list.at(0));
 	currentMesh->EntityMesh::update(seconds_elapsed);
 }
+
+void Stage::getKeyDownEvent(Camera* camera, int key_num) {
+	switch (key_num)
+	{
+	case 1: AddObjectInFont(camera, Mesh::Get("data/assets/town/minihouse.obj"), Texture::Get("data/texture.tga")); break;
+	}
+}
+
+void Stage::AddObjectInFont(Camera* camera, Mesh* mesh, Texture* texture) {
+	Scene* world = Scene::instance;
+	Game* game = Game::instance;
+
+	Vector3 origin = camera->eye;
+	Vector3 dir = camera->getRayDirection(Input::mouse_position.x, Input::mouse_position.y, game->window_width, game->window_height);
+	Vector3 pos = RayPlaneCollision(Vector3(), Vector3(0, 1, 0), origin, dir);
+
+	//create new entitymesh, set model, mesh, texture, and push to static list
+	EntityMesh* entity = new EntityMesh();
+	entity->model.setTranslation(pos.x, pos.y, pos.z);
+	entity->mesh = mesh;
+	entity->texture = texture;
+	entity->shader =  Shader::Get("data/shaders/basic.vs", "data/shaders/texture.fs");
+	world->static_list.push_back(entity);
+	std::cout << "sze: "<< world->static_list.size() << std::endl;
+}
+

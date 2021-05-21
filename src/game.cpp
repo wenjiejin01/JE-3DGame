@@ -6,7 +6,7 @@
 #include "shader.h"
 #include "input.h"
 #include "animation.h"
-
+#include "scene.h"
 #include <cmath>
 
 //some globals
@@ -41,6 +41,9 @@ Game::Game(int window_width, int window_height, SDL_Window* window)
 	camera->lookAt(Vector3(0.f, 100.f, 100.f), Vector3(0.f, 0.f, 0.f), Vector3(0.f, 1.f, 0.f)); //position the camera and point to 0,0,0
 	camera->setPerspective(70.f, window_width / (float)window_height, 0.1f, 10000.f); //set the projection, we want to be perspective
 
+	// Init world
+	Scene* world = new Scene();
+
 	// Initialize Stages
 	play_stage = new PlayStage();
 	current_Stage = play_stage;
@@ -66,6 +69,7 @@ void Game::render(void)
 	glEnable(GL_DEPTH_TEST);
 	glDisable(GL_CULL_FACE);
    
+
 	current_Stage->render(camera);
 
 
@@ -92,6 +96,10 @@ void Game::onKeyDown( SDL_KeyboardEvent event )
 	{
 		case SDLK_ESCAPE: must_exit = true; break; //ESC key, kill the app
 		case SDLK_F1: Shader::ReloadAll(); break; 
+		case SDLK_1: current_Stage->getKeyDownEvent(camera, 1);
+		case SDLK_2: current_Stage->getKeyDownEvent(camera, 2);
+		case SDLK_3: current_Stage->getKeyDownEvent(camera, 3);
+
 	}
 }
 
