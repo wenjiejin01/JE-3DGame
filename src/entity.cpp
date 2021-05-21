@@ -77,7 +77,7 @@ void EntityMesh::update(float seconds_elapsed) {
 	}
 	else {
 		// Mesh movimente.
-		float model_speed = seconds_elapsed * 200.0f;
+		float model_speed = seconds_elapsed * 30.0f;
 		if (Input::isKeyPressed(SDL_SCANCODE_W)) {
 			moving = true;
 			model.translate(0.0f, 0.0f, -1.0f * model_speed);

@@ -14,7 +14,9 @@ public:
 	Scene();
 
 	//current scene
-	std::vector<Entity*> entity_list;
+	std::vector<Entity*> static_list;
+	std::vector<Entity*> dynamic_list;
+
 
 };
 

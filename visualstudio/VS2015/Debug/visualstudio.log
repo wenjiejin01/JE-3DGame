@@ -1,9 +1,9 @@
 ﻿  stage.cpp
-C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\framework.h(372,105): warning C4244: 'return': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(78,23): warning C4018: '<': no coinciden signed/unsigned
-C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(76,11): warning C4101: 'usedTex': variable local sin referencia
-C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(75,8): warning C4101: 'usedMesh': variable local sin referencia
-animation.obj : warning LNK4075: se omite '/EDITANDCONTINUE' debido a la especificación '/INCREMENTAL:NO'
-LINK : warning LNK4098: la biblioteca predeterminada'LIBCMT' entra en conflicto con otras bibliotecas; use la biblioteca /NODEFAULTLIB:biblioteca
-glew32s.lib(glew.obj) : warning LNK4099: no se encontró PDB 'vc120.pdb' con 'glew32s.lib(glew.obj)' o en 'C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\vc120.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-  visualstudio.vcxproj -> C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\game_debug.exe
+C:\Users\Wenjie\Desktop\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\framework.h(372,105): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+C:\Users\Wenjie\Desktop\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(76,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Wenjie\Desktop\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(74,11): warning C4101: 'usedTex': unreferenced local variable
+C:\Users\Wenjie\Desktop\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(73,8): warning C4101: 'usedMesh': unreferenced local variable
+animation.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/INCREMENTAL:NO' specification
+LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
+glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'C:\Users\Wenjie\Desktop\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\vc120.pdb'; linking object as if no debug info
+  visualstudio.vcxproj -> C:\Users\Wenjie\Desktop\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\game_debug.exe

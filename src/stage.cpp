@@ -8,25 +8,10 @@ Stage::Stage() {}
 
 PlayStage::PlayStage() {
 	Scene* world = new Scene();
-	//CAR
-	EntityMesh* car = new EntityMesh();
-	car->meshType = EntityMesh::CAR;
-	world->entity_list.push_back(car);
-
-	//load one texture without using the Texture Manager (Texture::Get would use the manager)
-	car->texture = new Texture();
-	car->texture->load("data/assets/color-atlas-new.png");
-
-	// example of loading Mesh from Mesh Manager
-	car->mesh = Mesh::Get("data/assets/coches/car-passenger_1.obj");
-	car->model.translate(0.0f, 0.0f, 0.0f);
-	// example of shader loading using the shaders manager
-	car->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/texture.fs");
-
 	//GRASS
 	EntityMesh* grass = new EntityMesh();
 	grass->meshType = EntityMesh::GRASS;
-	world->entity_list.push_back(grass);
+	world->static_list.push_back(grass);
 	grass->mesh = new Mesh();
 	grass->mesh->createPlane(600.0f);
 	grass->texture = new Texture();
@@ -38,7 +23,7 @@ PlayStage::PlayStage() {
 	//ROAD
 	EntityMesh* road = new EntityMesh();
 	road->meshType = EntityMesh::ROAD;
-	world->entity_list.push_back(road);
+	world->static_list.push_back(road);
 	//load one texture without using the Texture Manager (Texture::Get would use the manager)
 	road->texture = new Texture();
 	road->texture->load("data/assets/color-atlas-new.png");
@@ -52,7 +37,7 @@ PlayStage::PlayStage() {
 	//SKY
 	EntityMesh* sky = new EntityMesh();
 	sky->meshType = EntityMesh::SKY;
-	world->entity_list.push_back(sky);
+	world->static_list.push_back(sky);
 
 	//load one texture without using the Texture Manager (Texture::Get would use the manager)
 	sky->texture = new Texture();
@@ -61,6 +46,19 @@ PlayStage::PlayStage() {
 	sky->model.translate(0.0f, 0.0f, 0.0f);
 	sky->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/texture.fs");
 
+
+	//CAR
+	EntityMesh* car = new EntityMesh();
+	car->meshType = EntityMesh::CAR;
+	world->dynamic_list.push_back(car);
+	//load one texture without using the Texture Manager (Texture::Get would use the manager)
+	car->texture = new Texture();
+	car->texture->load("data/assets/color-atlas-new.png");
+	// example of loading Mesh from Mesh Manager
+	car->mesh = Mesh::Get("data/assets/coches/car-passenger_1.obj");
+	car->model.translate(0.0f, 0.0f, 0.0f);
+	// example of shader loading using the shaders manager
+	car->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/texture.fs");
 }
 
 
@@ -69,7 +67,7 @@ void PlayStage::render(Camera* camera){
 	Scene* world = Scene::instance;
 
 
-	int count = world->entity_list.size();
+	int count = world->static_list.size();
 	Vector3 eye, center, up, padding;
 	Vector3 current_pos_world;
 	Mesh* usedMesh;
@@ -78,13 +76,13 @@ void PlayStage::render(Camera* camera){
 	for (size_t i = 0; i < count; i++)
 	{
 		// Break the game and show error.
-		assert(world->entity_list.at(i) != NULL);
+		assert(world->static_list.at(i) != NULL);
 
 		// Check entity type
-		if (world->entity_list.at(i)->getType() == ENTITY_TYPE_ID::MESH)
+		if (world->static_list.at(i)->getType() == ENTITY_TYPE_ID::MESH)
 		{			
 			//DOWNCAST, BY STATIC_CAST
-			currentMesh = static_cast<EntityMesh*>(world->entity_list.at(i));
+			currentMesh = static_cast<EntityMesh*>(world->static_list.at(i));
 		}
 
 		// 
@@ -106,31 +104,36 @@ void PlayStage::render(Camera* camera){
 			currentMesh->render(camera);
 			break;
 
-		//coche
-		case EntityMesh::meshType::CAR:
-			//fix camera
-			if (!world->free_camera)
-			{
-				eye = currentMesh->model * Vector3(0.0f, 6.0f, 10.0f);
-				center = currentMesh->model * Vector3(0.0f, 0.0f, -2.0f);
-				up = currentMesh->model.rotateVector(Vector3(0.0f, 1.0f, 0.0f));
-				camera->lookAt(eye, center, up);
-			}
-
-			currentMesh->render(camera);
-			break;
-
-
 		default:
 			break;
 		}
+	}
 
+	for (size_t i = 0; i < world->dynamic_list.size(); i++)	{
+		// Break the game and show error.
+		assert(world->dynamic_list.at(i) != NULL);
+
+		// Check entity type
+		if (world->dynamic_list.at(i)->getType() == ENTITY_TYPE_ID::MESH)
+		{
+			//DOWNCAST, BY STATIC_CAST
+			currentMesh = static_cast<EntityMesh*>(world->dynamic_list.at(i));
+		}
+
+		if (!world->free_camera)
+		{
+			eye = currentMesh->model * Vector3(0.0f, 6.0f, 10.0f);
+			center = currentMesh->model * Vector3(0.0f, 0.0f, -2.0f);
+			up = currentMesh->model.rotateVector(Vector3(0.0f, 1.0f, 0.0f));
+			camera->lookAt(eye, center, up);
+		}
+		currentMesh->render(camera);
 	}
 }
 
 void PlayStage::update(float seconds_elapsed) {
 	Scene* world = Scene::instance;
 
-	EntityMesh* currentMesh = static_cast<EntityMesh*>(world->entity_list.at(0));
+	EntityMesh* currentMesh = static_cast<EntityMesh*>(world->dynamic_list.at(0));
 	currentMesh->update(seconds_elapsed);
 }

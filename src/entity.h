@@ -59,4 +59,18 @@ public:
     ENTITY_TYPE_ID getType() { return ENTITY_TYPE_ID::MESH;};
 };
 
+class EntityCar : public EntityMesh
+{
+public:
+    Vector3 pos;
+    float velocidad;
+    float aceleracion;
+    float yaw;
+
+    //methods overwritten 
+    void render(Camera* camera, float tiling = 1.0f);
+    void update(float dt);
+    ENTITY_TYPE_ID getType() { return ENTITY_TYPE_ID::MESH; };
+};
+
 #endif // ENTITY_H
