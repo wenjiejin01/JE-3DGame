@@ -114,8 +114,7 @@ void PlayStage::render(Camera* camera){
 			camera->lookAt(eye, center, up);
 		}
 		//currentCar->model.translate(currentCar->pos.x, currentCar->pos.y, currentCar->pos.z);
-		currentCar->model.setTranslation(currentCar->pos.x, currentCar->pos.y, currentCar->pos.z);
-		currentCar->model.rotate(currentCar->yaw * DEG2RAD, Vector3(0.0f, 1.0f, 0.0f));
+		currentCar->get_CarModel(); // actualizar model
 		currentCar->render(currentCar->mesh, currentCar->model, camera, currentCar->texture);
 	}
 }

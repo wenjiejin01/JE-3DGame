@@ -1,7 +1,7 @@
 #include "entity.h"
 #include "game.h"
 #include "scene.h"
-
+#include <string>
 Entity::Entity(){
 
 }
@@ -113,6 +113,9 @@ void EntityCar::render(Mesh* mesh, Matrix44 model, Camera* camera, Texture* text
 	}
 
 	mesh->renderBounding(model);
+	//render the FPS, Draw Calls, etc
+	std::string text = "velocidad: " + std::to_string(vel.z);
+	drawText(2, game->window_width - 100, text, Vector3(1, 1, 1), 2);
 }
 
 void EntityCar::update(float seconds_elapsed) {
@@ -121,6 +124,9 @@ void EntityCar::update(float seconds_elapsed) {
 	Scene* world = Scene::instance;
 
 	this->moving = false;
+	vel_mod = vel.length();
+	vel_mod = clamp(vel_mod, 0, 2.0f);
+	float angular_acc = car_rot_speed * seconds_elapsed * vel_mod;
 
 	////mouse input to rotate the cam
 	if (!world->free_camera){
@@ -133,51 +139,59 @@ void EntityCar::update(float seconds_elapsed) {
 		// Convertir cordenada mundo
 		goFront = model.rotateVector(goFront);
 
-		if (Input::isKeyPressed(SDL_SCANCODE_W)) {
-			moving = true;
-			target = goFront * -model_speed;
-			//model.translate(0.0f, 0.0f, -1.0f * model_speed);
-		}
-		if (Input::isKeyPressed(SDL_SCANCODE_S)) {
-			moving = true;
-			target = goFront * model_speed;
-			//model.translate(0.0f, 0.0f, 1.0f * model_speed);
-		}
-		// rotate only when is moving 
-		if (Input::isKeyPressed(SDL_SCANCODE_D) && moving) yaw += rot_speed * seconds_elapsed;//model.rotate(-90.0f * seconds_elapsed * DEG2RAD, Vector3(0.0f, -1.0f, 0.0f));
-		if (Input::isKeyPressed(SDL_SCANCODE_A) && moving) yaw -= rot_speed * seconds_elapsed; //model.rotate(-90.0f * seconds_elapsed * DEG2RAD, Vector3(0.0f, 1.0f, 0.0f));
-	
-		//check colision
-		Vector3 checkTarget = target + pos;
-		EntityMesh* currentMesh = NULL;
-		//Variable para chequear colision
-		Vector3 coll;
-		Vector3 collNorm;
-		Vector3 characterTargetCenter = checkTarget + Vector3(0, 1, 0);
-
-		//check for any static entity if there is a collision
-		for (size_t i = 0; i < world->static_list.size(); i++)
+		//Movimiento
 		{
-			// Break the game and show error.
-			assert(world->static_list.at(i) != NULL);
-
-			// Check entity type
-			if (world->static_list.at(i)->getType() == ENTITY_TYPE_ID::MESH)
-			{
-				//DOWNCAST, BY STATIC_CAST
-				currentMesh = static_cast<EntityMesh*>(world->static_list.at(i));
+			if (Input::isKeyPressed(SDL_SCANCODE_W)) vel = vel + (goFront * -seconds_elapsed * acc_front);	
+			else if (Input::isKeyPressed(SDL_SCANCODE_S)) vel = vel - (goFront * -seconds_elapsed * acc_back);
+			else {
+				vel = vel - (vel * seconds_elapsed * 2.0f);
 			}
 
-			bool result = currentMesh->mesh->testSphereCollision(currentMesh->model, characterTargetCenter, 1.0, coll, collNorm);
-			if (result)
-			{
-				Vector3 push_away = normalize(coll - characterTargetCenter) * seconds_elapsed;
-				checkTarget = pos - push_away;
-				checkTarget.y = pos.y;
+			// rotate only when is moving 
+			if (Input::isKeyPressed(SDL_SCANCODE_D)) angular_vel += angular_acc;
+			else if (Input::isKeyPressed(SDL_SCANCODE_A)) angular_vel -= angular_acc;
+			else {
+				angular_vel = angular_vel - (angular_vel * seconds_elapsed * 10.0f);
+
 			}
+			angular_vel = clamp(angular_vel, -max_angular_acc, max_angular_acc);
+			yaw = yaw + (angular_vel * seconds_elapsed);
+
 		}
 
-		pos = checkTarget;
+		/******************* check colision  *****************************/
+		{
+			Vector3 checkTarget = pos + (vel * seconds_elapsed);
+			EntityMesh* currentMesh = NULL;
+			//Variable para chequear colision
+			Vector3 coll;
+			Vector3 collNorm;
+			Vector3 characterTargetCenter = checkTarget + Vector3(0, 1, 0);
+
+			//check for any static entity if there is a collision
+			for (size_t i = 0; i < world->static_list.size(); i++)
+			{
+				// Break the game and show error.
+				assert(world->static_list.at(i) != NULL);
+
+				// Check entity type
+				if (world->static_list.at(i)->getType() == ENTITY_TYPE_ID::MESH)
+				{
+					//DOWNCAST, BY STATIC_CAST
+					currentMesh = static_cast<EntityMesh*>(world->static_list.at(i));
+				}
+
+				bool result = currentMesh->mesh->testSphereCollision(currentMesh->model, characterTargetCenter, 1.0, coll, collNorm);
+				if (result)
+				{
+					std::cout << result << std::endl;
+					Vector3 push_away = normalize(coll - characterTargetCenter) * seconds_elapsed;
+					checkTarget = pos - push_away;
+					checkTarget.y = pos.y;
+				}
+			}
+			pos = checkTarget;
+		}
 	}
 
 	//to navigate with the mouse fixed in the middle
@@ -189,4 +203,10 @@ void EntityCar::update(float seconds_elapsed) {
 	{
 		world->free_camera = !(world->free_camera);
 	}
+}
+
+Matrix44 EntityCar::get_CarModel() {
+	model.setTranslation(pos.x, pos.y, pos.z);
+	model.rotate(yaw * DEG2RAD, Vector3(0.0f, 1.0f, 0.0f));
+	return model;
 }

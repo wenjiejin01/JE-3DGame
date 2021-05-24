@@ -68,16 +68,22 @@ class EntityCar : public EntityMesh
 public:
     Vector3 pos;
     Vector3 target;
-    float velocidad;
-    float aceleracion;
+    Vector3 vel;
     float yaw;
-    float rot_speed = 30.0f;
+    float acc_front = 15.0f;
+    float acc_back = 10.0f;
+    float car_rot_speed = 10.0f;
+    float max_speed = 40.0f;
+    float max_angular_acc = 100.0f;
+    float vel_mod;
+    float angular_vel;
 
 
     //methods overwritten 
     void render(Mesh* mesh, Matrix44 model, Camera* camera, Texture* texture, float tiling = 1.0f);
     void update(float dt);
     ENTITY_TYPE_ID getType() { return ENTITY_TYPE_ID::CAR; };
+    Matrix44 get_CarModel();
 };
 
 #endif // ENTITY_H
