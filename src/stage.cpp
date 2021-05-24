@@ -67,11 +67,14 @@ void PlayStage::render(Camera* camera){
 	EntityMesh* currentMesh = NULL;
 	Scene* world = Scene::instance;
 
+	//Declare temporal variable
 	int count = world->static_list.size();
 	Vector3 eye, center, up, padding;
 	Vector3 current_pos_world;
 	Mesh* usedMesh;
 	Texture* usedTex;
+
+
 
 	for (size_t i = 0; i < count; i++)
 	{
@@ -88,33 +91,33 @@ void PlayStage::render(Camera* camera){
 		currentMesh->render(camera);
 	}
 
+	EntityCar* currentCar;
 	for (size_t i = 0; i < world->dynamic_list.size(); i++)	{
 		// Break the game and show error.
 		assert(world->dynamic_list.at(i) != NULL);
 
 		// Check entity type
-		if (world->dynamic_list.at(i)->getType() == ENTITY_TYPE_ID::MESH)
+		if (world->dynamic_list.at(i)->getType() == ENTITY_TYPE_ID::CAR)
 		{
 			//DOWNCAST, BY STATIC_CAST
-			currentMesh = static_cast<EntityMesh*>(world->dynamic_list.at(i));
+			currentCar = static_cast<EntityCar*>(world->dynamic_list.at(i));
+		}
+		else {
+			continue;
 		}
 
 		if (!world->free_camera)
 		{
-			eye = currentMesh->model * Vector3(0.0f, 6.0f, 10.0f);
-			center = currentMesh->model * Vector3(0.0f, 0.0f, -2.0f);
-			up = currentMesh->model.rotateVector(Vector3(0.0f, 1.0f, 0.0f));
+			eye = currentCar->model * Vector3(0.0f, 6.0f, 10.0f);
+			center = currentCar->model * Vector3(0.0f, 0.0f, -2.0f);
+			up = currentCar->model.rotateVector(Vector3(0.0f, 1.0f, 0.0f));
 			camera->lookAt(eye, center, up);
 		}
-		currentMesh->EntityMesh::render(camera);
+		//currentCar->model.translate(currentCar->pos.x, currentCar->pos.y, currentCar->pos.z);
+		currentCar->model.setTranslation(currentCar->pos.x, currentCar->pos.y, currentCar->pos.z);
+		currentCar->model.rotate(currentCar->yaw * DEG2RAD, Vector3(0.0f, 1.0f, 0.0f));
+		currentCar->render(currentCar->mesh, currentCar->model, camera, currentCar->texture);
 	}
-}
-
-void PlayStage::update(float seconds_elapsed) {
-	Scene* world = Scene::instance;
-
-	EntityMesh* currentMesh = static_cast<EntityMesh*>(world->dynamic_list.at(0));
-	currentMesh->EntityMesh::update(seconds_elapsed);
 }
 
 void Stage::getKeyDownEvent(Camera* camera, int key_num) {
@@ -185,4 +188,11 @@ void Stage::SelectEntity(Camera* camera) {
 		world->selected_entity = current;
 		break;
 	}
+}
+
+void PlayStage::update(float seconds_elapsed) {
+	Scene* world = Scene::instance;
+
+	EntityCar* currentMesh = static_cast<EntityCar*>(world->dynamic_list.at(0));
+	currentMesh->update(seconds_elapsed);
 }
