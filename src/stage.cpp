@@ -9,17 +9,17 @@ Stage::Stage() {}
 
 PlayStage::PlayStage() {
 	Scene* world = Scene::instance;
-	////GRASS
-	//EntityMesh* grass = new EntityMesh();
-	//grass->meshType = EntityMesh::GRASS;
-	//world->static_list.push_back(grass);
-	//grass->mesh = new Mesh();
-	//grass->mesh->createPlane(600.0f);
-	//grass->texture = new Texture();
-	//grass->texture->load("data/grass.tga");
-	//grass->model.translate(0.0f, 0.0f, 0.0f);
-	//// example of shader loading using the shaders manager
-	//grass->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/texture.fs");
+	//GRASS
+	EntityMesh* grass = new EntityMesh();
+	grass->meshType = EntityMesh::GRASS;
+	world->static_list.push_back(grass);
+	grass->mesh = new Mesh();
+	grass->mesh->createPlane(600.0f);
+	grass->texture = new Texture();
+	grass->texture->load("data/grass.tga");
+	grass->model.translate(0.0f, -0.5f, 0.0f);
+	// example of shader loading using the shaders manager
+	grass->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/texture.fs");
 
 	//ROAD
 	EntityMesh* road = new EntityMesh();
