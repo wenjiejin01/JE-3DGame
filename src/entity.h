@@ -41,7 +41,7 @@ class Entity
         virtual ENTITY_TYPE_ID getType() = 0;
         Matrix44 getGlobalMatrix(); //returns transform in world coordinates
         bool isCollision(Entity* target);
-        virtual void onCollision();
+        virtual void onCollision(float seconds_elapsed);
         ////some useful methods...
         //Vector3 getPosition();
 };
@@ -93,7 +93,7 @@ public:
     //methods overwritten 
     void render(Mesh* mesh, Matrix44 model, Camera* camera, Texture* texture, float tiling = 1.0f);
     void update(float dt);
-    void onCollision();
+    void onCollision(float seconds_elapsed);
     ENTITY_TYPE_ID getType() { return ENTITY_TYPE_ID::CAR; };
     Matrix44 get_CarModel();
 };

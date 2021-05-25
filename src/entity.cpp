@@ -36,14 +36,14 @@ bool Entity::isCollision(Entity* entity) {
 	Vector3 character_center = position + Vector3(0, 1, 0);
 
 	//comprobamos si colisiona el objeto con la esfera (radio 3)
-	bool iscollision = mesh->testSphereCollision(model, character_center, 2.5, coll, collnorm);
+	bool iscollision = mesh->testSphereCollision(model, character_center, 2.1, coll, collnorm);
 
 	// False = no hay colision
 	// True = hay colision
 	return iscollision;
 }
 
-void Entity::onCollision() {
+void Entity::onCollision(float seconds_elapsed) {
 	//model.getTranslation();
 	//model.rotate(90.0f * DEG2RAD, Vector3(0.0f, 1.0f, 0.0f));
 	
@@ -79,7 +79,7 @@ void EntityMesh::render(Camera* camera, float tiling)
 		shader->disable();
 	}
 
-	mesh->renderBounding(model);
+	//mesh->renderBounding(model);
 }
 
 void EntityMesh::update(float seconds_elapsed) {
@@ -109,8 +109,9 @@ void EntityMesh::update(float seconds_elapsed) {
 	}
 }
 
-void EntityCar::onCollision() {
-	vel = vel * -0.5;
+void EntityCar::onCollision(float seconds_elapsed) {
+	vel = vel * -0.2;
+	pos = pos + (vel * seconds_elapsed);
 }
 
 void EntityCar::render(Mesh* mesh, Matrix44 model, Camera* camera, Texture* texture, float tiling)
@@ -143,8 +144,8 @@ void EntityCar::render(Mesh* mesh, Matrix44 model, Camera* camera, Texture* text
 
 	mesh->renderBounding(model);
 	//render the FPS, Draw Calls, etc
-	std::string text = "velocidad: " + std::to_string(vel.z);
-	drawText(2, game->window_width - 100, text, Vector3(1, 1, 1), 2);
+	std::string text = "velocidad: " + std::to_string(std::abs(vel.z));
+	drawText(2, 560, text, Vector3(1, 1, 1), 2);
 }
 
 void EntityCar::update(float seconds_elapsed) {
@@ -156,6 +157,16 @@ void EntityCar::update(float seconds_elapsed) {
 	vel_mod = vel.length();
 	vel_mod = clamp(vel_mod, 0, 2.0f);
 	float angular_acc = car_rot_speed * seconds_elapsed * vel_mod;
+	//// fuera de carretera
+	//for (size_t i = 0; i < world->dynamic_list.size(); i++)
+	//{
+	//	EntityCar* dynamic_entity = static_cast<EntityCar*>(world->dynamic_list.at(i));
+
+	//	if (world->road->isCollision(dynamic_entity))
+	//	{
+	//		dynamic_entity->vel = dynamic_entity->vel * 0;
+	//	}
+	//}
 
 	// Colision Event
 	{
@@ -169,7 +180,7 @@ void EntityCar::update(float seconds_elapsed) {
 				// check colision
 				if (static_entity->isCollision(dynamic_entity))
 				{
- 					dynamic_entity->onCollision();
+ 					dynamic_entity->onCollision(seconds_elapsed);
 				}
 			}
 		}
