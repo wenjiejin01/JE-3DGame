@@ -17,14 +17,16 @@
 class Stage {
 public:
 	float angle = 0;
+	int number_level = 1;
 
 	Stage();
 
 	virtual void render(Camera* camera) {}; //empty body
 	virtual void update(float elapsed_time) {}; //empty body
 	void getKeyDownEvent(Camera* camera, int key_num);
-	void AddObjectInFont(Camera* camera, Mesh* mesh, Texture* texture);
+	void AddObjectInFont(Camera* camera, const char* mesh, const char* texture);
 	void SelectEntity(Camera* camera);
+	void LoadFile();
 };
 
 //class IntroStage : public Stage {
@@ -52,6 +54,7 @@ public:
 
 	FBO* fbo = NULL;
 	std::vector<Entity*> mesh_List;
+	
 
 	PlayStage();
 	virtual void render(Camera* camera);

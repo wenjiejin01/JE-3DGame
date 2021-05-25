@@ -3,12 +3,19 @@
 #include "stage.h"
 #include "entity.h"
 #include "scene.h"
+#include "extra/textparser.h"
+
+#include <iostream>
+#include <fstream>
+#include <cmath>
+
 
 Stage::Stage() {}
 
 
 PlayStage::PlayStage() {
 	Scene* world = Scene::instance;
+
 	//GRASS
 	EntityMesh* grass = new EntityMesh();
 	grass->meshType = EntityMesh::GRASS;
@@ -61,6 +68,8 @@ PlayStage::PlayStage() {
 	// example of shader loading using the shaders manager
 	car->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/texture.fs");
 
+	//OBJECTS
+	LoadFile();
 }
 
 void PlayStage::render(Camera* camera){
@@ -122,7 +131,11 @@ void Stage::getKeyDownEvent(Camera* camera, int key_num) {
 
 	switch (key_num)
 	{
-		case 1: AddObjectInFont(camera, Mesh::Get("data/assets/town/minihouse.obj"), Texture::Get("data/texture.tga")); break;
+		case 1: AddObjectInFont(camera, "data/assets/edificios/building-office-big_13.obj", "data/assets/color-atlas-new.png"); break;
+		//case 1: AddObjectInFont(camera, "data/assets/arboles/tree-birch_42.obj", "data/assets/color-atlas-new.png"); break;
+		//case 1: AddObjectInFont(camera, "data/assets/edificios/building-house-middle_7.obj", "data/assets/color-atlas-new.png"); break;
+		//case 1: AddObjectInFont(camera, "data/assets/edificios/building-office-tall_15.obj", "data/assets/color-atlas-new.png"); break;
+
 		case 2: SelectEntity(camera); break;
 		case 3: {
 			EntityMesh* mesh = static_cast<EntityMesh*>(world->selected_entity);
@@ -133,10 +146,12 @@ void Stage::getKeyDownEvent(Camera* camera, int key_num) {
 			mesh->model.rotate(-10.0f * DEG2RAD, Vector3(0, 1, 0));
 		}
 		break;
+
+		
 	}
 }
 
-void Stage::AddObjectInFont(Camera* camera, Mesh* mesh, Texture* texture) {
+void Stage::AddObjectInFont(Camera* camera, const char* mesh, const char* texture) {
 	Scene* world = Scene::instance;
 	Game* game = Game::instance;
 
@@ -147,13 +162,75 @@ void Stage::AddObjectInFont(Camera* camera, Mesh* mesh, Texture* texture) {
 	//create new entitymesh, set model, mesh, texture, and push to static list
 	EntityMesh* entity = new EntityMesh();
 	entity->model.setTranslation(pos.x, pos.y, pos.z);
-	entity->mesh = mesh;
-	entity->texture = texture;
+	entity->mesh = Mesh::Get(mesh);
+	/*entity->texture = new Texture();;
+	entity->texture->load(texture);*/
+	entity->texture = Texture::Get(texture);
 	entity->shader =  Shader::Get("data/shaders/basic.vs", "data/shaders/texture.fs");
 	entity->meshType = EntityMesh::HOUSE;
 	world->static_list.push_back(entity);
-}
 
+	//write pos, mesh and text in file
+	std::stringstream filename;
+	filename << "data/levels/level" << number_level << ".txt";
+	std::fstream myfile;
+	myfile.open(filename.str(), myfile.out | myfile.app);
+	
+	if (!myfile.is_open())
+	{
+		std::cout << "no file to write levels" << std::endl;
+		exit(0);
+	}
+
+	myfile << "\t -ENTITY: " << pos.x << " " << pos.y << "       " << pos.z << "     " << mesh << "     " << texture << "  " << "\n\n";
+	myfile.close();
+}
+void Stage::LoadFile()
+{
+	Scene* world = Scene::instance;
+	Vector3 pos = Vector3();
+	const char* mesh;
+	const char* texture;
+	
+	//load file of level with mesh , text and pos 
+	
+	std::stringstream filename;
+	filename << "data/levels/level" << number_level << ".txt";
+	TextParser t = TextParser(filename.str().c_str());
+	std::fstream myfile;
+	//FILE* file = fopen(filename.str().c_str(), "rb");
+	if (!t.create(filename.str().c_str())) {
+		std::cout << "File not found " << filename.str() << std::endl;
+		exit(0);
+	}
+
+	int count = t.countword("-ENTITY:");
+	std::cout << "debug de pos" << 0 << " " << 0 << " " << 0 << "\n\n ";
+
+	for (int i = 0; i < count; i++) {
+		t.seek("-ENTITY:");
+		pos.x = t.getfloat();
+		pos.y = t.getfloat();
+		pos.z = t.getfloat();
+		mesh = t.getword();
+		//texture = t.getword();
+		texture = "data/assets/color-atlas-new.png";
+		strlwr((char*)mesh);
+		strlwr((char*)texture);
+
+		std::cout << "debug de pos " << pos.x << " " << pos.y << " " << pos.z << " " << mesh << " " << texture << "\n";
+	
+		EntityMesh* entity = new EntityMesh();
+		entity->model.setTranslation(pos.x, pos.y, pos.z);
+		entity->mesh = Mesh::Get((const char*)mesh);
+		entity->texture = Texture::Get((const char*)texture);
+		entity->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/texture.fs");
+		entity->meshType = EntityMesh::HOUSE;
+		world->static_list.push_back(entity);
+	}
+	myfile.close();
+
+}
 
 void Stage::SelectEntity(Camera* camera) {
 	Scene* world = Scene::instance;

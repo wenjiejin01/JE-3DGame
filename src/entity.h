@@ -40,7 +40,8 @@ public:
         HOUSE,
         ROAD,
         GRASS,
-        SKY
+        SKY,
+        TREE
 
     };
     //Attributes of this class 
