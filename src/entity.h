@@ -21,6 +21,9 @@ class Entity
 
         //some attributes 
         std::string name;
+        Mesh* mesh;
+        Texture* texture;
+        Shader* shader;
         Matrix44 model;
 
         //methods overwritten by derived classes 
@@ -49,10 +52,7 @@ public:
     meshType meshType;
     bool moving = false;
 
-    Mesh* mesh;
-    Texture* texture;
-    Shader* shader;
-    Matrix44 model;
+
     Vector4 color;
 
 
@@ -73,7 +73,7 @@ public:
     float yaw;
     float acc_front = 15.0f;
     float acc_back = 10.0f;
-    float car_rot_speed = 10.0f;
+    float car_rot_speed = 30.0f;
     float max_speed = 40.0f;
     float max_angular_acc = 100.0f;
     float vel_mod;

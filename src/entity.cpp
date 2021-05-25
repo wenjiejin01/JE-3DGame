@@ -23,8 +23,8 @@ void EntityMesh::render(Camera* camera, float tiling)
 	if (this->meshType == EntityMesh::GRASS) tiling = 100.0f;
 
 	// frustum check
-	/*BoundingBox box = transformBoundingBox(model, mesh->box);
-	if (!camera->testBoxInFrustum(box.center, box.halfsize)) return;*/
+	BoundingBox box = transformBoundingBox(model, mesh->box);
+	if (!camera->testBoxInFrustum(box.center, box.halfsize)) return;
 
 
 	if (shader)
@@ -139,19 +139,19 @@ void EntityCar::update(float seconds_elapsed) {
 		// Convertir cordenada mundo
 		goFront = model.rotateVector(goFront);
 
-		//Movimiento
+		//Movimiento fisica
 		{
 			if (Input::isKeyPressed(SDL_SCANCODE_W)) vel = vel + (goFront * -seconds_elapsed * acc_front);	
 			else if (Input::isKeyPressed(SDL_SCANCODE_S)) vel = vel - (goFront * -seconds_elapsed * acc_back);
 			else {
-				vel = vel - (vel * seconds_elapsed * 2.0f);
+				vel = vel - (vel * seconds_elapsed * 5.0f);
 			}
 
 			// rotate only when is moving 
 			if (Input::isKeyPressed(SDL_SCANCODE_D)) angular_vel += angular_acc;
 			else if (Input::isKeyPressed(SDL_SCANCODE_A)) angular_vel -= angular_acc;
 			else {
-				angular_vel = angular_vel - (angular_vel * seconds_elapsed * 10.0f);
+				angular_vel = angular_vel - (angular_vel * seconds_elapsed * 5.0f);
 
 			}
 			angular_vel = clamp(angular_vel, -max_angular_acc, max_angular_acc);
