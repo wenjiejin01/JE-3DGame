@@ -1,5 +1,5 @@
 # Blender MTL File: 'mapa_carretera.blend'
-# Material Count: 144
+# Material Count: 133
 
 newmtl LOW-POLY-COLORS
 Ns 0.000000
@@ -23,17 +23,6 @@ d 1.000000
 illum 2
 map_Kd C:\\Users\\Jesús Pavón García\\Documents\\GitHub\\JE-3DGame\\data\\biglib\\GiantGeneralPack\\color-atlas-new.png
 
-newmtl LOW-POLY-COLORS.002
-Ns 0.000000
-Ka 1.000000 1.000000 1.000000
-Kd 0.600000 0.600000 0.600000
-Ks 0.900000 0.900000 0.900000
-Ke 0.000000 0.000000 0.000000
-Ni 1.450000
-d 1.000000
-illum 2
-map_Kd C:\\Users\\Jesús Pavón García\\Documents\\GitHub\\JE-3DGame\\data\\assets\\color-atlas-new.png
-
 newmtl LOW-POLY-COLORS.003
 Ns 0.000000
 Ka 1.000000 1.000000 1.000000
@@ -55,17 +44,6 @@ Ni 1.450000
 d 1.000000
 illum 2
 map_Kd C:\\Users\\Jesús Pavón García\\Documents\\GitHub\\JE-3DGame\\data\\biglib\\GiantGeneralPack\\color-atlas-new.png
-
-newmtl LOW-POLY-COLORS.005
-Ns 0.000000
-Ka 1.000000 1.000000 1.000000
-Kd 0.600000 0.600000 0.600000
-Ks 0.900000 0.900000 0.900000
-Ke 0.000000 0.000000 0.000000
-Ni 1.450000
-d 1.000000
-illum 2
-map_Kd C:\\Users\\Jesús Pavón García\\Documents\\GitHub\\JE-3DGame\\data\\assets\\color-atlas-new.png
 
 newmtl LOW-POLY-COLORS.006
 Ns 0.000000
@@ -694,17 +672,6 @@ d 1.000000
 illum 2
 map_Kd C:\\Users\\Jesús Pavón García\\Documents\\GitHub\\JE-3DGame\\data\\biglib\\GiantGeneralPack\\color-atlas-new.png
 
-newmtl LOW-POLY-COLORS.065
-Ns 0.000000
-Ka 1.000000 1.000000 1.000000
-Kd 0.600000 0.600000 0.600000
-Ks 0.900000 0.900000 0.900000
-Ke 0.000000 0.000000 0.000000
-Ni 1.450000
-d 1.000000
-illum 2
-map_Kd C:\\Users\\Jesús Pavón García\\Documents\\GitHub\\JE-3DGame\\data\\assets\\color-atlas-new.png
-
 newmtl LOW-POLY-COLORS.066
 Ns 0.000000
 Ka 1.000000 1.000000 1.000000
@@ -836,17 +803,6 @@ Ni 1.450000
 d 1.000000
 illum 2
 map_Kd C:\\Users\\Jesús Pavón García\\Documents\\GitHub\\JE-3DGame\\data\\biglib\\GiantGeneralPack\\color-atlas-new.png
-
-newmtl LOW-POLY-COLORS.080
-Ns 0.000000
-Ka 1.000000 1.000000 1.000000
-Kd 0.600000 0.600000 0.600000
-Ks 0.900000 0.900000 0.900000
-Ke 0.000000 0.000000 0.000000
-Ni 1.450000
-d 1.000000
-illum 2
-map_Kd C:\\Users\\Jesús Pavón García\\Documents\\GitHub\\JE-3DGame\\data\\assets\\color-atlas-new.png
 
 newmtl LOW-POLY-COLORS.081
 Ns 0.000000
@@ -1475,39 +1431,6 @@ d 1.000000
 illum 2
 map_Kd C:\\Users\\Jesús Pavón García\\Documents\\GitHub\\JE-3DGame\\data\\biglib\\GiantGeneralPack\\color-atlas-new.png
 
-newmtl LOW-POLY-COLORS.151
-Ns 0.000000
-Ka 1.000000 1.000000 1.000000
-Kd 0.600000 0.600000 0.600000
-Ks 0.900000 0.900000 0.900000
-Ke 0.000000 0.000000 0.000000
-Ni 1.450000
-d 1.000000
-illum 2
-map_Kd C:\\Users\\Jesús Pavón García\\Documents\\GitHub\\JE-3DGame\\data\\assets\\color-atlas-new.png
-
-newmtl LOW-POLY-COLORS.152
-Ns 0.000000
-Ka 1.000000 1.000000 1.000000
-Kd 0.600000 0.600000 0.600000
-Ks 0.900000 0.900000 0.900000
-Ke 0.000000 0.000000 0.000000
-Ni 1.450000
-d 1.000000
-illum 2
-map_Kd C:\\Users\\Jesús Pavón García\\Documents\\GitHub\\JE-3DGame\\data\\assets\\color-atlas-new.png
-
-newmtl LOW-POLY-COLORS.153
-Ns 0.000000
-Ka 1.000000 1.000000 1.000000
-Kd 0.600000 0.600000 0.600000
-Ks 0.900000 0.900000 0.900000
-Ke 0.000000 0.000000 0.000000
-Ni 1.450000
-d 1.000000
-illum 2
-map_Kd C:\\Users\\Jesús Pavón García\\Documents\\GitHub\\JE-3DGame\\data\\assets\\color-atlas-new.png
-
 newmtl LOW-POLY-COLORS.154
 Ns 0.000000
 Ka 1.000000 1.000000 1.000000
@@ -1520,50 +1443,6 @@ illum 2
 map_Kd C:\\Users\\Jesús Pavón García\\Documents\\GitHub\\JE-3DGame\\data\\assets\\color-atlas-new.png
 
 newmtl LOW-POLY-COLORS.155
-Ns 0.000000
-Ka 1.000000 1.000000 1.000000
-Kd 0.600000 0.600000 0.600000
-Ks 0.900000 0.900000 0.900000
-Ke 0.000000 0.000000 0.000000
-Ni 1.450000
-d 1.000000
-illum 2
-map_Kd C:\\Users\\Jesús Pavón García\\Documents\\GitHub\\JE-3DGame\\data\\assets\\color-atlas-new.png
-
-newmtl LOW-POLY-COLORS.156
-Ns 0.000000
-Ka 1.000000 1.000000 1.000000
-Kd 0.600000 0.600000 0.600000
-Ks 0.900000 0.900000 0.900000
-Ke 0.000000 0.000000 0.000000
-Ni 1.450000
-d 1.000000
-illum 2
-map_Kd C:\\Users\\Jesús Pavón García\\Documents\\GitHub\\JE-3DGame\\data\\assets\\color-atlas-new.png
-
-newmtl LOW-POLY-COLORS.159
-Ns 0.000000
-Ka 1.000000 1.000000 1.000000
-Kd 0.600000 0.600000 0.600000
-Ks 0.900000 0.900000 0.900000
-Ke 0.000000 0.000000 0.000000
-Ni 1.450000
-d 1.000000
-illum 2
-map_Kd C:\\Users\\Jesús Pavón García\\Documents\\GitHub\\JE-3DGame\\data\\biglib\\GiantGeneralPack\\color-atlas-new.png
-
-newmtl LOW-POLY-COLORS.160
-Ns 0.000000
-Ka 1.000000 1.000000 1.000000
-Kd 0.600000 0.600000 0.600000
-Ks 0.900000 0.900000 0.900000
-Ke 0.000000 0.000000 0.000000
-Ni 1.450000
-d 1.000000
-illum 2
-map_Kd C:\\Users\\Jesús Pavón García\\Documents\\GitHub\\JE-3DGame\\data\\biglib\\GiantGeneralPack\\color-atlas-new.png
-
-newmtl LOW-POLY-COLORS.161
 Ns 0.000000
 Ka 1.000000 1.000000 1.000000
 Kd 0.600000 0.600000 0.600000
