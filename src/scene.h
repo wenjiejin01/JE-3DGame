@@ -17,6 +17,8 @@ public:
 	std::vector<Entity*> static_list;
 	std::vector<Entity*> dynamic_list;
 	Entity* selected_entity = NULL;
+	EntityMesh* road;
+	EntityMesh* grass;
 
 
 };

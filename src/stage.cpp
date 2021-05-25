@@ -17,21 +17,20 @@ PlayStage::PlayStage() {
 	Scene* world = Scene::instance;
 
 	//GRASS
-	EntityMesh* grass = new EntityMesh();
+	world->grass = new EntityMesh();
+	EntityMesh* grass = world->grass;
 	grass->meshType = EntityMesh::GRASS;
-	world->static_list.push_back(grass);
 	grass->mesh = new Mesh();
 	grass->mesh->createPlane(600.0f);
 	grass->texture = new Texture();
 	grass->texture->load("data/grass.tga");
 	grass->model.translate(0.0f, -0.5f, 0.0f);
-	// example of shader loading using the shaders manager
 	grass->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/texture.fs");
 
 	//ROAD
-	EntityMesh* road = new EntityMesh();
+	world->road = new EntityMesh();
+	EntityMesh* road = world->road;
 	road->meshType = EntityMesh::ROAD;
-	world->static_list.push_back(road);
 	//load one texture without using the Texture Manager (Texture::Get would use the manager)
 	road->texture = new Texture();
 	road->texture->load("data/assets/color-atlas-new.png");
@@ -83,7 +82,8 @@ void PlayStage::render(Camera* camera){
 	Mesh* usedMesh;
 	Texture* usedTex;
 
-
+	world->grass->render(camera);
+	world->road->render(camera);
 
 	for (size_t i = 0; i < count; i++)
 	{
@@ -207,7 +207,7 @@ void Stage::LoadFile()
 	}
 
 	int count = t.countword("-ENTITY:");
-	std::cout << "debug de pos" << 0 << " " << 0 << " " << 0 << "\n\n ";
+	//std::cout << "debug de pos" << 0 << " " << 0 << " " << 0 << "\n\n ";
 
 	for (int i = 0; i < count; i++) {
 		t.seek("-ENTITY:");
@@ -220,7 +220,7 @@ void Stage::LoadFile()
 		strlwr((char*)mesh);
 		strlwr((char*)texture);
 
-		std::cout << "debug de pos " << pos.x << " " << pos.y << " " << pos.z << " " << mesh << " " << texture << "\n";
+		//std::cout << "debug de pos " << pos.x << " " << pos.y << " " << pos.z << " " << mesh << " " << texture << "\n";
 	
 		EntityMesh* entity = new EntityMesh();
 		entity->model.setTranslation(pos.x, pos.y, pos.z);
