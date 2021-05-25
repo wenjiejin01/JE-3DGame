@@ -1,7 +1,7 @@
 #include "entity.h"
 #include "game.h"
 #include "scene.h"
-
+#include <string>
 Entity::Entity(){
 
 }
@@ -19,9 +19,8 @@ void Entity::update(float elapsed_time) {
 
 void EntityMesh::render(Camera* camera, float tiling)
 {
-	if(this->meshType == EntityMesh::GRASS) tiling = 100.0f;
-
 	Game* game = Game::instance;
+	if (this->meshType == EntityMesh::GRASS) tiling = 100.0f;
 
 	// frustum check
 	/*BoundingBox box = transformBoundingBox(model, mesh->box);
@@ -57,7 +56,6 @@ void EntityMesh::update(float seconds_elapsed) {
 	Scene* world = Scene::instance;
 
 	float speed = seconds_elapsed * game->mouse_speed; //the speed is defined by the seconds_elapsed so it goes constant
-	this->moving = false;
 	//example
 	world->angle += (float)seconds_elapsed * 10.0f;
 
@@ -77,32 +75,138 @@ void EntityMesh::update(float seconds_elapsed) {
 		if (Input::isKeyPressed(SDL_SCANCODE_A) || Input::isKeyPressed(SDL_SCANCODE_LEFT)) camera->move(Vector3(1.0f, 0.0f, 0.0f) * speed);
 		if (Input::isKeyPressed(SDL_SCANCODE_D) || Input::isKeyPressed(SDL_SCANCODE_RIGHT)) camera->move(Vector3(-1.0f, 0.0f, 0.0f) * speed);
 	}
-	else {
-		// Mesh movimente.
-		float model_speed = seconds_elapsed * 30.0f;
-		if (Input::isKeyPressed(SDL_SCANCODE_W)) {
-			moving = true;
-			model.translate(0.0f, 0.0f, -1.0f * model_speed);
-		}
-		if (Input::isKeyPressed(SDL_SCANCODE_S)) {
-			moving = true;
-			model.translate(0.0f, 0.0f, 1.0f * model_speed);
-		}
-		// rotate only when is moving 
-		if (Input::isKeyPressed(SDL_SCANCODE_D) && moving) model.rotate(90.0f * seconds_elapsed * DEG2RAD, Vector3(0.0f, 1.0f, 0.0f));
-		if (Input::isKeyPressed(SDL_SCANCODE_A) && moving) model.rotate(-90.0f * seconds_elapsed * DEG2RAD, Vector3(0.0f, 1.0f, 0.0f));
+}
 
+bool EntityMesh::isCollision(Vector3 targetPos) {
+	Scene* world = Scene::instance;
+
+
+	return false;
+}
+
+void EntityCar::render(Mesh* mesh, Matrix44 model, Camera* camera, Texture* texture, float tiling)
+{
+	Game* game = Game::instance;
+	// frustum check
+	BoundingBox box = transformBoundingBox(model, mesh->box);
+	if (!camera->testBoxInFrustum(box.center, box.halfsize)) return;
+
+
+	if (shader)
+	{
+		//enable shader
+		shader->enable();
+
+		//upload uniforms
+		shader->setUniform("u_color", Vector4(1, 1, 1, 1));
+		shader->setUniform("u_viewprojection", camera->viewprojection_matrix);
+		if (texture != NULL) shader->setUniform("u_texture", texture, 0);
+		shader->setUniform("u_model", model);
+		shader->setUniform("u_time", time);
+		shader->setUniform("u_texture_tiling", tiling);
+
+		//do the draw call
+		mesh->render(GL_TRIANGLES);
+
+		//disable shader
+		shader->disable();
 	}
 
+	mesh->renderBounding(model);
+	//render the FPS, Draw Calls, etc
+	std::string text = "velocidad: " + std::to_string(vel.z);
+	drawText(2, game->window_width - 100, text, Vector3(1, 1, 1), 2);
+}
 
+void EntityCar::update(float seconds_elapsed) {
+	EntityMesh::update(seconds_elapsed);
+	Game* game = Game::instance;
+	Scene* world = Scene::instance;
+
+	this->moving = false;
+	vel_mod = vel.length();
+	vel_mod = clamp(vel_mod, 0, 2.0f);
+	float angular_acc = car_rot_speed * seconds_elapsed * vel_mod;
+
+	////mouse input to rotate the cam
+	if (!world->free_camera){
+
+		// Mesh movimente.
+		float model_speed = seconds_elapsed * 30.0f;
+		target = Vector3(0, 0, 0);
+		// Coordenada  local
+		Vector3 goFront = Vector3(0.0f, 0.0f, 1.0f);
+		// Convertir cordenada mundo
+		goFront = model.rotateVector(goFront);
+
+		//Movimiento
+		{
+			if (Input::isKeyPressed(SDL_SCANCODE_W)) vel = vel + (goFront * -seconds_elapsed * acc_front);	
+			else if (Input::isKeyPressed(SDL_SCANCODE_S)) vel = vel - (goFront * -seconds_elapsed * acc_back);
+			else {
+				vel = vel - (vel * seconds_elapsed * 2.0f);
+			}
+
+			// rotate only when is moving 
+			if (Input::isKeyPressed(SDL_SCANCODE_D)) angular_vel += angular_acc;
+			else if (Input::isKeyPressed(SDL_SCANCODE_A)) angular_vel -= angular_acc;
+			else {
+				angular_vel = angular_vel - (angular_vel * seconds_elapsed * 10.0f);
+
+			}
+			angular_vel = clamp(angular_vel, -max_angular_acc, max_angular_acc);
+			yaw = yaw + (angular_vel * seconds_elapsed);
+
+		}
+
+		/******************* check colision  *****************************/
+		{
+			Vector3 checkTarget = pos + (vel * seconds_elapsed);
+			EntityMesh* currentMesh = NULL;
+			//Variable para chequear colision
+			Vector3 coll;
+			Vector3 collNorm;
+			Vector3 characterTargetCenter = checkTarget + Vector3(0, 1, 0);
+
+			//check for any static entity if there is a collision
+			for (size_t i = 0; i < world->static_list.size(); i++)
+			{
+				// Break the game and show error.
+				assert(world->static_list.at(i) != NULL);
+
+				// Check entity type
+				if (world->static_list.at(i)->getType() == ENTITY_TYPE_ID::MESH)
+				{
+					//DOWNCAST, BY STATIC_CAST
+					currentMesh = static_cast<EntityMesh*>(world->static_list.at(i));
+				}
+
+				bool result = currentMesh->mesh->testSphereCollision(currentMesh->model, characterTargetCenter, 1.0, coll, collNorm);
+				if (result)
+				{
+					std::cout << result << std::endl;
+					Vector3 push_away = normalize(coll - characterTargetCenter) * seconds_elapsed;
+					checkTarget = pos - push_away;
+					checkTarget.y = pos.y;
+				}
+			}
+			pos = checkTarget;
+		}
+	}
 
 	//to navigate with the mouse fixed in the middle
 	if (game->mouse_locked)
 		Input::centerMouse();
 
+	//switch entre vista coche o mundo
 	if (Input::wasKeyPressed(SDL_SCANCODE_TAB))
 	{
 		world->free_camera = !(world->free_camera);
 	}
 }
 
+Matrix44 EntityCar::get_CarModel() {
+	model.setTranslation(pos.x, pos.y, pos.z);
+	model.rotate(yaw * DEG2RAD, Vector3(0.0f, 1.0f, 0.0f));
+	return model;
+}

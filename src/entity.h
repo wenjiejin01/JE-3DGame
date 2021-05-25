@@ -9,6 +9,7 @@
 enum ENTITY_TYPE_ID {
     ENTITY,
     MESH,
+    CAR,
     SOUND,
 };
 
@@ -53,11 +54,13 @@ public:
     Shader* shader;
     Matrix44 model;
     Vector4 color;
-   
+
+
 
     //methods overwritten 
     virtual void render(Camera* camera , float tiling = 1.0f);
     virtual void update(float dt);
+    bool isCollision(Vector3 target);
     ENTITY_TYPE_ID getType() { return ENTITY_TYPE_ID::MESH;};
 };
 
@@ -65,14 +68,23 @@ class EntityCar : public EntityMesh
 {
 public:
     Vector3 pos;
-    float velocidad;
-    float aceleracion;
+    Vector3 target;
+    Vector3 vel;
     float yaw;
+    float acc_front = 15.0f;
+    float acc_back = 10.0f;
+    float car_rot_speed = 10.0f;
+    float max_speed = 40.0f;
+    float max_angular_acc = 100.0f;
+    float vel_mod;
+    float angular_vel;
+
 
     //methods overwritten 
-    void render(Camera* camera, float tiling = 1.0f) {};
-    void update(float dt) {};
-    ENTITY_TYPE_ID getType() { return ENTITY_TYPE_ID::MESH; };
+    void render(Mesh* mesh, Matrix44 model, Camera* camera, Texture* texture, float tiling = 1.0f);
+    void update(float dt);
+    ENTITY_TYPE_ID getType() { return ENTITY_TYPE_ID::CAR; };
+    Matrix44 get_CarModel();
 };
 
 #endif // ENTITY_H
