@@ -720,3 +720,7 @@
 
 	 -ENTITY: 47.5782 0       -270.858     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
 
+	 -ENTITY: -18.4458 0       2.09904     data/assets/checkpoints/finish_check.obj     data/assets/checkpoints/finish_check.mtl  
+
+	 -ENTITY: -106.157 0       3.34966     data/assets/checkpoints/check.obj     data/assets/checkpoints/check.mtl  
+

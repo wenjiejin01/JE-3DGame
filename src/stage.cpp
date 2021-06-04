@@ -134,16 +134,17 @@ void Stage::getKeyDownEvent(Camera* camera, int key_num) {
 	switch (key_num)
 	{
 		case 1: AddObjectInFont(camera, "data/assets/edificios/building-office-big_13.obj", "data/assets/color-atlas-new.png"); break;
-		//case 1: AddObjectInFont(camera, "data/assets/arboles/tree-birch_42.obj", "data/assets/color-atlas-new.png"); break;
-		//case 1: AddObjectInFont(camera, "data/assets/edificios/building-house-middle_7.obj", "data/assets/color-atlas-new.png"); break;
-		//case 1: AddObjectInFont(camera, "data/assets/edificios/building-office-tall_15.obj", "data/assets/color-atlas-new.png"); break;
+		case 2: AddObjectInFont(camera, "data/assets/arboles/tree-birch_42.obj", "data/assets/color-atlas-new.png"); break;
+		case 3: AddObjectInFont(camera, "data/assets/edificios/building-house-middle_7.obj", "data/assets/color-atlas-new.png"); break;
+		case 4: AddObjectInFont(camera, "data/assets/checkpoints/finish_check.obj", "data/assets/checkpoints/finish_check.mtl"); break;
+		case 5: AddObjectInFont(camera, "data/assets/checkpoints/check.obj", "data/assets/checkpoints/check.mtl"); break;
 
-		case 2: SelectEntity(camera); break;
-		case 3: {
+		case 6: SelectEntity(camera); break;
+		case 7: {
 			EntityMesh* mesh = static_cast<EntityMesh*>(world->selected_entity);
 			mesh->model.rotate(10.0f * DEG2RAD, Vector3(0, 1, 0));		}
 		break;
-		case 4: {
+		case 8: {
 			EntityMesh* mesh = static_cast<EntityMesh*>(world->selected_entity);
 			mesh->model.rotate(-10.0f * DEG2RAD, Vector3(0, 1, 0));
 		}
