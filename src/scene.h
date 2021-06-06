@@ -20,6 +20,10 @@ public:
 	EntityMesh* road;
 	EntityMesh* grass;
 
+	// Global variable
+	Vector3 startPoint;
+	Vector3 TargetPoint;
+
 
 };
 

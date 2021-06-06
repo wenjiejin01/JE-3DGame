@@ -82,7 +82,7 @@ PlayStage::PlayStage() {
 	// example of shader loading using the shaders manager
 	car->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/texture.fs");
 
-	//CAR
+	//CAR2
 	EntityCar* car2 = new EntityCar();
 	car2->meshType = EntityMesh::CAR;
 	world->dynamic_list.push_back(car2);
