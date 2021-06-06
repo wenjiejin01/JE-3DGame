@@ -45,7 +45,10 @@ Game::Game(int window_width, int window_height, SDL_Window* window)
 	Scene* world = new Scene();
 
 	// Initialize Stages
+	intro_stage = new IntroStage();
+	tutorial_stage = new TutorialStage();
 	play_stage = new PlayStage();
+	end_stage = new EndStage();
 	current_Stage = play_stage;
 
 	//hide the cursor
@@ -69,9 +72,7 @@ void Game::render(void)
 	glEnable(GL_DEPTH_TEST);
 	glDisable(GL_CULL_FACE);
    
-
 	current_Stage->render(camera);
-
 
 	//Draw the floor grid
 	drawGrid();
@@ -86,7 +87,6 @@ void Game::render(void)
 void Game::update(double seconds_elapsed)
 {
 	current_Stage->update(seconds_elapsed);
-	
 }
 
 //Keyboard event handler (sync input)
@@ -100,10 +100,6 @@ void Game::onKeyDown( SDL_KeyboardEvent event )
 		case SDLK_2: current_Stage->getKeyDownEvent(camera, 2); break;
 		case SDLK_3: current_Stage->getKeyDownEvent(camera, 3); break;
 		case SDLK_4: current_Stage->getKeyDownEvent(camera, 4); break;
-		case SDLK_5: current_Stage->getKeyDownEvent(camera, 5); break;
-		case SDLK_6: current_Stage->getKeyDownEvent(camera, 6); break;
-		case SDLK_7: current_Stage->getKeyDownEvent(camera, 7); break;
-		case SDLK_8: current_Stage->getKeyDownEvent(camera, 8); break;
 	}
 }
 

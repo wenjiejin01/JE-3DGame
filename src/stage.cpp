@@ -12,7 +12,21 @@
 
 Stage::Stage() {}
 
+/********************************************************* Introstage *********************************************************/
+IntroStage::IntroStage() {
 
+}
+
+void IntroStage::render(Camera* camera) {
+
+}
+
+void IntroStage::update(float elapse_time) {
+
+}
+
+
+/********************************************************* PlayStagte *********************************************************/
 PlayStage::PlayStage() {
 	Scene* world = Scene::instance;
 
@@ -51,6 +65,7 @@ PlayStage::PlayStage() {
 	sky->mesh = Mesh::Get("data/assets/cielo/cielo.ASE");
 	sky->texture->load("data/assets/cielo/cielo.tga");
 	sky->model.translate(0.0f, 0.0f, 0.0f);
+	sky->model.scale(0.63f, 0.7f, 0.6f);
 	sky->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/texture.fs");
 
 
@@ -66,6 +81,20 @@ PlayStage::PlayStage() {
 	car->model.translate(0.0f, 0.0f, 0.0f);
 	// example of shader loading using the shaders manager
 	car->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/texture.fs");
+
+	//CAR
+	EntityCar* car2 = new EntityCar();
+	car2->meshType = EntityMesh::CAR;
+	world->dynamic_list.push_back(car2);
+	//load one texture without using the Texture Manager (Texture::Get would use the manager)
+	car2->texture = new Texture();
+	car2->texture->load("data/assets/color-atlas-new.png");
+	// example of loading Mesh from Mesh Manager
+	car2->mesh = Mesh::Get("data/assets/coches/car-passenger_1.obj");
+	car2->pos = Vector3(0.0f, 0.0f, 20.0f);
+	car2->model.translate(car2->pos.x, car2->pos.y, car2->pos.z);
+	// example of shader loading using the shaders manager
+	car2->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/texture.fs");
 
 	//OBJECTS
 	LoadFile();
@@ -84,6 +113,7 @@ void PlayStage::render(Camera* camera){
 
 	world->grass->render(camera);
 	world->road->render(camera);
+
 
 	for (size_t i = 0; i < count; i++)
 	{
@@ -115,14 +145,14 @@ void PlayStage::render(Camera* camera){
 			continue;
 		}
 
-		if (!world->free_camera)
+		if (!world->free_camera && i == 0)
 		{
-			eye = currentCar->model * Vector3(0.0f, 6.0f, 10.0f);
+			eye = currentCar->model * Vector3(0.0f, 3.0f, 6.0f);
 			center = currentCar->model * Vector3(0.0f, 0.0f, -2.0f);
 			up = currentCar->model.rotateVector(Vector3(0.0f, 1.0f, 0.0f));
 			camera->lookAt(eye, center, up);
 		}
-		//currentCar->model.translate(currentCar->pos.x, currentCar->pos.y, currentCar->pos.z);
+		currentCar->model.translate(currentCar->pos.x, currentCar->pos.y, currentCar->pos.z);
 		currentCar->get_CarModel(); // actualizar model
 		currentCar->render(currentCar->mesh, currentCar->model, camera, currentCar->texture);
 	}
@@ -134,23 +164,19 @@ void Stage::getKeyDownEvent(Camera* camera, int key_num) {
 	switch (key_num)
 	{
 		case 1: AddObjectInFont(camera, "data/assets/edificios/building-office-big_13.obj", "data/assets/color-atlas-new.png"); break;
-		case 2: AddObjectInFont(camera, "data/assets/arboles/tree-birch_42.obj", "data/assets/color-atlas-new.png"); break;
-		case 3: AddObjectInFont(camera, "data/assets/edificios/building-house-middle_7.obj", "data/assets/color-atlas-new.png"); break;
-		case 4: AddObjectInFont(camera, "data/assets/checkpoints/finish_check.obj", "data/assets/checkpoints/finish_check.mtl"); break;
-		case 5: AddObjectInFont(camera, "data/assets/checkpoints/check.obj", "data/assets/checkpoints/check.mtl"); break;
+		//case 1: AddObjectInFont(camera, "data/assets/edificios/building-house-middle_7.obj", "data/assets/color-atlas-new.png"); break;
+		//case 1: AddObjectInFont(camera, "data/assets/edificios/building-office-tall_15.obj", "data/assets/color-atlas-new.png"); break;
 
-		case 6: SelectEntity(camera); break;
-		case 7: {
+		case 2: SelectEntity(camera); break;
+		case 3: {
 			EntityMesh* mesh = static_cast<EntityMesh*>(world->selected_entity);
 			mesh->model.rotate(10.0f * DEG2RAD, Vector3(0, 1, 0));		}
 		break;
-		case 8: {
+		case 4: {
 			EntityMesh* mesh = static_cast<EntityMesh*>(world->selected_entity);
 			mesh->model.rotate(-10.0f * DEG2RAD, Vector3(0, 1, 0));
 		}
 		break;
-
-		
 	}
 }
 
@@ -185,9 +211,10 @@ void Stage::AddObjectInFont(Camera* camera, const char* mesh, const char* textur
 		exit(0);
 	}
 
-	myfile << "\t -ENTITY: " << pos.x << " " << pos.y << "       " << pos.z << "     " << mesh << "     " << texture << "  " << "\n\n";
+	myfile << "\t -entity: " << pos.x << " " << pos.y << "       " << pos.z << "     " << mesh << "     " << texture << "  " << "\n\n";
 	myfile.close();
 }
+
 void Stage::LoadFile()
 {
 	Scene* world = Scene::instance;
@@ -272,4 +299,31 @@ void PlayStage::update(float seconds_elapsed) {
 
 	EntityCar* currentMesh = static_cast<EntityCar*>(world->dynamic_list.at(0));
 	currentMesh->update(seconds_elapsed);
+}
+
+/********************************************************* End Stage *********************************************************/
+TutorialStage::TutorialStage() {
+
+}
+
+void TutorialStage::render(Camera* camera) {
+
+}
+
+void TutorialStage::update(float elapse_time) {
+
+}
+
+
+/********************************************************* End Stage *********************************************************/
+EndStage::EndStage() {
+
+}
+
+void EndStage::render(Camera* camera) {
+
+}
+
+void EndStage::update(float elapse_time) {
+
 }
