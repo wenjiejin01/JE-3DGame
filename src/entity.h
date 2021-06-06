@@ -56,7 +56,8 @@ public:
         ROAD,
         GRASS,
         SKY,
-        TREE
+        TREE,
+        CHECKPOINT
 
     };
     //Attributes of this class 

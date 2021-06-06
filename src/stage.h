@@ -25,6 +25,7 @@ public:
 	virtual void update(float elapsed_time) {}; //empty body
 	void getKeyDownEvent(Camera* camera, int key_num);
 	void AddObjectInFont(Camera* camera, const char* mesh, const char* texture);
+	void LoadFile(std::stringstream filename, char* word);
 	void SelectEntity(Camera* camera);
 	void LoadFile();
 };

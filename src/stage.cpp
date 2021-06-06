@@ -168,11 +168,11 @@ void Stage::getKeyDownEvent(Camera* camera, int key_num) {
 		case 3: AddObjectInFont(camera, "data/assets/edificios/building-house-middle_7.obj", "data/assets/color-atlas-new.png"); break;
 		case 4: AddObjectInFont(camera, "data/assets/checkpoints/finish_check.obj", "data/assets/checkpoints/finish_check.mtl"); break;
 		case 5: AddObjectInFont(camera, "data/assets/checkpoints/check.obj", "data/assets/checkpoints/check.mtl"); break;
-		/*case 6: AddObjectInFont(camera, "data/assets/edificios/building-house-middle_7.obj", "data/assets/color-atlas-new.png"); break;
-		case 7: AddObjectInFont(camera, "data/assets/checkpoints/finish_check.obj", "data/assets/checkpoints/finish_check.mtl"); break;
-		case 8: AddObjectInFont(camera, "data/assets/checkpoints/check.obj", "data/assets/checkpoints/check.mtl"); break;*/
+		case 6: AddObjectInFont(camera, "data/assets/checkpoints/check_v2.obj", "data/assets/checkpoints/check.mtl"); break;
+		///*case 7: AddObjectInFont(camera, "data/assets/checkpoints/finish_check.obj", "data/assets/checkpoints/finish_check.mtl"); break;
+		//case 8: AddObjectInFont(camera, "data/assets/checkpoints/check.obj", "data/assets/checkpoints/check.mtl"); break;*/
 
-		case 6: SelectEntity(camera); break;
+		//case 6: SelectEntity(camera); break;*/
 		case 7: {
 			EntityMesh* mesh = static_cast<EntityMesh*>(world->selected_entity);
 			mesh->model.rotate(10.0f * DEG2RAD, Vector3(0, 1, 0));		}
@@ -216,7 +216,8 @@ void Stage::AddObjectInFont(Camera* camera, const char* mesh, const char* textur
 		exit(0);
 	}
 
-	myfile << "\t -entity: " << pos.x << " " << pos.y << "       " << pos.z << "     " << mesh << "     " << texture << "  " << "\n\n";
+	//myfile << "\t -entity: " << pos.x << " " << pos.y << "       " << pos.z << "     " << mesh << "     " << texture << "  " << "\n\n";
+	myfile << "\t -target: " << pos.x << " " << pos.y << "       " << pos.z << "     " << mesh << "     " << texture << "  " << "\n\n";
 	myfile.close();
 }
 
@@ -238,6 +239,7 @@ void Stage::LoadFile()
 		std::cout << "File not found " << filename.str() << std::endl;
 		exit(0);
 	}
+	
 
 	int count = t.countword("-ENTITY:");
 	//std::cout << "debug de pos" << 0 << " " << 0 << " " << 0 << "\n\n ";
@@ -248,13 +250,10 @@ void Stage::LoadFile()
 		pos.y = t.getfloat();
 		pos.z = t.getfloat();
 		mesh = t.getword();
-		//texture = t.getword();
 		texture = "data/assets/color-atlas-new.png";
 		strlwr((char*)mesh);
 		strlwr((char*)texture);
 
-		//std::cout << "debug de pos " << pos.x << " " << pos.y << " " << pos.z << " " << mesh << " " << texture << "\n";
-	
 		EntityMesh* entity = new EntityMesh();
 		entity->model.setTranslation(pos.x, pos.y, pos.z);
 		entity->mesh = Mesh::Get((const char*)mesh);
@@ -262,6 +261,29 @@ void Stage::LoadFile()
 		entity->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/texture.fs");
 		entity->meshType = EntityMesh::HOUSE;
 		world->static_list.push_back(entity);
+	}
+
+	//igual para target
+    //t = TextParser(filename.str().c_str());
+
+	int count2 = t.countword("-TARGET:");
+
+	for (int i = 0; i < count2; i++) {
+		t.seek("-TARGET:");
+		pos.x = t.getfloat();
+		pos.y = t.getfloat();
+		pos.z = t.getfloat();
+		mesh = t.getword();
+		texture = "data/assets/color-atlas-new.png";
+		strlwr((char*)mesh);
+		strlwr((char*)texture);
+		EntityMesh* entity2 = new EntityMesh();
+		entity2->model.setTranslation(pos.x, pos.y, pos.z);
+		entity2->mesh = Mesh::Get((const char*)mesh);
+		entity2->texture = Texture::Get((const char*)texture);
+		entity2->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/texture.fs");
+		entity2->meshType = EntityMesh::CHECKPOINT;
+		world->static_list.push_back(entity2);
 	}
 	myfile.close();
 
