@@ -114,6 +114,7 @@ void PlayStage::render(Camera* camera){
 	world->grass->render(camera);
 	world->road->render(camera);
 
+
 	for (size_t i = 0; i < count; i++)
 	{
 		// Break the game and show error.
@@ -151,7 +152,7 @@ void PlayStage::render(Camera* camera){
 			up = currentCar->model.rotateVector(Vector3(0.0f, 1.0f, 0.0f));
 			camera->lookAt(eye, center, up);
 		}
-		//currentCar->model.translate(currentCar->pos.x, currentCar->pos.y, currentCar->pos.z);
+		currentCar->model.translate(currentCar->pos.x, currentCar->pos.y, currentCar->pos.z);
 		currentCar->get_CarModel(); // actualizar model
 		currentCar->render(currentCar->mesh, currentCar->model, camera, currentCar->texture);
 	}
@@ -163,23 +164,19 @@ void Stage::getKeyDownEvent(Camera* camera, int key_num) {
 	switch (key_num)
 	{
 		case 1: AddObjectInFont(camera, "data/assets/edificios/building-office-big_13.obj", "data/assets/color-atlas-new.png"); break;
-		case 2: AddObjectInFont(camera, "data/assets/arboles/tree-birch_42.obj", "data/assets/color-atlas-new.png"); break;
-		case 3: AddObjectInFont(camera, "data/assets/edificios/building-house-middle_7.obj", "data/assets/color-atlas-new.png"); break;
-		case 4: AddObjectInFont(camera, "data/assets/checkpoints/finish_check.obj", "data/assets/checkpoints/finish_check.mtl"); break;
-		case 5: AddObjectInFont(camera, "data/assets/checkpoints/check.obj", "data/assets/checkpoints/check.mtl"); break;
+		//case 1: AddObjectInFont(camera, "data/assets/edificios/building-house-middle_7.obj", "data/assets/color-atlas-new.png"); break;
+		//case 1: AddObjectInFont(camera, "data/assets/edificios/building-office-tall_15.obj", "data/assets/color-atlas-new.png"); break;
 
-		case 6: SelectEntity(camera); break;
-		case 7: {
+		case 2: SelectEntity(camera); break;
+		case 3: {
 			EntityMesh* mesh = static_cast<EntityMesh*>(world->selected_entity);
 			mesh->model.rotate(10.0f * DEG2RAD, Vector3(0, 1, 0));		}
 		break;
-		case 8: {
+		case 4: {
 			EntityMesh* mesh = static_cast<EntityMesh*>(world->selected_entity);
 			mesh->model.rotate(-10.0f * DEG2RAD, Vector3(0, 1, 0));
 		}
 		break;
-
-		
 	}
 }
 
@@ -214,7 +211,7 @@ void Stage::AddObjectInFont(Camera* camera, const char* mesh, const char* textur
 		exit(0);
 	}
 
-	myfile << "\t -ENTITY: " << pos.x << " " << pos.y << "       " << pos.z << "     " << mesh << "     " << texture << "  " << "\n\n";
+	myfile << "\t -entity: " << pos.x << " " << pos.y << "       " << pos.z << "     " << mesh << "     " << texture << "  " << "\n\n";
 	myfile.close();
 }
 

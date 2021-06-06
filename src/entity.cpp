@@ -33,7 +33,7 @@ bool Entity::isCollision(Entity* entity) {
 	Matrix44 global_matrix = entity->getGlobalMatrix();
 	Vector3 position = global_matrix.getTranslation();
 
-	//calculamos el centro de la esfera de colisi¨®n del player elevandola hasta la cintura
+	//calculamos el centro de la esfera de colisiï¿½ï¿½n del player elevandola hasta la cintura
 	Vector3 character_center = position + Vector3(0, 1, 0);
 
 	//comprobamos si colisiona el objeto con la esfera (radio 3)
@@ -170,22 +170,22 @@ void EntityCar::update(float seconds_elapsed) {
 	//}
 
 	// Colision Event
-	{
-		for (size_t i = 0; i < world->static_list.size(); i++)
-		{
-			for (size_t j = 0; j < world->dynamic_list.size(); j++)
-			{
-				Entity* dynamic_entity = world->dynamic_list.at(j);
-				Entity* static_entity = world->static_list.at(i);
+	//{
+	//	for (size_t i = 0; i < world->static_list.size(); i++)
+	//	{
+	//		for (size_t j = 0; j < world->dynamic_list.size(); j++)
+	//		{
+	//			Entity* dynamic_entity = world->dynamic_list.at(j);
+	//			Entity* static_entity = world->static_list.at(i);
 
-				// check colision
-				if (static_entity->isCollision(dynamic_entity))
-				{
- 					dynamic_entity->onCollision(seconds_elapsed);
-				}
-			}
-		}
-	}
+	//			// check colision
+	//			if (static_entity->isCollision(dynamic_entity))
+	//			{
+ //					dynamic_entity->onCollision(seconds_elapsed);
+	//			}
+	//		}
+	//	}
+	//}
 
 
 	////mouse input to rotate the cam
@@ -207,7 +207,6 @@ void EntityCar::update(float seconds_elapsed) {
 			}
 
 			target = pos + (vel * seconds_elapsed);
-
 			// rotate only when is moving 
 			if (Input::isKeyPressed(SDL_SCANCODE_D) && moving) angular_vel += angular_acc;
 			else if (Input::isKeyPressed(SDL_SCANCODE_A) && moving) angular_vel -= angular_acc;
@@ -245,7 +244,7 @@ void EntityCar::update(float seconds_elapsed) {
 				bool result = currentMesh->mesh->testSphereCollision(currentMesh->model, characterTargetCenter, 2.0, coll, collNorm);
 				if (result)
 				{
-					//si la esfera est¨¢ colisionando muevela a su posicion anterior alejandola del objeto
+					//si la esfera estï¿½ï¿½ colisionando muevela a su posicion anterior alejandola del objeto
 					Vector3 push_away = normalize(coll - characterTargetCenter) * seconds_elapsed;
 					//move to previous pos but a little bit further
 					checkTarget = pos - push_away * 10.0f;
