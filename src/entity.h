@@ -81,11 +81,11 @@ public:
     Vector3 target;
     Vector3 vel;
     float yaw;
-    float acc_front = 5.0f;
-    float acc_back = 3.0f;
-    float car_rot_speed = 40.0f;
-    float max_speed = 20.0f;
-    float max_angular_acc = 90.0f;
+    float acc_front = 15.0f;
+    float acc_back = 10.0f;
+    float car_rot_speed = 30.0f;
+    float max_speed = 40.0f;
+    float max_angular_acc = 100.0f;
     float vel_mod;
     float angular_vel;
 

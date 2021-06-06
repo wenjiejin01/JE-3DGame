@@ -110,7 +110,7 @@ void EntityMesh::update(float seconds_elapsed) {
 }
 
 void EntityCar::onCollision(float seconds_elapsed) {
-	vel = vel * -0.1;
+	vel = vel * -0.2;
 	pos = pos + (vel * seconds_elapsed);
 }
 
@@ -145,7 +145,7 @@ void EntityCar::render(Mesh* mesh, Matrix44 model, Camera* camera, Texture* text
 	mesh->renderBounding(model);
 	//render the FPS, Draw Calls, etc
 	std::string text = "velocidad: " + std::to_string(std::abs(vel.z));
-	drawText(2, Game::instance->window_height - 20, text, Vector3(1, 1, 1), 2);
+	drawText(2, 560, text, Vector3(1, 1, 1), 2);
 }
 
 void EntityCar::update(float seconds_elapsed) {
@@ -169,50 +169,48 @@ void EntityCar::update(float seconds_elapsed) {
 	//}
 
 	// Colision Event
-	//{
-	//	for (size_t i = 0; i < world->static_list.size(); i++)
-	//	{
-	//		for (size_t j = 0; j < world->dynamic_list.size(); j++)
-	//		{
-	//			Entity* dynamic_entity = world->dynamic_list.at(j);
-	//			Entity* static_entity = world->static_list.at(i);
+	{
+		for (size_t i = 0; i < world->static_list.size(); i++)
+		{
+			for (size_t j = 0; j < world->dynamic_list.size(); j++)
+			{
+				Entity* dynamic_entity = world->dynamic_list.at(j);
+				Entity* static_entity = world->static_list.at(i);
 
-	//			// check colision
-	//			if (static_entity->isCollision(dynamic_entity))
-	//			{
- //					dynamic_entity->onCollision(seconds_elapsed);
-	//			}
-	//		}
-	//	}
-	//}
+				// check colision
+				if (static_entity->isCollision(dynamic_entity))
+				{
+ 					dynamic_entity->onCollision(seconds_elapsed);
+				}
+			}
+		}
+	}
 
 
 	////mouse input to rotate the cam
 	if (!world->free_camera){
 
-		Vector3 target;
-
+		// Mesh movimente.
+		float model_speed = seconds_elapsed * 30.0f;
+		target = Vector3(0, 0, 0);
+		// Coordenada  local
+		Vector3 goFront = Vector3(0.0f, 0.0f, 1.0f);
+		// Convertir cordenada mundo
+		goFront = model.rotateVector(goFront);
 
 		//Movimiento fisica
 		{
-			// Coordenada  local
-			Vector3 carForward = Vector3(0.0f, 0.0f, -1.0f);
-			// Convertir cordenada mundo
-			carForward = model.rotateVector(carForward);
-
-			if (Input::isKeyPressed(SDL_SCANCODE_W)) { vel = vel + (carForward * seconds_elapsed * acc_front); moving = true; }
-			else if (Input::isKeyPressed(SDL_SCANCODE_S)) { vel = vel - (carForward * seconds_elapsed * acc_back); moving = true; }
+			if (Input::isKeyPressed(SDL_SCANCODE_W)) vel = vel + (goFront * -seconds_elapsed * acc_front);	
+			else if (Input::isKeyPressed(SDL_SCANCODE_S)) vel = vel - (goFront * -seconds_elapsed * acc_back);
 			else {
-				vel = vel - (vel * seconds_elapsed * 2.0f);
+				vel = vel - (vel * seconds_elapsed * 5.0f);
 			}
 
-			target = pos + (vel * seconds_elapsed);
-			
 			// rotate only when is moving 
-			if (Input::isKeyPressed(SDL_SCANCODE_D) && moving) angular_vel += angular_acc;
-			else if (Input::isKeyPressed(SDL_SCANCODE_A) && moving) angular_vel -= angular_acc;
+			if (Input::isKeyPressed(SDL_SCANCODE_D)) { angular_vel += angular_acc; /*vel = vel * 0.9999f;*/ }
+			else if (Input::isKeyPressed(SDL_SCANCODE_A)) { angular_vel -= angular_acc; /*vel = vel * 0.9999f;*/ }
 			else {
-				angular_vel = angular_vel - (angular_vel * seconds_elapsed * 10.0f);
+				angular_vel = angular_vel - (angular_vel * seconds_elapsed * 5.0f);
 
 			}
 			angular_vel = clamp(angular_vel, -max_angular_acc, max_angular_acc);
@@ -222,7 +220,7 @@ void EntityCar::update(float seconds_elapsed) {
 
 		/******************* check colision  *****************************/
 		{
-			Vector3 checkTarget = target;
+			Vector3 checkTarget = pos + (vel * seconds_elapsed);
 			Entity* currentMesh = NULL;
 			//Variable para chequear colision
 			Vector3 coll;

@@ -29,10 +29,7 @@ public:
 
 	// Stages
 	Stage* current_Stage;
-	IntroStage* intro_stage;
-	TutorialStage* tutorial_stage;
 	PlayStage* play_stage;
-	EndStage* end_stage;
 
 	//some vars
 	Camera* camera; //our global camera
