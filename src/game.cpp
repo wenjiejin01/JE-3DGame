@@ -45,7 +45,10 @@ Game::Game(int window_width, int window_height, SDL_Window* window)
 	Scene* world = new Scene();
 
 	// Initialize Stages
+	intro_stage = new IntroStage();
+	tutorial_stage = new TutorialStage();
 	play_stage = new PlayStage();
+	end_stage = new EndStage();
 	current_Stage = play_stage;
 
 	//hide the cursor

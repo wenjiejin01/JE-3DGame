@@ -29,29 +29,24 @@ public:
 	void LoadFile();
 };
 
-//class IntroStage : public Stage {
-//public:
-//
-//	IntroStage();
-//	virtual void render(Camera* camera);
-//	virtual void update(float elapsed_time);
-//};
-//
-//class TutorialStage : public Stage {
-//public:
-//
-//	TutorialStage();
-//	virtual void render(Camera* camera);
-//	virtual void update(float elapsed_time);
-//};
+class IntroStage : public Stage {
+public:
+
+	IntroStage();
+	virtual void render(Camera* camera);
+	virtual void update(float elapsed_time);
+};
+
+class TutorialStage : public Stage {
+public:
+
+	TutorialStage();
+	virtual void render(Camera* camera);
+	virtual void update(float elapsed_time);
+};
 
 class PlayStage : public Stage {
 public:
-	//Mesh* mesh = NULL;
-	//Texture* texture;
-	//Shader* shader = NULL;
-	//Animation* anim = NULL;
-
 	FBO* fbo = NULL;
 	std::vector<Entity*> mesh_List;
 	
@@ -61,13 +56,13 @@ public:
 	virtual void update(float elapsed_time);
 };
 
-//class EndStage : public Stage {
-//public:
-//
-//	EndStage(Camera* camera);
-//	virtual void render();
-//	virtual void update(float elapsed_time);
-//};
+class EndStage : public Stage {
+public:
+
+	EndStage();
+	virtual void render(Camera* camera);
+	virtual void update(float elapsed_time);
+};
 
 #endif
 

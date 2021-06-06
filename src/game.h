@@ -28,8 +28,11 @@ public:
 	bool must_exit;
 
 	// Stages
-	Stage* current_Stage;
+	IntroStage* intro_stage;
+	TutorialStage* tutorial_stage;
 	PlayStage* play_stage;
+	EndStage* end_stage;
+	Stage* current_Stage;
 
 	//some vars
 	Camera* camera; //our global camera
