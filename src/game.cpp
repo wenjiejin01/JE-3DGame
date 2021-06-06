@@ -100,6 +100,10 @@ void Game::onKeyDown( SDL_KeyboardEvent event )
 		case SDLK_2: current_Stage->getKeyDownEvent(camera, 2); break;
 		case SDLK_3: current_Stage->getKeyDownEvent(camera, 3); break;
 		case SDLK_4: current_Stage->getKeyDownEvent(camera, 4); break;
+		case SDLK_5: current_Stage->getKeyDownEvent(camera, 5); break;
+		case SDLK_6: current_Stage->getKeyDownEvent(camera, 6); break;
+		case SDLK_7: current_Stage->getKeyDownEvent(camera, 7); break;
+		case SDLK_8: current_Stage->getKeyDownEvent(camera, 8); break;
 	}
 }
 
