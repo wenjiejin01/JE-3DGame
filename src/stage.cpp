@@ -4,6 +4,7 @@
 #include "entity.h"
 #include "scene.h"
 #include "extra/textparser.h"
+#include "animation.h"
 
 #include <iostream>
 #include <fstream>
@@ -90,11 +91,34 @@ PlayStage::PlayStage() {
 	car2->texture = new Texture();
 	car2->texture->load("data/assets/color-atlas-new.png");
 	// example of loading Mesh from Mesh Manager
-	car2->mesh = Mesh::Get("data/assets/coches/car-passenger_1.obj");
+	car2->mesh = Mesh::Get("data/assets/coches/car2.obj");
 	car2->pos = Vector3(0.0f, 0.0f, 20.0f);
 	car2->model.translate(car2->pos.x, car2->pos.y, car2->pos.z);
 	// example of shader loading using the shaders manager
 	car2->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/texture.fs");
+
+	// CHAR1
+	
+	EntityAnimation* persona = new EntityAnimation();
+	persona->meshType =  EntityMesh::PERSONA;  // EntityMesh::ANIMATION;
+	world->dynamic_list.push_back(persona);
+	persona->texture = new Texture();
+	persona->texture->load("data/assets/personas/texture_char.png");
+	persona->mesh = Mesh::Get("data/animation/walking.mesh");
+	persona->pos = Vector3(7.0f, 0.0f, 20.0f);
+	persona->model.translate(persona->pos.x, persona->pos.y, persona->pos.z);
+
+	// example of shader loading using the shaders manager
+	persona->shader = Shader::Get("data/shaders/skinning.vs", "data/shaders/texture.fs");
+	persona->animation = Animation::Get("data/animation/animations_walking.skanim");
+
+	//CHAR 2,3,4,5
+	/*EntityAnimation* persona2 = new EntityAnimation();
+	persona2 = persona;
+	world->dynamic_list.push_back(persona2);
+	persona2->pos = Vector3(7.0f, 0.0f, 15.0f);*/
+	/*EntityAnimation* persona3 = new EntityAnimation();
+	EntityAnimation* persona4 = new EntityAnimation();*/
 
 	//OBJECTS
 	LoadFile();
@@ -102,6 +126,7 @@ PlayStage::PlayStage() {
 
 void PlayStage::render(Camera* camera){
 	EntityMesh* currentMesh = NULL;
+	
 	Scene* world = Scene::instance;
 
 	//Declare temporal variable
@@ -126,8 +151,9 @@ void PlayStage::render(Camera* camera){
 			//DOWNCAST, BY STATIC_CAST
 			currentMesh = static_cast<EntityMesh*>(world->static_list.at(i));
 		}
-
+		
 		currentMesh->render(camera);
+		
 	}
 
 	EntityCar* currentCar;
@@ -156,6 +182,27 @@ void PlayStage::render(Camera* camera){
 		currentCar->get_CarModel(); // actualizar model
 		currentCar->render(currentCar->mesh, currentCar->model, camera, currentCar->texture);
 	}
+
+	EntityAnimation* currentAnim;
+	for (size_t i = 0; i < world->dynamic_list.size(); i++) {
+		assert(world->dynamic_list.at(i) != NULL);
+
+		// Check entity type
+		if (world->dynamic_list.at(i)->getType() == ENTITY_TYPE_ID::ANIMATION)
+		{
+			//DOWNCAST, BY STATIC_CAST
+			currentAnim = static_cast<EntityAnimation*>(world->dynamic_list.at(i));
+		}
+		else {
+			continue;
+		}
+		currentAnim->model.translate(currentAnim->pos.x, currentAnim->pos.y, currentAnim->pos.z);
+		currentAnim->get_AnimationModel(); // actualizar model
+		currentAnim->render(currentAnim->mesh, currentAnim->model, camera, currentAnim->texture, &currentAnim->animation->skeleton);
+
+
+	}
+	
 }
 
 void Stage::getKeyDownEvent(Camera* camera, int key_num) {
@@ -165,10 +212,12 @@ void Stage::getKeyDownEvent(Camera* camera, int key_num) {
 	{
 		case 1: AddObjectInFont(camera, "data/assets/edificios/building-office-big_13.obj", "data/assets/color-atlas-new.png"); break;
 		case 2: AddObjectInFont(camera, "data/assets/arboles/tree-birch_42.obj", "data/assets/color-atlas-new.png"); break;
-		case 3: AddObjectInFont(camera, "data/assets/edificios/building-house-middle_7.obj", "data/assets/color-atlas-new.png"); break;
-		case 4: AddObjectInFont(camera, "data/assets/checkpoints/finish_check.obj", "data/assets/checkpoints/finish_check.mtl"); break;
-		case 5: AddObjectInFont(camera, "data/assets/checkpoints/check.obj", "data/assets/checkpoints/check.mtl"); break;
-		case 6: AddObjectInFont(camera, "data/assets/checkpoints/check_v2.obj", "data/assets/checkpoints/check.mtl"); break;
+		case 3: AddObjectInFont(camera, "data/assets/edificios/farm.obj", "data/assets/color-atlas-new.png"); break;
+		case 4: AddObjectInFont(camera, "data/assets/edificios/museum.obj", "data/assets/color-atlas-new.png"); break;
+		case 5: AddObjectInFont(camera, "data/assets/edificios/police_office.obj", "data/assets/color-atlas-new.png"); break;
+		//case 6: AddObjectInFont(camera, "data/assets/edificios/police2.obj", "data/assets/color-atlas-new.png"); break;
+		/*case 5: AddObjectInFont(camera, "data/assets/checkpoints/check.obj", "data/assets/checkpoints/check.mtl"); break;
+		case 6: AddObjectInFont(camera, "data/assets/checkpoints/check_v2.obj", "data/assets/checkpoints/check.mtl"); break;*/
 		///*case 7: AddObjectInFont(camera, "data/assets/checkpoints/finish_check.obj", "data/assets/checkpoints/finish_check.mtl"); break;
 		//case 8: AddObjectInFont(camera, "data/assets/checkpoints/check.obj", "data/assets/checkpoints/check.mtl"); break;*/
 
@@ -216,8 +265,8 @@ void Stage::AddObjectInFont(Camera* camera, const char* mesh, const char* textur
 		exit(0);
 	}
 
-	//myfile << "\t -entity: " << pos.x << " " << pos.y << "       " << pos.z << "     " << mesh << "     " << texture << "  " << "\n\n";
-	myfile << "\t -target: " << pos.x << " " << pos.y << "       " << pos.z << "     " << mesh << "     " << texture << "  " << "\n\n";
+	myfile << "\t -ENTITY: " << pos.x << " " << pos.y << "       " << pos.z << "     " << mesh << "     " << texture << "  " << "\n\n";
+	//myfile << "\t -target: " << pos.x << " " << pos.y << "       " << pos.z << "     " << mesh << "     " << texture << "  " << "\n\n";
 	myfile.close();
 }
 
@@ -326,6 +375,10 @@ void PlayStage::update(float seconds_elapsed) {
 
 	EntityCar* currentMesh = static_cast<EntityCar*>(world->dynamic_list.at(0));
 	currentMesh->update(seconds_elapsed);
+
+	EntityAnimation* currentAnim = static_cast<EntityAnimation*>(world->static_list.at(0));
+	currentAnim->update(seconds_elapsed);
+
 }
 
 /********************************************************* End Stage *********************************************************/
