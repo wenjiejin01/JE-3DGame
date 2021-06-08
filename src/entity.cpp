@@ -318,3 +318,49 @@ Matrix44 Entity::getModel(Vector3 pos, float yaw) {
 	model.rotate(yaw * DEG2RAD, Vector3(0.0f, 1.0f, 0.0f));
 	return model;
 }
+
+void EntityAnimation::render(Mesh* mesh, Matrix44 model, Camera* camera, Texture* texture, Skeleton* sk, float tiling)
+{
+	Game* game = Game::instance;
+	if (this->meshType == EntityMesh::PERSONA) tiling = 100.0f;
+
+	// frustum check
+	BoundingBox box = transformBoundingBox(model, mesh->box);
+	if (!camera->testBoxInFrustum(box.center, box.halfsize)) return;
+
+
+	if (shader)
+	{
+		//enable shader
+		shader->enable();
+
+		//upload uniforms
+		shader->setUniform("u_color", Vector4(1, 1, 1, 1));
+		shader->setUniform("u_viewprojection", camera->viewprojection_matrix);
+		if (texture != NULL) shader->setUniform("u_texture", texture, 0);
+		shader->setUniform("u_model", model);
+		shader->setUniform("u_time", time);
+		shader->setUniform("u_texture_tiling", tiling);
+
+		//do the draw call
+		mesh->renderAnimated(GL_TRIANGLES, sk);
+
+		//disable shader
+		shader->disable();
+	}
+}
+
+void EntityAnimation::update(float dt)
+{
+	Scene* world = Scene::instance;
+
+	EntityMesh::update(dt);
+	animation->assignTime(dt);
+}
+
+Matrix44 EntityAnimation::get_AnimationModel()
+{
+	model.setTranslation(pos.x, pos.y, pos.z);
+	model.rotate(yaw * DEG2RAD, Vector3(0.0f, 1.0f, 0.0f));
+	return model;
+}

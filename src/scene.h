@@ -2,6 +2,8 @@
 #define SCENE_H
 
 #include "entity.h"
+#include "animation.h"
+#include "mesh.h"
 
 class Scene //igual que World
 {
@@ -17,6 +19,8 @@ public:
 	std::vector<Entity*> static_list;
 	EntityCar* player_car;
 	EntityCar* enemy_car;
+	std::vector<Entity*> dynamic_list;
+
 	Entity* selected_entity = NULL;
 	EntityMesh* minimap;
 	EntityMesh* road;

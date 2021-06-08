@@ -4,6 +4,7 @@
 #include "entity.h"
 #include "scene.h"
 #include "extra/textparser.h"
+#include "animation.h"
 
 #include <iostream>
 #include <fstream>
@@ -101,12 +102,36 @@ PlayStage::PlayStage() {
 	// example of shader loading using the shaders manager
 	world->minimap->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/flat.fs");
 
+	// CHAR1
+	
+	EntityAnimation* persona = new EntityAnimation();
+	persona->meshType =  EntityMesh::PERSONA;  // EntityMesh::ANIMATION;
+	world->dynamic_list.push_back(persona);
+	persona->texture = new Texture();
+	persona->texture->load("data/assets/personas/texture_char.png");
+	persona->mesh = Mesh::Get("data/animation/walking.mesh");
+	persona->pos = Vector3(7.0f, 0.0f, 20.0f);
+	persona->model.translate(persona->pos.x, persona->pos.y, persona->pos.z);
+
+	// example of shader loading using the shaders manager
+	persona->shader = Shader::Get("data/shaders/skinning.vs", "data/shaders/texture.fs");
+	persona->animation = Animation::Get("data/animation/animations_walking.skanim");
+
+	//CHAR 2,3,4,5
+	/*EntityAnimation* persona2 = new EntityAnimation();
+	persona2 = persona;
+	world->dynamic_list.push_back(persona2);
+	persona2->pos = Vector3(7.0f, 0.0f, 15.0f);*/
+	/*EntityAnimation* persona3 = new EntityAnimation();
+	EntityAnimation* persona4 = new EntityAnimation();*/
+
 	//OBJECTS
 	LoadFile();
 }
 
 void PlayStage::render(Camera* camera){
 	EntityMesh* currentMesh = NULL;
+	
 	Scene* world = Scene::instance;
 
 	//Declare temporal variable
@@ -131,8 +156,9 @@ void PlayStage::render(Camera* camera){
 			//DOWNCAST, BY STATIC_CAST
 			currentMesh = static_cast<EntityMesh*>(world->static_list.at(i));
 		}
-
+		
 		currentMesh->render(camera);
+		
 	}
 
 	EntityCar* currentCar = world->player_car;
@@ -162,14 +188,16 @@ void Stage::getKeyDownEvent(Camera* camera, int key_num) {
 	{
 		case 1: AddObjectInFont(camera, "data/assets/edificios/building-office-big_13.obj", "data/assets/color-atlas-new.png"); break;
 		case 2: AddObjectInFont(camera, "data/assets/arboles/tree-birch_42.obj", "data/assets/color-atlas-new.png"); break;
-		case 3: AddObjectInFont(camera, "data/assets/edificios/building-house-middle_7.obj", "data/assets/color-atlas-new.png"); break;
-		case 4: AddObjectInFont(camera, "data/assets/checkpoints/finish_check.obj", "data/assets/checkpoints/finish_check.mtl"); break;
-		case 5: AddObjectInFont(camera, "data/assets/checkpoints/check.obj", "data/assets/checkpoints/check.mtl"); break;
-		/*case 6: AddObjectInFont(camera, "data/assets/edificios/building-house-middle_7.obj", "data/assets/color-atlas-new.png"); break;
-		case 7: AddObjectInFont(camera, "data/assets/checkpoints/finish_check.obj", "data/assets/checkpoints/finish_check.mtl"); break;
-		case 8: AddObjectInFont(camera, "data/assets/checkpoints/check.obj", "data/assets/checkpoints/check.mtl"); break;*/
+		case 3: AddObjectInFont(camera, "data/assets/edificios/farm.obj", "data/assets/color-atlas-new.png"); break;
+		case 4: AddObjectInFont(camera, "data/assets/edificios/museum.obj", "data/assets/color-atlas-new.png"); break;
+		case 5: AddObjectInFont(camera, "data/assets/edificios/police_office.obj", "data/assets/color-atlas-new.png"); break;
+		//case 6: AddObjectInFont(camera, "data/assets/edificios/police2.obj", "data/assets/color-atlas-new.png"); break;
+		/*case 5: AddObjectInFont(camera, "data/assets/checkpoints/check.obj", "data/assets/checkpoints/check.mtl"); break;
+		case 6: AddObjectInFont(camera, "data/assets/checkpoints/check_v2.obj", "data/assets/checkpoints/check.mtl"); break;*/
+		///*case 7: AddObjectInFont(camera, "data/assets/checkpoints/finish_check.obj", "data/assets/checkpoints/finish_check.mtl"); break;
+		//case 8: AddObjectInFont(camera, "data/assets/checkpoints/check.obj", "data/assets/checkpoints/check.mtl"); break;*/
 
-		case 6: SelectEntity(camera); break;
+		//case 6: SelectEntity(camera); break;*/
 		case 7: {
 			EntityMesh* mesh = static_cast<EntityMesh*>(world->selected_entity);
 			mesh->model.rotate(10.0f * DEG2RAD, Vector3(0, 1, 0));		}
@@ -213,7 +241,8 @@ void Stage::AddObjectInFont(Camera* camera, const char* mesh, const char* textur
 		exit(0);
 	}
 
-	myfile << "\t -entity: " << pos.x << " " << pos.y << "       " << pos.z << "     " << mesh << "     " << texture << "  " << "\n\n";
+	myfile << "\t -ENTITY: " << pos.x << " " << pos.y << "       " << pos.z << "     " << mesh << "     " << texture << "  " << "\n\n";
+	//myfile << "\t -target: " << pos.x << " " << pos.y << "       " << pos.z << "     " << mesh << "     " << texture << "  " << "\n\n";
 	myfile.close();
 }
 
@@ -235,6 +264,7 @@ void Stage::LoadFile()
 		std::cout << "File not found " << filename.str() << std::endl;
 		exit(0);
 	}
+	
 
 	int count = t.countword("-ENTITY:");
 	//std::cout << "debug de pos" << 0 << " " << 0 << " " << 0 << "\n\n ";
@@ -245,13 +275,10 @@ void Stage::LoadFile()
 		pos.y = t.getfloat();
 		pos.z = t.getfloat();
 		mesh = t.getword();
-		//texture = t.getword();
 		texture = "data/assets/color-atlas-new.png";
 		strlwr((char*)mesh);
 		strlwr((char*)texture);
 
-		//std::cout << "debug de pos " << pos.x << " " << pos.y << " " << pos.z << " " << mesh << " " << texture << "\n";
-	
 		EntityMesh* entity = new EntityMesh();
 		entity->model.setTranslation(pos.x, pos.y, pos.z);
 		entity->mesh = Mesh::Get((const char*)mesh);
@@ -259,6 +286,29 @@ void Stage::LoadFile()
 		entity->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/texture.fs");
 		entity->meshType = EntityMesh::HOUSE;
 		world->static_list.push_back(entity);
+	}
+
+	//igual para target
+    //t = TextParser(filename.str().c_str());
+
+	int count2 = t.countword("-TARGET:");
+
+	for (int i = 0; i < count2; i++) {
+		t.seek("-TARGET:");
+		pos.x = t.getfloat();
+		pos.y = t.getfloat();
+		pos.z = t.getfloat();
+		mesh = t.getword();
+		texture = "data/assets/color-atlas-new.png";
+		strlwr((char*)mesh);
+		strlwr((char*)texture);
+		EntityMesh* entity2 = new EntityMesh();
+		entity2->model.setTranslation(pos.x, pos.y, pos.z);
+		entity2->mesh = Mesh::Get((const char*)mesh);
+		entity2->texture = Texture::Get((const char*)texture);
+		entity2->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/texture.fs");
+		entity2->meshType = EntityMesh::CHECKPOINT;
+		world->static_list.push_back(entity2);
 	}
 	myfile.close();
 

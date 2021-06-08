@@ -5,11 +5,13 @@
 #include "mesh.h"
 #include "texture.h"
 #include "shader.h"
+#include "animation.h"
 
 enum ENTITY_TYPE_ID {
     ENTITY,
     MESH,
     CAR,
+    ANIMATION,
     SOUND,
 };
 
@@ -25,6 +27,7 @@ class Entity
         Texture* texture;
         Shader* shader;
         Matrix44 model;
+        Vector3 pos;
 
         //pointer to my parent entity 
         Entity* parent;
@@ -60,6 +63,9 @@ public:
         SKY,
         TREE,
         MINIMAP
+        CHECKPOINT,
+        PERSONA
+
     };
     //Attributes of this class 
     meshType meshType;
@@ -97,6 +103,21 @@ public:
     void update(float dt);
     void onCollision(float seconds_elapsed);
     ENTITY_TYPE_ID getType() { return ENTITY_TYPE_ID::CAR; };
+};
+
+class EntityAnimation : public EntityMesh
+{
+public:
+    float yaw;
+    Vector3 pos;
+    Animation* animation;
+
+    //Methods overwritten
+    void render(Mesh* mesh, Matrix44 model, Camera* camera, Texture* texture, Skeleton* sk, float tiling = 1.0f);
+    void update(float dt);
+    ENTITY_TYPE_ID getType() { return ENTITY_TYPE_ID::ANIMATION; };
+    Matrix44 get_AnimationModel();
+
 };
 
 #endif // ENTITY_H
