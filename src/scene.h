@@ -15,14 +15,18 @@ public:
 
 	//current scene
 	std::vector<Entity*> static_list;
-	std::vector<Entity*> dynamic_list;
+	EntityCar* player_car;
+	EntityCar* enemy_car;
 	Entity* selected_entity = NULL;
+	EntityMesh* minimap;
 	EntityMesh* road;
 	EntityMesh* grass;
 
 	// Global variable
 	Vector3 startPoint;
-	Vector3 TargetPoint;
+	std::vector<Vector3> TargetPoint;
+	Shader* global_Shader;
+	Texture* global_texture;
 
 
 };

@@ -36,13 +36,15 @@ class Entity
         void addChild(Entity* ent);
         void removeChild(Entity* ent);
         //methods overwritten by derived classes 
-        virtual void render(Camera* camera);
+        virtual void render(Mesh* mesh, Matrix44 model, Camera* camera, Vector4 color, Texture* texture, Shader* shader, int primitive, float tiling);
         virtual void update(float elapsed_time);
         virtual ENTITY_TYPE_ID getType() = 0;
         Matrix44 getGlobalMatrix(); //returns transform in world coordinates
+        Matrix44 getModel(Vector3 pos, float yaw); //get transformated matrix
         bool isCollision(Entity* target);
         virtual void onCollision(float seconds_elapsed);
         ////some useful methods...
+        virtual void renderGUI(float x, float y, float w, float h, bool uvs);
         //Vector3 getPosition();
 };
 
@@ -56,8 +58,8 @@ public:
         ROAD,
         GRASS,
         SKY,
-        TREE
-
+        TREE,
+        MINIMAP
     };
     //Attributes of this class 
     meshType meshType;
@@ -95,7 +97,6 @@ public:
     void update(float dt);
     void onCollision(float seconds_elapsed);
     ENTITY_TYPE_ID getType() { return ENTITY_TYPE_ID::CAR; };
-    Matrix44 get_CarModel();
 };
 
 #endif // ENTITY_H

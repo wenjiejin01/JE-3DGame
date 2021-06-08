@@ -10,12 +10,58 @@ Entity::~Entity() {
 
 }
 
-void Entity::render(Camera* camera) {
-	std::cout << "this is entity render" << std::endl;
+void Entity::render(Mesh* sentmesh, Matrix44 sentmodel, Camera* camera, Vector4 color, Texture* senttexture = NULL, Shader* sentshader = NULL, int primitive = 4, float tiling = 1.0f) {
+	Game* game = Game::instance;
+
+	// frustum check
+	BoundingBox box = transformBoundingBox(sentmodel, sentmesh->box);
+	if (!camera->testBoxInFrustum(box.center, box.halfsize)) return;
+
+	if (sentshader)
+	{
+		//enable shader
+		sentshader->enable();
+
+		//upload uniforms
+		sentshader->setUniform("u_color", color);
+		sentshader->setUniform("u_viewprojection", camera->viewprojection_matrix);
+		if (senttexture != NULL) sentshader->setUniform("u_texture", senttexture, 0);
+		sentshader->setUniform("u_model", sentmodel);
+		sentshader->setUniform("u_time", time);
+		sentshader->setUniform("u_texture_tiling", tiling);
+
+		//do the draw call
+		sentmesh->render(primitive);
+
+		//disable shader
+		sentshader->disable();
+	}
 }
 
 void Entity::update(float elapsed_time) {
 	std::cout << "this is entity update" << std::endl;
+}
+
+void Entity::renderGUI(float x, float y, float w, float h, bool flipuvs) {
+	Camera cam2D;
+	cam2D.setOrthographic(0, Game::instance->window_width, Game::instance->window_height, 0, -1, 1);
+	cam2D.enable();
+
+	Mesh quad;
+	quad.createQuad(x, y, w, h, flipuvs);
+
+	Shader* shader = Scene::instance->global_Shader;
+	shader->enable();
+	shader->setUniform("u_color", Vector4(1, 1, 1, 1));
+	shader->setUniform("u_viewprojection", cam2D.viewprojection_matrix);
+	shader->setUniform("u_texture", Texture::Get("data/startButton.png"), 0);
+	Matrix44 quadModel;
+	quadModel.setTranslation(sin(Game::instance->time) * 10, 0, 0);
+	shader->setUniform("u_model", quadModel);
+	shader->setUniform("u_texture_tiling", 1.0f);
+	quad.render(GL_TRIANGLES);
+	shader->disable();
+
 }
 
 Matrix44 Entity::getGlobalMatrix()
@@ -80,7 +126,8 @@ void EntityMesh::render(Camera* camera, float tiling)
 		shader->disable();
 	}
 
-	//mesh->renderBounding(model);
+	mesh->renderBounding(model);
+
 }
 
 void EntityMesh::update(float seconds_elapsed) {
@@ -266,7 +313,7 @@ void EntityCar::update(float seconds_elapsed) {
 	}
 }
 
-Matrix44 EntityCar::get_CarModel() {
+Matrix44 Entity::getModel(Vector3 pos, float yaw) {
 	model.setTranslation(pos.x, pos.y, pos.z);
 	model.rotate(yaw * DEG2RAD, Vector3(0.0f, 1.0f, 0.0f));
 	return model;

@@ -29,7 +29,8 @@ void IntroStage::update(float elapse_time) {
 /********************************************************* PlayStagte *********************************************************/
 PlayStage::PlayStage() {
 	Scene* world = Scene::instance;
-
+	world->global_Shader = Shader::Get("data/shaders/basic.vs", "data/shaders/texture.fs");
+	world->global_texture = Texture::Get("data/assets/color-atlas-new.png");
 	//GRASS
 	world->grass = new EntityMesh();
 	EntityMesh* grass = world->grass;
@@ -39,21 +40,19 @@ PlayStage::PlayStage() {
 	grass->texture = new Texture();
 	grass->texture->load("data/grass.tga");
 	grass->model.translate(0.0f, -0.5f, 0.0f);
-	grass->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/texture.fs");
+	grass->shader = world->global_Shader;
 
 	//ROAD
 	world->road = new EntityMesh();
 	EntityMesh* road = world->road;
 	road->meshType = EntityMesh::ROAD;
 	//load one texture without using the Texture Manager (Texture::Get would use the manager)
-	road->texture = new Texture();
-	road->texture->load("data/assets/color-atlas-new.png");
+	road->texture = world->global_texture;
 	// example of loading Mesh from Mesh Manager
-	//road->mesh = Mesh::Get("data/map_road.obj");
 	road->mesh = Mesh::Get("data/assets/carretera/mapa_carretera.obj");
 	road->model.translate(0.0f, 0.0f, 0.0f);
 	// example of shader loading using the shaders manager
-	road->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/texture.fs");
+	road->shader = world->global_Shader;
 
 	//SKY
 	EntityMesh* sky = new EntityMesh();
@@ -66,35 +65,41 @@ PlayStage::PlayStage() {
 	sky->texture->load("data/assets/cielo/cielo.tga");
 	sky->model.translate(0.0f, 0.0f, 0.0f);
 	sky->model.scale(0.63f, 0.7f, 0.6f);
-	sky->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/texture.fs");
+	sky->shader = world->global_Shader;
 
 
 	//CAR
-	EntityCar* car = new EntityCar();
-	car->meshType = EntityMesh::CAR;
-	world->dynamic_list.push_back(car);
+	world->player_car = new EntityCar();
+	world->player_car->meshType = EntityMesh::CAR;
 	//load one texture without using the Texture Manager (Texture::Get would use the manager)
-	car->texture = new Texture();
-	car->texture->load("data/assets/color-atlas-new.png");
+	world->player_car->texture = world->global_texture;
 	// example of loading Mesh from Mesh Manager
-	car->mesh = Mesh::Get("data/assets/coches/car-passenger_1.obj");
-	car->model.translate(0.0f, 0.0f, 0.0f);
+	world->player_car->mesh = Mesh::Get("data/assets/coches/car-passenger_1.obj");
+	world->player_car->model.translate(0.0f, 0.0f, 0.0f);
 	// example of shader loading using the shaders manager
-	car->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/texture.fs");
+	world->player_car->shader = world->global_Shader;
 
 	//CAR2
-	EntityCar* car2 = new EntityCar();
-	car2->meshType = EntityMesh::CAR;
-	world->dynamic_list.push_back(car2);
+	world->enemy_car = new EntityCar();
+	world->enemy_car->meshType = EntityMesh::CAR;
 	//load one texture without using the Texture Manager (Texture::Get would use the manager)
-	car2->texture = new Texture();
-	car2->texture->load("data/assets/color-atlas-new.png");
+	world->enemy_car->texture = world->global_texture;
 	// example of loading Mesh from Mesh Manager
-	car2->mesh = Mesh::Get("data/assets/coches/car-passenger_1.obj");
-	car2->pos = Vector3(0.0f, 0.0f, 20.0f);
-	car2->model.translate(car2->pos.x, car2->pos.y, car2->pos.z);
+	world->enemy_car->mesh = Mesh::Get("data/assets/coches/car-passenger_1.obj");
+	world->enemy_car->pos = Vector3(0.0f, 0.0f, 20.0f);
+	world->enemy_car->model.translate(world->enemy_car->pos.x, world->enemy_car->pos.y, world->enemy_car->pos.z);
 	// example of shader loading using the shaders manager
-	car2->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/texture.fs");
+	world->enemy_car->shader = world->global_Shader;
+
+	/* Minimap */
+	world->minimap = new EntityMesh();
+	world->minimap->meshType = EntityMesh::MINIMAP;
+	//load one texture without using the Texture Manager (Texture::Get would use the manager)
+	world->minimap->texture = world->global_texture;
+	// example of loading Mesh from Mesh Manager
+	world->minimap->mesh = Mesh::Get("data/sphere.ASE");
+	// example of shader loading using the shaders manager
+	world->minimap->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/flat.fs");
 
 	//OBJECTS
 	LoadFile();
@@ -113,7 +118,7 @@ void PlayStage::render(Camera* camera){
 
 	world->grass->render(camera);
 	world->road->render(camera);
-
+	//renderMiniMap();
 
 	for (size_t i = 0; i < count; i++)
 	{
@@ -130,32 +135,24 @@ void PlayStage::render(Camera* camera){
 		currentMesh->render(camera);
 	}
 
-	EntityCar* currentCar;
-	for (size_t i = 0; i < world->dynamic_list.size(); i++)	{
-		// Break the game and show error.
-		assert(world->dynamic_list.at(i) != NULL);
+	EntityCar* currentCar = world->player_car;
 
-		// Check entity type
-		if (world->dynamic_list.at(i)->getType() == ENTITY_TYPE_ID::CAR)
-		{
-			//DOWNCAST, BY STATIC_CAST
-			currentCar = static_cast<EntityCar*>(world->dynamic_list.at(i));
-		}
-		else {
-			continue;
-		}
-
-		if (!world->free_camera && i == 0)
-		{
-			eye = currentCar->model * Vector3(0.0f, 3.0f, 6.0f);
-			center = currentCar->model * Vector3(0.0f, 0.0f, -2.0f);
-			up = currentCar->model.rotateVector(Vector3(0.0f, 1.0f, 0.0f));
-			camera->lookAt(eye, center, up);
-		}
-		currentCar->model.translate(currentCar->pos.x, currentCar->pos.y, currentCar->pos.z);
-		currentCar->get_CarModel(); // actualizar model
-		currentCar->render(currentCar->mesh, currentCar->model, camera, currentCar->texture);
+	// camara se sigue al coche
+	if (!world->free_camera)
+	{
+		eye = currentCar->model * Vector3(0.0f, 3.0f, 6.0f);
+		center = currentCar->model * Vector3(0.0f, 0.0f, -2.0f);
+		up = currentCar->model.rotateVector(Vector3(0.0f, 1.0f, 0.0f));
+		camera->lookAt(eye, center, up);
 	}
+	// render player car
+	currentCar->getModel(currentCar->pos, currentCar->yaw); // actualizar model
+	currentCar->render(currentCar->mesh, currentCar->model, camera, currentCar->texture);
+
+	// render enemy car
+	currentCar = world->enemy_car;
+	currentCar->getModel(currentCar->pos, currentCar->yaw); // actualizar model
+	currentCar->render(currentCar->mesh, currentCar->model, camera, currentCar->texture);
 }
 
 void Stage::getKeyDownEvent(Camera* camera, int key_num) {
@@ -302,9 +299,47 @@ void Stage::SelectEntity(Camera* camera) {
 void PlayStage::update(float seconds_elapsed) {
 	Scene* world = Scene::instance;
 
-	EntityCar* currentMesh = static_cast<EntityCar*>(world->dynamic_list.at(0));
-	currentMesh->update(seconds_elapsed);
+	world->player_car->update(seconds_elapsed);
 }
+
+void PlayStage::renderMiniMap() {
+	Scene* world = Scene::instance;
+	EntityMesh* minimap = world->minimap;
+	Game* game = Game::instance;
+
+	glViewport(game->window_width - 200, game->window_height - 200, 200, 200);
+
+	Camera minimapCam;
+	minimapCam.setPerspective(60, 1, 0, 1000);
+
+	EntityCar* currentCar = world->player_car;
+	Matrix44 carmodel = currentCar->getModel(currentCar->pos, currentCar->yaw);
+	Vector3 pos = carmodel.getTranslation();
+	Vector3 forward = carmodel.rotateVector(Vector3(0, 0, -1));
+	minimapCam.lookAt(pos + Vector3(0, 100, 0), pos, forward);
+	minimapCam.enable();
+
+	//render suelo de mapa
+	Mesh floor;
+	floor.createPlane(100);
+	minimap->Entity::render(&floor, Matrix44(), &minimapCam, Vector4(1, 1, 1, 1), minimap->texture, world->global_Shader, 4, 1.0f);
+
+	// render player posicion en minimap
+	carmodel.scale(0.2, 0.2, 0.2);
+	minimap->Entity::render(Mesh::Get("data/sphere.ASE"), carmodel, &minimapCam, Vector4(1, 1, 1, 1),NULL, minimap->shader, 4, 1.0f);
+
+	//// render enemy posicion en minimap
+	carmodel = world->enemy_car->getModel(world->enemy_car->pos, world->enemy_car->yaw);
+	minimap->model.scale(0.02, 0.02, 0.02);
+	minimap->Entity::render(minimap->mesh, carmodel, &minimapCam, Vector4(1, 0, 0, 1), NULL, minimap->shader, 4, 1.0f);
+	
+	//elimina
+	//EntityMesh* entity = new EntityMesh();
+	//entity->Entity::renderGUI(100, 100, 100, 30, true);
+
+	glViewport(0, 0, game->window_width, game->window_height);
+}
+
 
 /********************************************************* End Stage *********************************************************/
 TutorialStage::TutorialStage() {

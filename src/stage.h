@@ -53,6 +53,7 @@ public:
 
 	PlayStage();
 	virtual void render(Camera* camera);
+	void renderMiniMap();
 	virtual void update(float elapsed_time);
 };
 
