@@ -62,7 +62,7 @@ public:
         GRASS,
         SKY,
         TREE,
-        MINIMAP
+        MINIMAP,
         CHECKPOINT,
         PERSONA
 

@@ -59,7 +59,6 @@ PlayStage::PlayStage() {
 	EntityMesh* sky = new EntityMesh();
 	sky->meshType = EntityMesh::SKY;
 	world->static_list.push_back(sky);
-
 	//load one texture without using the Texture Manager (Texture::Get would use the manager)
 	sky->texture = new Texture();
 	sky->mesh = Mesh::Get("data/assets/cielo/cielo.ASE");
@@ -141,7 +140,7 @@ void PlayStage::render(Camera* camera){
 	Mesh* usedMesh;
 	Texture* usedTex;
 
-	world->grass->render(camera);
+	//world->grass->render(camera);
 	world->road->render(camera);
 	//renderMiniMap();
 
@@ -159,6 +158,24 @@ void PlayStage::render(Camera* camera){
 		
 		currentMesh->render(camera);
 		
+	}
+
+	EntityAnimation* currentAnim;
+	for (size_t i = 0; i < world->dynamic_list.size(); i++) {
+		assert(world->dynamic_list.at(i) != NULL);
+
+		// Check entity type
+		if (world->dynamic_list.at(i)->getType() == ENTITY_TYPE_ID::ANIMATION)
+		{
+			//DOWNCAST, BY STATIC_CAST
+			currentAnim = static_cast<EntityAnimation*>(world->dynamic_list.at(i));
+		}
+		else {
+			continue;
+		}
+		currentAnim->model.translate(currentAnim->pos.x, currentAnim->pos.y, currentAnim->pos.z);
+		currentAnim->get_AnimationModel(); // actualizar model
+		currentAnim->render(currentAnim->mesh, currentAnim->model, camera, currentAnim->texture, &currentAnim->animation->skeleton);
 	}
 
 	EntityCar* currentCar = world->player_car;
