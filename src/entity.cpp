@@ -205,16 +205,14 @@ void EntityCar::update(float seconds_elapsed) {
 	vel_mod = vel.length();
 	vel_mod = clamp(vel_mod, 0, 2.0f);
 	float angular_acc = car_rot_speed * seconds_elapsed * vel_mod;
-	//// fuera de carretera
-	//for (size_t i = 0; i < world->dynamic_list.size(); i++)
-	//{
-	//	EntityCar* dynamic_entity = static_cast<EntityCar*>(world->dynamic_list.at(i));
+	// fuera de carretera
 
-	//	if (world->road->isCollision(dynamic_entity))
-	//	{
-	//		dynamic_entity->vel = dynamic_entity->vel * 0;
-	//	}
-	//}
+	EntityCar* car_entity = world->player_car;
+
+	if (!world->road->isCollision(car_entity))
+	{
+		car_entity->vel = car_entity->vel * 0.99;
+	}
 
 	// Colision Event
 	//{
