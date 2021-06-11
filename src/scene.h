@@ -31,6 +31,7 @@ public:
 	std::vector<Vector3> TargetPoint;
 	Shader* global_Shader;
 	Texture* global_texture;
+	float live_time = 0.0f;
 
 
 };

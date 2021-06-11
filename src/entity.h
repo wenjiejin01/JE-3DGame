@@ -28,6 +28,7 @@ class Entity
         Shader* shader;
         Matrix44 model;
         Vector3 pos;
+        bool isBroken;
 
         //pointer to my parent entity 
         Entity* parent;
@@ -44,7 +45,7 @@ class Entity
         virtual ENTITY_TYPE_ID getType() = 0;
         Matrix44 getGlobalMatrix(); //returns transform in world coordinates
         Matrix44 getModel(Vector3 pos, float yaw); //get transformated matrix
-        bool isCollision(Entity* target);
+        bool isCollision(Entity* target, Matrix44 sentModel, float radio = 2.1);
         virtual void onCollision(float seconds_elapsed);
         ////some useful methods...
         virtual void renderGUI(float x, float y, float w, float h, bool uvs);
@@ -77,7 +78,7 @@ public:
 
 
     //methods overwritten 
-    virtual void render(Camera* camera , float tiling = 1.0f);
+    virtual void render(Camera* camera, Vector4 color = Vector4(1, 1, 1, 1) , float tiling = 1.0f);
     virtual void update(float dt);
     ENTITY_TYPE_ID getType() { return ENTITY_TYPE_ID::MESH;};
 };

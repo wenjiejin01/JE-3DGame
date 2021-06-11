@@ -71,19 +71,19 @@ Matrix44 Entity::getGlobalMatrix()
 	return model; //otherwise just return my model as global
 }
 
-bool Entity::isCollision(Entity* entity) {
+bool Entity::isCollision(Entity* entity, Matrix44 sentModel, float radio) {
 	Scene* world = Scene::instance;
 	
 	Vector3 coll, collnorm;
 	//sacar posicion de entity que recibimos
-	Matrix44 global_matrix = entity->getGlobalMatrix();
-	Vector3 position = global_matrix.getTranslation();
-
+	//Matrix44 global_matrix = entity->getGlobalMatrix();
+	Vector3 position = sentModel.getTranslation();
+	
 	//calculamos el centro de la esfera de colisi��n del player elevandola hasta la cintura
 	Vector3 character_center = position + Vector3(0, 1, 0);
 
 	//comprobamos si colisiona el objeto con la esfera (radio 3)
-	bool iscollision = mesh->testSphereCollision(model, character_center, 2.1, coll, collnorm);
+	bool iscollision = mesh->testSphereCollision(model, character_center, radio, coll, collnorm);
 
 	// False = no hay colision
 	// True = hay colision
@@ -96,7 +96,7 @@ void Entity::onCollision(float seconds_elapsed) {
 	
 }
 
-void EntityMesh::render(Camera* camera, float tiling)
+void EntityMesh::render(Camera* camera, Vector4 color, float tiling)
 {
 	Game* game = Game::instance;
 	if (this->meshType == EntityMesh::GRASS) tiling = 100.0f;
@@ -112,7 +112,7 @@ void EntityMesh::render(Camera* camera, float tiling)
 		shader->enable();
 
 		//upload uniforms
-		shader->setUniform("u_color", Vector4(1, 1, 1, 1));
+		shader->setUniform("u_color", color);
 		shader->setUniform("u_viewprojection", camera->viewprojection_matrix);
 		if (texture != NULL) shader->setUniform("u_texture", texture, 0);
 		shader->setUniform("u_model", model);
@@ -193,7 +193,9 @@ void EntityCar::render(Mesh* mesh, Matrix44 model, Camera* camera, Texture* text
 	mesh->renderBounding(model);
 	//render the FPS, Draw Calls, etc
 	std::string text = "velocidad: " + std::to_string(std::abs(vel.z));
+	std::string text2 = "Time: " + std::to_string(Scene::instance->live_time);
 	drawText(2, Game::instance->window_height - 20, text, Vector3(1, 1, 1), 2);
+	drawText(2, Game::instance->window_height - 40, text2, Vector3(1, 1, 1), 2);
 }
 
 void EntityCar::update(float seconds_elapsed) {
@@ -209,9 +211,27 @@ void EntityCar::update(float seconds_elapsed) {
 
 	EntityCar* car_entity = world->player_car;
 
-	if (!world->road->isCollision(car_entity))
+	// colision contra fuera de carretera
+	if (!world->road->isCollision(car_entity, car_entity->model))
 	{
 		car_entity->vel = car_entity->vel * 0.99;
+	}
+
+	// comprobar targets.
+	int size = world->static_list.size();
+	for (size_t i = 0; i < size; i++)
+	{
+		Entity* static_entity = world->static_list.at(i);
+		if (static_entity->name == "target" && !static_entity->isBroken)
+		{
+			Matrix44 hight_model = car_entity->model;
+			hight_model.translate(0, 2, 0);
+			if (static_entity->isCollision(car_entity, hight_model, 3))
+			{
+				world->live_time += 10.0f;
+				static_entity->isBroken = true;
+			}
+		}
 	}
 
 	// Colision Event
@@ -226,7 +246,7 @@ void EntityCar::update(float seconds_elapsed) {
 	//			// check colision
 	//			if (static_entity->isCollision(dynamic_entity))
 	//			{
- //					dynamic_entity->onCollision(seconds_elapsed);
+	//				dynamic_entity->onCollision(seconds_elapsed);
 	//			}
 	//		}
 	//	}
