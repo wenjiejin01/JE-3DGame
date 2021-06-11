@@ -342,11 +342,6 @@ void EntityAnimation::render(Mesh* mesh, Matrix44 model, Camera* camera, Texture
 	Game* game = Game::instance;
 	if (this->meshType == EntityMesh::PERSONA) tiling = 100.0f;
 
-	// frustum check
-	BoundingBox box = transformBoundingBox(model, mesh->box);
-	if (!camera->testBoxInFrustum(box.center, box.halfsize)) return;
-
-
 	if (shader)
 	{
 		//enable shader
@@ -373,7 +368,6 @@ void EntityAnimation::update(float dt)
 	Scene* world = Scene::instance;
 
 	EntityMesh::update(dt);
-	animation->assignTime(dt);
 }
 
 Matrix44 EntityAnimation::get_AnimationModel()

@@ -296,7 +296,7 @@ PlayStage::PlayStage() {
 
 void PlayStage::render(Camera* camera){
 	EntityMesh* currentMesh = NULL;
-	
+	Game* game = Game::instance;
 	Scene* world = Scene::instance;
 
 	//Declare temporal variable
@@ -341,8 +341,9 @@ void PlayStage::render(Camera* camera){
 		else {
 			continue;
 		}
-		currentAnim->model.translate(currentAnim->pos.x, currentAnim->pos.y, currentAnim->pos.z);
+		//currentAnim->model.translate(currentAnim->pos.x, currentAnim->pos.y, currentAnim->pos.z);
 		currentAnim->get_AnimationModel(); // actualizar model
+		currentAnim->animation->assignTime(game->time);
 		currentAnim->render(currentAnim->mesh, currentAnim->model, camera, currentAnim->texture, &currentAnim->animation->skeleton);
 	}
 
