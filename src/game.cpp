@@ -49,7 +49,7 @@ Game::Game(int window_width, int window_height, SDL_Window* window)
 	tutorial_stage = new TutorialStage();
 	play_stage = new PlayStage();
 	end_stage = new EndStage();
-	current_Stage = play_stage;
+	current_Stage = intro_stage;
 
 	//hide the cursor
 	SDL_ShowCursor(!mouse_locked); //hide or show the mouse
@@ -75,7 +75,7 @@ void Game::render(void)
 	current_Stage->render(camera);
 
 	//Draw the floor grid
-	drawGrid();
+	//drawGrid();
 
 	//render the FPS, Draw Calls, etc
 	drawText(2, 2, getGPUStats(), Vector3(1, 1, 1), 2);
@@ -96,6 +96,7 @@ void Game::onKeyDown( SDL_KeyboardEvent event )
 	{
 		case SDLK_ESCAPE: must_exit = true; break; //ESC key, kill the app
 		case SDLK_F1: Shader::ReloadAll(); break; 
+		case SDLK_0: current_Stage = intro_stage; break;
 		case SDLK_1: current_Stage->getKeyDownEvent(camera, 1); break;
 		case SDLK_2: current_Stage->getKeyDownEvent(camera, 2); break;
 		case SDLK_3: current_Stage->getKeyDownEvent(camera, 3); break;
@@ -113,7 +114,10 @@ void Game::onKeyUp(SDL_KeyboardEvent event)
 
 void Game::onGamepadButtonDown(SDL_JoyButtonEvent event)
 {
-
+	if (event.button == SDL_BUTTON_LEFT)
+	{
+		Input::wasMouseButtonDown = true;
+	}
 }
 
 void Game::onGamepadButtonUp(SDL_JoyButtonEvent event)
@@ -123,6 +127,10 @@ void Game::onGamepadButtonUp(SDL_JoyButtonEvent event)
 
 void Game::onMouseButtonDown( SDL_MouseButtonEvent event )
 {
+	if (event.button == SDL_BUTTON_LEFT)
+	{
+		Input::wasMouseButtonDown = true;
+	}
 	if (event.button == SDL_BUTTON_MIDDLE) //middle mouse
 	{
 		mouse_locked = !mouse_locked;

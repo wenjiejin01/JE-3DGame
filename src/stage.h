@@ -32,8 +32,11 @@ public:
 
 class IntroStage : public Stage {
 public:
+	float angle = 0;
 
 	IntroStage();
+	EntityMesh* startButton;
+	EntityMesh* TutorialButton;
 	virtual void render(Camera* camera);
 	virtual void update(float elapsed_time);
 };

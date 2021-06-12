@@ -42,7 +42,7 @@ void Entity::update(float elapsed_time) {
 	std::cout << "this is entity update" << std::endl;
 }
 
-void Entity::renderGUI(float x, float y, float w, float h, bool flipuvs) {
+bool Entity::renderButton(float x, float y, float w, float h, bool flipuvs) {
 	Camera cam2D;
 	cam2D.setOrthographic(0, Game::instance->window_width, Game::instance->window_height, 0, -1, 1);
 	cam2D.enable();
@@ -50,18 +50,33 @@ void Entity::renderGUI(float x, float y, float w, float h, bool flipuvs) {
 	Mesh quad;
 	quad.createQuad(x, y, w, h, flipuvs);
 
-	Shader* shader = Scene::instance->global_Shader;
+	//hover effect
+	Vector2 mouse = Input::mouse_position;
+	float halfWidth = w * 0.5;
+	float halfhight = h * 0.5;
+	float min_x = x - halfWidth;
+	float max_x = x + halfWidth;
+	float min_y = y - halfhight;
+	float max_y = y + halfhight;
+
+	bool hover = mouse.x > min_x && mouse.y > min_y && mouse.x < max_x&& mouse.y < max_y;
+	bool pressed = Input::wasMouseButtonDown; 
+
+	Vector4 normalColor = Vector4(1, 1, 1, 0.6);
+	Vector4 hoverColor = Vector4(1, 1, 1, 1);
+
+
+	// utiliza texture, model y shader de entity
 	shader->enable();
-	shader->setUniform("u_color", Vector4(1, 1, 1, 1));
+	shader->setUniform("u_color", hover ? hoverColor : normalColor);
 	shader->setUniform("u_viewprojection", cam2D.viewprojection_matrix);
-	shader->setUniform("u_texture", Texture::Get("data/startButton.png"), 0);
-	Matrix44 quadModel;
-	quadModel.setTranslation(sin(Game::instance->time) * 10, 0, 0);
-	shader->setUniform("u_model", quadModel);
+	shader->setUniform("u_texture", texture, 0);
+	shader->setUniform("u_model", model);
 	shader->setUniform("u_texture_tiling", 1.0f);
 	quad.render(GL_TRIANGLES);
 	shader->disable();
 
+	return hover && pressed;
 }
 
 Matrix44 Entity::getGlobalMatrix()
@@ -135,7 +150,7 @@ void EntityMesh::update(float seconds_elapsed) {
 	Camera* camera = game->camera;
 	Scene* world = Scene::instance;
 
-	float speed = seconds_elapsed * game->mouse_speed; //the speed is defined by the seconds_elapsed so it goes constant
+	float speed = seconds_elapsed * game->mouse_speed * 0.1; //the speed is defined by the seconds_elapsed so it goes constant
 	//example
 	world->angle += (float)seconds_elapsed * 10.0f;
 
@@ -190,7 +205,7 @@ void EntityCar::render(Mesh* mesh, Matrix44 model, Camera* camera, Texture* text
 		shader->disable();
 	}
 
-	mesh->renderBounding(model);
+	//mesh->renderBounding(model);
 	//render the FPS, Draw Calls, etc
 	std::string text = "velocidad: " + std::to_string(std::abs(vel.z));
 	std::string text2 = "Time: " + std::to_string(Scene::instance->live_time);

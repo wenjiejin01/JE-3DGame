@@ -13,19 +13,6 @@
 
 Stage::Stage() {}
 
-/********************************************************* Introstage *********************************************************/
-IntroStage::IntroStage() {
-
-}
-
-void IntroStage::render(Camera* camera) {
-
-}
-
-void IntroStage::update(float elapse_time) {
-
-}
-
 void Stage::getKeyDownEvent(Camera* camera, int key_num) {
 	Scene* world = Scene::instance;
 
@@ -192,12 +179,81 @@ void Stage::SelectEntity(Camera* camera) {
 		break;
 	}
 }
+/********************************************************* Introstage *********************************************************/
+IntroStage::IntroStage() {
+	Scene* world = Scene::instance;
+
+	world->global_Shader = Shader::Get("data/shaders/basic.vs", "data/shaders/texture.fs");
+	world->global_texture = Texture::Get("data/assets/color-atlas-new.png");
+
+	//CAR
+	world->player_car = new EntityCar();
+	world->player_car->meshType = EntityMesh::CAR;
+	world->player_car->texture = world->global_texture;
+	world->player_car->mesh = Mesh::Get("data/assets/coches/car-passenger_1.obj");
+	world->player_car->model.translate(0.0f, 0.0f, 0.0f);
+	world->player_car->shader = world->global_Shader;
+
+	// Create button info.
+	startButton = new EntityMesh();
+	startButton->texture = Texture::Get("data/play-button.png");
+	startButton->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/gui.fs");
+
+	TutorialButton = new EntityMesh();
+	TutorialButton->texture = Texture::Get("data/read.png");
+	TutorialButton->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/gui.fs");
+}
+
+void IntroStage::render(Camera* camera) {
+	Scene* world = Scene::instance;
+	Game* game = Game::instance;
+
+	Matrix44 model;
+	Vector3 eye = model * Vector3(5.0f, 2.0, 0.0);
+	Vector3 center = model * Vector3(0.0f, 0.0f, 0.0f);
+	Vector3 up = model.rotateVector(Vector3(0.0f, 1.0f, 0.0f));
+	camera->lookAt(eye, center, up);
+	world->player_car->model.setRotation(angle * DEG2RAD, Vector3(0, 1, 0));
+	world->player_car->render(world->player_car->mesh, world->player_car->model, camera, world->player_car->texture);
+
+	glDisable(GL_DEPTH_TEST);
+	glDisable(GL_CULL_FACE);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	if (startButton->renderButton(game->window_width / 2 - 60, game->window_height / 2 + 150, 100, 100, true))
+	{
+		eye = world->player_car->model * Vector3(0.0f, 3.0f, 6.0f);
+		center = world->player_car->model * Vector3(0.0f, 0.0f, -2.0f);
+		up = world->player_car->model.rotateVector(Vector3(0.0f, 1.0f, 0.0f));
+		camera->lookAt(eye, center, up);
+		game->current_Stage = game->play_stage;
+	}
+
+	if (TutorialButton->renderButton(game->window_width / 2 + 60, game->window_height / 2 + 150, 100, 100, true)) {
+		game->current_Stage = game->tutorial_stage;
+	}
+
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_CULL_FACE);
+	glDisable(GL_BLEND);
+
+	Input::wasMouseButtonDown = false;
+	std::string Title = "Car Game 3D";
+	drawText(game->window_width/2 - 150, 40, Title, Vector3(0.5, 1, 0.5), 4);
+}
+
+void IntroStage::update(float elapse_time) {
+	angle += elapse_time * 10.0f;
+}
+
+
 
 /********************************************************* PlayStagte *********************************************************/
 PlayStage::PlayStage() {
 	Scene* world = Scene::instance;
-	world->global_Shader = Shader::Get("data/shaders/basic.vs", "data/shaders/texture.fs");
-	world->global_texture = Texture::Get("data/assets/color-atlas-new.png");
+
+
 	//GRASS
 	world->grass = new EntityMesh();
 	EntityMesh* grass = world->grass;
@@ -232,18 +288,6 @@ PlayStage::PlayStage() {
 	sky->model.translate(0.0f, 0.0f, 0.0f);
 	sky->model.scale(0.63f, 0.7f, 0.6f);
 	sky->shader = world->global_Shader;
-
-
-	//CAR
-	world->player_car = new EntityCar();
-	world->player_car->meshType = EntityMesh::CAR;
-	//load one texture without using the Texture Manager (Texture::Get would use the manager)
-	world->player_car->texture = world->global_texture;
-	// example of loading Mesh from Mesh Manager
-	world->player_car->mesh = Mesh::Get("data/assets/coches/car-passenger_1.obj");
-	world->player_car->model.translate(0.0f, 0.0f, 0.0f);
-	// example of shader loading using the shaders manager
-	world->player_car->shader = world->global_Shader;
 
 	//CAR2
 	world->enemy_car = new EntityCar();
