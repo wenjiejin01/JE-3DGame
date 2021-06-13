@@ -44,6 +44,7 @@ public:
 
 class TutorialStage : public Stage {
 public:
+	EntityMesh* goInit;
 
 	TutorialStage();
 	virtual void render(Camera* camera);

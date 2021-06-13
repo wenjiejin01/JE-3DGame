@@ -140,9 +140,6 @@ void EntityMesh::render(Camera* camera, Vector4 color, float tiling)
 		//disable shader
 		shader->disable();
 	}
-
-	mesh->renderBounding(model);
-
 }
 
 void EntityMesh::update(float seconds_elapsed) {
@@ -204,14 +201,6 @@ void EntityCar::render(Mesh* mesh, Matrix44 model, Camera* camera, Texture* text
 		//disable shader
 		shader->disable();
 	}
-
-	//mesh->renderBounding(model);
-	//render the FPS, Draw Calls, etc
-	Scene* world = Scene::instance;
-	std::string text = "Target visited: " + std::to_string(world->target_visited) + "/" + std::to_string(world->target_num);
-	std::string text2 = "Time: " + std::to_string(world->live_time);
-	drawText(2, Game::instance->window_height - 20, text, Vector3(1, 1, 1), 2);
-	drawText(2, Game::instance->window_height - 40, text2, Vector3(1, 1, 1), 2);
 }
 
 void EntityCar::update(float seconds_elapsed) {

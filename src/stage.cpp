@@ -248,7 +248,7 @@ void IntroStage::render(Camera* camera) {
 	}
 
 	if (TutorialButton->renderButton(game->window_width / 2 + 60, game->window_height / 2 + 150, 100, 100, true)) {
-		game->current_Stage = game->end_stage;
+		game->current_Stage = game->tutorial_stage;
 	}
 
 	glEnable(GL_DEPTH_TEST);
@@ -262,8 +262,6 @@ void IntroStage::render(Camera* camera) {
 void IntroStage::update(float elapse_time) {
 	angle += elapse_time * 10.0f;
 }
-
-
 
 /********************************************************* PlayStagte *********************************************************/
 PlayStage::PlayStage() {
@@ -427,6 +425,11 @@ void PlayStage::render(Camera* camera){
 //	currentCar = world->enemy_car;
 //	currentCar->getModel(currentCar->pos, currentCar->yaw); // actualizar model
 //	currentCar->render(currentCar->mesh, currentCar->model, camera, currentCar->texture);
+
+	std::string text = "Target visited: " + std::to_string(world->target_visited) + "/" + std::to_string(world->target_num);
+	std::string text2 = "Time: " + std::to_string(world->live_time);
+	drawText(2, Game::instance->window_height - 20, text, Vector3(1, 1, 1), 2);
+	drawText(2, Game::instance->window_height - 40, text2, Vector3(1, 1, 1), 2);
 }
 
 void PlayStage::update(float seconds_elapsed) {
@@ -486,11 +489,27 @@ void PlayStage::renderMiniMap() {
 
 /********************************************************* End Stage *********************************************************/
 TutorialStage::TutorialStage() {
-
+	goInit = new EntityMesh();
+	goInit->texture = Texture::Get("data/INIT.png");
+	goInit->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/gui.fs");
 }
 
 void TutorialStage::render(Camera* camera) {
+	Game* game = Game::instance;
+	Scene* world = Scene::instance;
 
+	glDisable(GL_DEPTH_TEST);
+	glDisable(GL_CULL_FACE);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	if (goInit->renderButton(game->window_width / 2 + 105, game->window_height / 2 + 150, 100, 100, true))
+	{
+		game->current_Stage = game->intro_stage;
+	}
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_CULL_FACE);
+	glDisable(GL_BLEND);
 }
 
 void TutorialStage::update(float elapse_time) {
