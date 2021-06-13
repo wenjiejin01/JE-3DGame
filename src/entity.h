@@ -104,6 +104,7 @@ public:
     void update(float dt);
     void onCollision(float seconds_elapsed);
     ENTITY_TYPE_ID getType() { return ENTITY_TYPE_ID::CAR; };
+    void ResetCar();
 };
 
 class EntityAnimation : public EntityMesh

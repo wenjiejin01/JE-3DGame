@@ -143,6 +143,7 @@ void Stage::LoadFile()
 		entity2->name = "target";
 		entity2->isBroken = false;
 		world->static_list.push_back(entity2);
+		world->target_num += 1;
 	}
 	myfile.close();
 
@@ -177,6 +178,24 @@ void Stage::SelectEntity(Camera* camera) {
 
 		world->selected_entity = current;
 		break;
+	}
+}
+
+void Stage::restartGame() {
+	Scene* world = Scene::instance;
+
+	// reset car state
+	world->player_car->ResetCar();
+
+	// reset world state
+	world->live_time = 20.0f;
+	world->target_visited = 0;
+
+	// reset object broken
+	int size = world->static_list.size();
+	for (size_t i = 0; i < size; i++)
+	{
+		world->static_list.at(i)->isBroken = false;
 	}
 }
 /********************************************************* Introstage *********************************************************/
@@ -223,22 +242,19 @@ void IntroStage::render(Camera* camera) {
 
 	if (startButton->renderButton(game->window_width / 2 - 60, game->window_height / 2 + 150, 100, 100, true))
 	{
-		eye = world->player_car->model * Vector3(0.0f, 3.0f, 6.0f);
-		center = world->player_car->model * Vector3(0.0f, 0.0f, -2.0f);
-		up = world->player_car->model.rotateVector(Vector3(0.0f, 1.0f, 0.0f));
-		camera->lookAt(eye, center, up);
+		world->free_camera = false;
+		restartGame();
 		game->current_Stage = game->play_stage;
 	}
 
 	if (TutorialButton->renderButton(game->window_width / 2 + 60, game->window_height / 2 + 150, 100, 100, true)) {
-		game->current_Stage = game->tutorial_stage;
+		game->current_Stage = game->end_stage;
 	}
 
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 	glDisable(GL_BLEND);
 
-	Input::wasMouseButtonDown = false;
 	std::string Title = "Car Game 3D";
 	drawText(game->window_width/2 - 150, 40, Title, Vector3(0.5, 1, 0.5), 4);
 }
@@ -372,6 +388,8 @@ void PlayStage::render(Camera* camera){
 		
 	}
 
+
+	//render animation
 	EntityAnimation* currentAnim;
 	for (size_t i = 0; i < world->dynamic_list.size(); i++) {
 		assert(world->dynamic_list.at(i) != NULL);
@@ -406,15 +424,25 @@ void PlayStage::render(Camera* camera){
 	currentCar->render(currentCar->mesh, currentCar->model, camera, currentCar->texture);
 
 	// render enemy car
-	currentCar = world->enemy_car;
-	currentCar->getModel(currentCar->pos, currentCar->yaw); // actualizar model
-	currentCar->render(currentCar->mesh, currentCar->model, camera, currentCar->texture);
+//	currentCar = world->enemy_car;
+//	currentCar->getModel(currentCar->pos, currentCar->yaw); // actualizar model
+//	currentCar->render(currentCar->mesh, currentCar->model, camera, currentCar->texture);
 }
 
 void PlayStage::update(float seconds_elapsed) {
 	Scene* world = Scene::instance;
 
-	world->player_car->update(seconds_elapsed);
+	world->live_time -= seconds_elapsed;
+
+	// When time to line is upper than 0, we can play the game. 
+	if (world->live_time > 0.0)
+	{
+		world->player_car->update(seconds_elapsed);
+	}
+	else {
+		world->live_time = 0.0;
+		Game::instance->current_Stage = Game::instance->end_stage;
+	}
 }
 
 void PlayStage::renderMiniMap() {
@@ -472,11 +500,46 @@ void TutorialStage::update(float elapse_time) {
 
 /********************************************************* End Stage *********************************************************/
 EndStage::EndStage() {
+	gameOver = new EntityMesh();
+	gameOver->texture = Texture::Get("data/gameover.png");
+	gameOver->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/gui.fs");
 
+	restart = new EntityMesh();
+	restart->texture = Texture::Get("data/restart.png");
+	restart->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/gui.fs");
+
+	goInit = new EntityMesh();
+	goInit->texture = Texture::Get("data/INIT.png");
+	goInit->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/gui.fs");
 }
 
 void EndStage::render(Camera* camera) {
+	Game* game = Game::instance;
+	Scene* world = Scene::instance;
 
+	gameOver->renderButton(game->window_width / 2, game->window_height / 2 - 150, 400, 200, true);
+
+	glDisable(GL_DEPTH_TEST);
+	glDisable(GL_CULL_FACE);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	if (restart->renderButton(game->window_width / 2 - 105, game->window_height / 2 + 150, 100, 100, true))
+	{
+		restartGame();
+		game->current_Stage = game->play_stage;
+	}
+
+	if (goInit->renderButton(game->window_width / 2 + 105, game->window_height / 2 + 150, 100, 100, true))
+	{
+		game->current_Stage = game->intro_stage;
+	}
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_CULL_FACE);
+	glDisable(GL_BLEND);
+	
+	std::string text = "You successfully visited " + std::to_string(world->target_visited) + "/" + std::to_string(world->target_num) + " Points.";
+	drawText(game->window_width / 2 - 160, game->window_height / 2, text, Vector3(1, 1, 1), 2.0);
 }
 
 void EndStage::update(float elapse_time) {

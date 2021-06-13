@@ -207,8 +207,9 @@ void EntityCar::render(Mesh* mesh, Matrix44 model, Camera* camera, Texture* text
 
 	//mesh->renderBounding(model);
 	//render the FPS, Draw Calls, etc
-	std::string text = "velocidad: " + std::to_string(std::abs(vel.z));
-	std::string text2 = "Time: " + std::to_string(Scene::instance->live_time);
+	Scene* world = Scene::instance;
+	std::string text = "Target visited: " + std::to_string(world->target_visited) + "/" + std::to_string(world->target_num);
+	std::string text2 = "Time: " + std::to_string(world->live_time);
 	drawText(2, Game::instance->window_height - 20, text, Vector3(1, 1, 1), 2);
 	drawText(2, Game::instance->window_height - 40, text2, Vector3(1, 1, 1), 2);
 }
@@ -243,30 +244,12 @@ void EntityCar::update(float seconds_elapsed) {
 			hight_model.translate(0, 2, 0);
 			if (static_entity->isCollision(car_entity, hight_model, 3))
 			{
-				world->live_time += 10.0f;
+				world->live_time += 5.0f;
+				world->target_visited++;
 				static_entity->isBroken = true;
 			}
 		}
 	}
-
-	// Colision Event
-	//{
-	//	for (size_t i = 0; i < world->static_list.size(); i++)
-	//	{
-	//		for (size_t j = 0; j < world->dynamic_list.size(); j++)
-	//		{
-	//			Entity* dynamic_entity = world->dynamic_list.at(j);
-	//			Entity* static_entity = world->static_list.at(i);
-
-	//			// check colision
-	//			if (static_entity->isCollision(dynamic_entity))
-	//			{
-	//				dynamic_entity->onCollision(seconds_elapsed);
-	//			}
-	//		}
-	//	}
-	//}
-
 
 	////mouse input to rotate the cam
 	if (!world->free_camera){
@@ -283,7 +266,12 @@ void EntityCar::update(float seconds_elapsed) {
 			if (Input::isKeyPressed(SDL_SCANCODE_W)) { vel = vel + (carForward * seconds_elapsed * acc_front); moving = true; }
 			else if (Input::isKeyPressed(SDL_SCANCODE_S)) { vel = vel - (carForward * seconds_elapsed * acc_back); moving = true; }
 			else  {
-				vel = vel - (vel * seconds_elapsed * 2.0f);
+				vel = vel - (vel * seconds_elapsed * 5.0f);
+			}
+			// freno
+			if (Input::isKeyPressed(SDL_SCANCODE_LSHIFT))
+			{
+				vel = vel * 0;
 			}
 
 			target = pos + (vel * seconds_elapsed);
@@ -344,6 +332,12 @@ void EntityCar::update(float seconds_elapsed) {
 	{
 		world->free_camera = !(world->free_camera);
 	}
+}
+
+void EntityCar::ResetCar() {
+	pos = pos * 0;
+	vel = vel * 0;
+	yaw = 0;
 }
 
 Matrix44 Entity::getModel(Vector3 pos, float yaw) {

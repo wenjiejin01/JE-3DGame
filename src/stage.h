@@ -28,6 +28,7 @@ public:
 	void LoadFile(std::stringstream filename, char* word);
 	void SelectEntity(Camera* camera);
 	void LoadFile();
+	void restartGame();
 };
 
 class IntroStage : public Stage {
@@ -63,6 +64,9 @@ public:
 class EndStage : public Stage {
 public:
 
+	EntityMesh* gameOver;
+	EntityMesh* restart;
+	EntityMesh* goInit;
 	EndStage();
 	virtual void render(Camera* camera);
 	virtual void update(float elapsed_time);

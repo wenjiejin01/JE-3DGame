@@ -71,8 +71,14 @@ void Game::render(void)
 	glDisable(GL_BLEND);
 	glEnable(GL_DEPTH_TEST);
 	glDisable(GL_CULL_FACE);
-   
+	
+	//if (current_Stage == end_stage)
+	//{
+	//	play_stage->render(camera);
+	//}
 	current_Stage->render(camera);
+	
+	Input::wasMouseButtonDown = false;
 
 	//Draw the floor grid
 	//drawGrid();
