@@ -221,6 +221,12 @@ IntroStage::IntroStage() {
 	TutorialButton = new EntityMesh();
 	TutorialButton->texture = Texture::Get("data/read.png");
 	TutorialButton->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/gui.fs");
+
+	//Init sounds
+	SoundManager* sound = new SoundManager();
+	
+	sound->playSound("BSO", true);
+	
 }
 
 void IntroStage::render(Camera* camera) {
@@ -240,10 +246,13 @@ void IntroStage::render(Camera* camera) {
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+
 	if (startButton->renderButton(game->window_width / 2 - 60, game->window_height / 2 + 150, 100, 100, true))
 	{
 		world->free_camera = false;
 		restartGame();
+		SoundManager* sound = new SoundManager();
+		sound->StopSound("BSO");
 		game->current_Stage = game->play_stage;
 	}
 

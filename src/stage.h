@@ -13,6 +13,7 @@
 #include "input.h"
 #include "animation.h"
 #include "entity.h"
+#include "soundmanager.h"
 
 class Stage {
 public:
