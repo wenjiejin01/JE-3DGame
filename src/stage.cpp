@@ -208,8 +208,8 @@ IntroStage::IntroStage() {
 	//CAR
 	world->player_car = new EntityCar();
 	world->player_car->meshType = EntityMesh::CAR;
-	world->player_car->texture = world->global_texture;
-	world->player_car->mesh = Mesh::Get("data/assets/coches/car-passenger_1.obj");
+	world->player_car->texture = Texture::Get("data/assets/SportsCar.png");
+	world->player_car->mesh = Mesh::Get("data/assets/coches/SportsCar.obj");
 	world->player_car->model.translate(0.0f, 0.0f, 0.0f);
 	world->player_car->shader = world->global_Shader;
 
@@ -221,6 +221,12 @@ IntroStage::IntroStage() {
 	TutorialButton = new EntityMesh();
 	TutorialButton->texture = Texture::Get("data/read.png");
 	TutorialButton->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/gui.fs");
+
+	//Init sounds
+	SoundManager* sound = new SoundManager();
+	
+	sound->playSound("BSO", true);
+	
 }
 
 void IntroStage::render(Camera* camera) {
@@ -240,10 +246,13 @@ void IntroStage::render(Camera* camera) {
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+
 	if (startButton->renderButton(game->window_width / 2 - 60, game->window_height / 2 + 150, 100, 100, true))
 	{
 		world->free_camera = false;
 		restartGame();
+		SoundManager* sound = new SoundManager();
+		sound->StopSound("BSO");
 		game->current_Stage = game->play_stage;
 	}
 
@@ -307,9 +316,9 @@ PlayStage::PlayStage() {
 	world->enemy_car = new EntityCar();
 	world->enemy_car->meshType = EntityMesh::CAR;
 	//load one texture without using the Texture Manager (Texture::Get would use the manager)
-	world->enemy_car->texture = world->global_texture;
+	world->enemy_car->texture = Texture::Get("data/assets/PoliceCar.tga");
 	// example of loading Mesh from Mesh Manager
-	world->enemy_car->mesh = Mesh::Get("data/assets/coches/car-passenger_1.obj");
+	world->enemy_car->mesh = Mesh::Get("data/assets/coches/PoliceCar.obj");
 	world->enemy_car->pos = Vector3(0.0f, 0.0f, 20.0f);
 	world->enemy_car->model.translate(world->enemy_car->pos.x, world->enemy_car->pos.y, world->enemy_car->pos.z);
 	// example of shader loading using the shaders manager
