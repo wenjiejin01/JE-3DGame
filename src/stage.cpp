@@ -223,7 +223,7 @@ IntroStage::IntroStage() {
 	TutorialButton->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/gui.fs");
 
 	//Init sounds
-	SoundManager* sound = new SoundManager();
+	sound = new SoundManager();
 	
 	sound->playSound("BSO", true);
 	
@@ -251,7 +251,6 @@ void IntroStage::render(Camera* camera) {
 	{
 		world->free_camera = false;
 		restartGame();
-		SoundManager* sound = new SoundManager();
 		sound->StopSound("BSO");
 		game->current_Stage = game->play_stage;
 	}
