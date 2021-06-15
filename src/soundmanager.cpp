@@ -53,3 +53,16 @@ void SoundManager::StopSound(const std::string& name)
 
 	std::cout << "could not find sample.. " << name << std::endl;
 }
+
+void SoundManager::SetVolume(const std::string& name, float value)
+{
+	auto it = samples.find(name);
+	if (it != samples.end())
+	{
+		HCHANNEL hSampleChannel = channels[name];
+		BASS_ChannelSetAttribute(hSampleChannel, BASS_ATTRIB_VOL, value);
+		return;
+	}
+
+	std::cout << "could not find sample.. " << name << std::endl;
+}

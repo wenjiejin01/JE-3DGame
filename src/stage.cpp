@@ -362,6 +362,10 @@ PlayStage::PlayStage() {
 
 	//OBJECTS
 	LoadFile();
+
+	//Sound
+	sound->playSound("BSO-2", true);
+	//sound->SetVolume("BSO-2", 8.0);
 }
 
 void PlayStage::render(Camera* camera){
@@ -558,6 +562,10 @@ EndStage::EndStage() {
 	goInit = new EntityMesh();
 	goInit->texture = Texture::Get("data/INIT.png");
 	goInit->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/gui.fs");
+
+	//Sounds
+	sound->StopSound("BSO-2");
+	sound->playSound("GAMEOVER",false);
 }
 
 void EndStage::render(Camera* camera) {
