@@ -188,7 +188,7 @@ void Stage::restartGame() {
 	world->player_car->ResetCar();
 
 	// reset world state
-	world->live_time = 20.0f;
+	world->live_time = 200.0f;
 	world->target_visited = 0;
 
 	// reset object broken
@@ -275,8 +275,7 @@ void IntroStage::update(float elapse_time) {
 /********************************************************* PlayStagte *********************************************************/
 PlayStage::PlayStage() {
 	Scene* world = Scene::instance;
-
-
+	
 	//GRASS
 	world->grass = new EntityMesh();
 	EntityMesh* grass = world->grass;
@@ -299,6 +298,11 @@ PlayStage::PlayStage() {
 	road->model.translate(0.0f, 0.0f, 0.0f);
 	// example of shader loading using the shaders manager
 	road->shader = world->global_Shader;
+	world->map_width = world->road->mesh->box.halfsize.x * 2;
+	world->map_height = world->road->mesh->box.halfsize.z * 2;
+	int size = world->map_width * world->map_height;
+	world->map = new uint8[size];
+	for (size_t i = 0; i < size; i++) world->map[i] = 1;
 
 	//SKY
 	EntityMesh* sky = new EntityMesh();
@@ -431,10 +435,25 @@ void PlayStage::render(Camera* camera){
 	currentCar->render(currentCar->mesh, currentCar->model, camera, currentCar->texture);
 
 	// render enemy car
-//	currentCar = world->enemy_car;
-//	currentCar->getModel(currentCar->pos, currentCar->yaw); // actualizar model
-//	currentCar->render(currentCar->mesh, currentCar->model, camera, currentCar->texture);
+	currentCar = world->enemy_car;
+	currentCar->getModel(currentCar->pos, currentCar->yaw); // actualizar model
+	currentCar->render(currentCar->mesh, currentCar->model, camera, currentCar->texture);
 
+	if (world->current_map_steps > 0)
+	{
+		Mesh mesh;
+		for (size_t i = 0; i < world->current_map_steps; i++)
+		{
+			int gridIndex = world->output[i];
+			int posxgrid = gridIndex % world->map_width;
+			int posygrid = gridIndex / world->map_width;
+
+			world->enemy_car->pos = Vector3(posxgrid, 1.0f, posygrid);
+		}
+
+	}
+
+	// render information
 	std::string text = "Target visited: " + std::to_string(world->target_visited) + "/" + std::to_string(world->target_num);
 	std::string text2 = "Time: " + std::to_string(world->live_time);
 	drawText(2, Game::instance->window_height - 20, text, Vector3(1, 1, 1), 2);
@@ -450,6 +469,7 @@ void PlayStage::update(float seconds_elapsed) {
 	if (world->live_time > 0.0)
 	{
 		world->player_car->update(seconds_elapsed);
+		std::cout << world->current_map_steps << std::endl;
 	}
 	else {
 		world->live_time = 0.0;

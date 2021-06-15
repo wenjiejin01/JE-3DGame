@@ -111,6 +111,18 @@ void Entity::onCollision(float seconds_elapsed) {
 	
 }
 
+void Entity::pathfinder(int startx, int starty, int targety, int targetx) {
+	Scene* world = Scene::instance;
+
+	world->current_map_steps = AStarFindPathNoTieDiag(
+		startx, starty, //origin (tienen que ser enteros)
+		targetx, targety, //target (tienen que ser enteros)
+		world-> map, //pointer to map data
+		world->map_width, world->map_height, //map width and height
+		world->output, //pointer where the final path will be stored
+		100);
+}
+
 void EntityMesh::render(Camera* camera, Vector4 color, float tiling)
 {
 	Game* game = Game::instance;
@@ -147,7 +159,7 @@ void EntityMesh::update(float seconds_elapsed) {
 	Camera* camera = game->camera;
 	Scene* world = Scene::instance;
 
-	float speed = seconds_elapsed * game->mouse_speed * 0.1; //the speed is defined by the seconds_elapsed so it goes constant
+	float speed = seconds_elapsed * game->mouse_speed; //the speed is defined by the seconds_elapsed so it goes constant
 	//example
 	world->angle += (float)seconds_elapsed * 10.0f;
 
@@ -236,6 +248,13 @@ void EntityCar::update(float seconds_elapsed) {
 				world->live_time += 5.0f;
 				world->target_visited++;
 				static_entity->isBroken = true;
+
+				int targetx = clamp(world->player_car->pos.x, 0, world->map_width);
+				int targety = clamp(world->player_car->pos.z, 0, world->map_height);
+				int startx = clamp(world->enemy_car->pos.x, 0, world->map_height);
+				int starty = clamp(world->enemy_car->pos.z, 0, world->map_width);
+
+				world->enemy_car->pathfinder(startx, starty, targety, targetx);
 			}
 		}
 	}
