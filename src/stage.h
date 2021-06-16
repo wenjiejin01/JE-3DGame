@@ -20,6 +20,7 @@ public:
 	float angle = 0;
 	int number_level = 1;
 	SoundManager* sound;
+	bool havesound;
 
 	Stage();
 

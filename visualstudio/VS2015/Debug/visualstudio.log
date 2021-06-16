@@ -1,6 +1,4 @@
-﻿  soundmanager.cpp
-C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\framework.h(372,105): warning C4244: 'return': conversión de 'double' a 'float'; posible pérdida de datos
-  stage.cpp
+﻿  stage.cpp
 C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\framework.h(372,105): warning C4244: 'return': conversión de 'double' a 'float'; posible pérdida de datos
 C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(35,55): warning C4305: 'argumento': truncamiento de 'double' a 'float'
 C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(39,56): warning C4305: 'argumento': truncamiento de 'double' a 'float'
@@ -24,38 +22,38 @@ C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(157,86):
 C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(157,61): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
 C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(164,23): warning C4018: '<': no coinciden signed/unsigned
 C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(196,23): warning C4018: '<': no coinciden signed/unsigned
-C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(241,45): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(250,85): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(250,55): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(258,88): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(258,58): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(267,32): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(300,55): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(301,56): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(304,23): warning C4018: '<': no coinciden signed/unsigned
-C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(388,23): warning C4018: '<': no coinciden signed/unsigned
-C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(400,69): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(448,24): warning C4018: '<': no coinciden signed/unsigned
-C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(454,52): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(454,36): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(462,44): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(463,44): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(381,11): warning C4101: 'usedTex': variable local sin referencia
-C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(380,8): warning C4101: 'usedMesh': variable local sin referencia
-C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(506,30): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(511,39): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(538,81): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(538,50): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(571,73): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(571,44): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(578,82): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(578,51): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(584,81): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(584,50): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(593,61): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(593,34): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-  Generando código...
+C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(238,45): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(254,85): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(254,55): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(263,88): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(263,58): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(272,32): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(306,55): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(307,56): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(310,23): warning C4018: '<': no coinciden signed/unsigned
+C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(408,23): warning C4018: '<': no coinciden signed/unsigned
+C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(420,69): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(468,24): warning C4018: '<': no coinciden signed/unsigned
+C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(474,52): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(474,36): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(482,44): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(483,44): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(489,31): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(401,11): warning C4101: 'usedTex': variable local sin referencia
+C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(400,8): warning C4101: 'usedMesh': variable local sin referencia
+C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(535,30): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(540,39): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(567,81): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(567,50): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(605,73): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(605,44): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(612,82): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(612,51): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(618,81): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(618,50): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(627,61): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\src\stage.cpp(627,34): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
 animation.obj : warning LNK4075: se omite '/EDITANDCONTINUE' debido a la especificación '/INCREMENTAL:NO'
 LINK : warning LNK4098: la biblioteca predeterminada'LIBCMT' entra en conflicto con otras bibliotecas; use la biblioteca /NODEFAULTLIB:biblioteca
-entity.obj : error LNK2019: símbolo externo "int __cdecl AStarFindPathNoTieDiag(int,int,int,int,unsigned char const *,int,int,int *,int)" (?AStarFindPathNoTieDiag@@YAHHHHHPBEHHPAHH@Z) sin resolver al que se hace referencia en la función "public: void __thiscall Entity::pathfinder(int,int,int,int)" (?pathfinder@Entity@@QAEXHHHH@Z)
-..\..\game_debug.exe : fatal error LNK1120: 1 externos sin resolver
+glew32s.lib(glew.obj) : warning LNK4099: no se encontró PDB 'vc120.pdb' con 'glew32s.lib(glew.obj)' o en 'C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\vc120.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+  visualstudio.vcxproj -> C:\Users\Jesús Pavón García\Documents\GitHub\JE-3DGame\game_debug.exe

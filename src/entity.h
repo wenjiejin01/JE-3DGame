@@ -7,6 +7,7 @@
 #include "shader.h"
 #include "animation.h"
 #include "pathfinders.h"
+#include "soundmanager.h"
 
 enum ENTITY_TYPE_ID {
     ENTITY,
@@ -30,6 +31,9 @@ class Entity
         Matrix44 model;
         Vector3 pos;
         bool isBroken;
+        bool havesound;
+        SoundManager* sound;
+        SoundManager* sound2;
 
         //pointer to my parent entity 
         Entity* parent;
@@ -74,10 +78,7 @@ public:
     meshType meshType;
     bool moving = false;
 
-
     Vector4 color;
-
-
 
     //methods overwritten 
     virtual void render(Camera* camera, Vector4 color = Vector4(1, 1, 1, 1) , float tiling = 1.0f);

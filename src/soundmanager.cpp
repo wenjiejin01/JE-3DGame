@@ -66,3 +66,30 @@ void SoundManager::SetVolume(const std::string& name, float value)
 
 	std::cout << "could not find sample.. " << name << std::endl;
 }
+
+bool SoundManager::IsStarted(const std::string& name) {
+
+	HCHANNEL hSampleChannel = channels[name];
+	if (BASS_ChannelIsActive(hSampleChannel) == BASS_ACTIVE_PLAYING) { return true; }
+	else { return false; }
+
+	//auto it = samples.find(name);
+	//if (it != samples.end())
+	//{
+	//	// stop if the sound is being played //
+	//	StopSound(name);
+
+	//	HCHANNEL hSampleChannel;
+	//	if (channels[name] == -1)
+	//	{
+	//		hSampleChannel = BASS_SampleGetChannel(samples[name], false);
+	//		channels[name] = hSampleChannel;
+	//	}
+	//	else
+	//	{
+	//		hSampleChannel = channels[name];
+	//	}
+	//	BASS_ChannelPlay(hSampleChannel, loop);
+	//	return;
+	//}
+}

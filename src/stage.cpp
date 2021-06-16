@@ -188,7 +188,7 @@ void Stage::restartGame() {
 	world->player_car->ResetCar();
 
 	// reset world state
-	world->live_time = 200.0f;
+	world->live_time = 10.0f;
 	world->target_visited = 0;
 
 	// reset object broken
@@ -223,10 +223,7 @@ IntroStage::IntroStage() {
 	TutorialButton->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/gui.fs");
 
 	//Init sounds
-	sound = new SoundManager();
-	
-	sound->playSound("BSO", true);
-	
+	havesound = false;
 }
 
 void IntroStage::render(Camera* camera) {
@@ -246,10 +243,18 @@ void IntroStage::render(Camera* camera) {
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+	//Render Sound
+	if (havesound == false) {
+		sound = new SoundManager();
+		sound->playSound("BSO", true);
+		sound->SetVolume("BSO", 0.5);
+		havesound = true;
+	}
 
 	if (startButton->renderButton(game->window_width / 2 - 60, game->window_height / 2 + 150, 100, 100, true))
 	{
 		world->free_camera = false;
+		havesound = false;
 		restartGame();
 		sound->StopSound("BSO");
 		game->current_Stage = game->play_stage;
@@ -282,7 +287,8 @@ PlayStage::PlayStage() {
 	grass->mesh = new Mesh();
 	grass->mesh->createPlane(600.0f);
 	grass->texture = new Texture();
-	grass->texture->load("data/grass.tga");
+	//grass->texture->load("data/grass.tga");
+	grass->texture->load("data/grass2.png");
 	grass->model.translate(0.0f, -0.5f, 0.0f);
 	grass->shader = world->global_Shader;
 
@@ -347,10 +353,23 @@ PlayStage::PlayStage() {
 	persona->mesh = Mesh::Get("data/animation/walking.mesh");
 	persona->pos = Vector3(7.0f, 0.0f, 20.0f);
 	persona->model.translate(persona->pos.x, persona->pos.y, persona->pos.z);
-
 	// example of shader loading using the shaders manager
 	persona->shader = Shader::Get("data/shaders/skinning.vs", "data/shaders/texture.fs");
 	persona->animation = Animation::Get("data/animation/animations_walking.skanim");
+
+	//// CHAR2
+
+	//EntityAnimation* persona2 = new EntityAnimation();
+	//persona2->meshType = EntityMesh::PERSONA;  // EntityMesh::ANIMATION;
+	//world->dynamic_list.push_back(persona2);
+	//persona2->texture = new Texture();
+	//persona2->texture->load("data/assets/personas/texture_char.png");
+	//persona2->mesh = Mesh::Get("data/animation/walking.mesh");
+	//persona2->pos = Vector3(7.0f, 0.0f, 20.0f);
+	//persona2->model.translate(persona2->pos.x, persona2->pos.y, persona2->pos.z);
+	//// example of shader loading using the shaders manager
+	//persona2->shader = Shader::Get("data/shaders/skinning.vs", "data/shaders/texture.fs");
+	//persona2->animation = Animation::Get("data/animation/animations_walking.skanim");
 
 	//CHAR 2,3,4,5
 	/*EntityAnimation* persona2 = new EntityAnimation();
@@ -364,8 +383,9 @@ PlayStage::PlayStage() {
 	LoadFile();
 
 	//Sound
-	sound->playSound("BSO-2", true);
-	//sound->SetVolume("BSO-2", 8.0);
+	havesound = false;
+	
+	
 }
 
 void PlayStage::render(Camera* camera){
@@ -461,6 +481,14 @@ void PlayStage::render(Camera* camera){
 	std::string text2 = "Time: " + std::to_string(world->live_time);
 	drawText(2, Game::instance->window_height - 20, text, Vector3(1, 1, 1), 2);
 	drawText(2, Game::instance->window_height - 40, text2, Vector3(1, 1, 1), 2);
+
+	//render sound
+	if (havesound == false) {
+		sound = new SoundManager();
+		sound->playSound("BSO2", true);
+		sound->SetVolume("BSO2", 0.2);
+		havesound = true;
+	}
 }
 
 void PlayStage::update(float seconds_elapsed) {
@@ -476,6 +504,7 @@ void PlayStage::update(float seconds_elapsed) {
 	}
 	else {
 		world->live_time = 0.0;
+		sound->StopSound("BSO2");
 		Game::instance->current_Stage = Game::instance->end_stage;
 	}
 }
@@ -564,8 +593,9 @@ EndStage::EndStage() {
 	goInit->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/gui.fs");
 
 	//Sounds
-	sound->StopSound("BSO-2");
-	sound->playSound("GAMEOVER",false);
+	//sound->StopSound("BSO2");
+	//sound->playSound("GAMEOVER",false);
+	havesound = false;
 }
 
 void EndStage::render(Camera* camera) {
@@ -595,6 +625,16 @@ void EndStage::render(Camera* camera) {
 	
 	std::string text = "You successfully visited " + std::to_string(world->target_visited) + "/" + std::to_string(world->target_num) + " Points.";
 	drawText(game->window_width / 2 - 160, game->window_height / 2, text, Vector3(1, 1, 1), 2.0);
+
+
+	//Render sound 
+	if (havesound == false) {
+		sound = new SoundManager();
+		sound->playSound("GAMEOVER",false);
+		sound->SetVolume("GAMEOVER", 0.5);
+		havesound = true;
+		
+	}
 }
 
 void EndStage::update(float elapse_time) {

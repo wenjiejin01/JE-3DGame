@@ -25,6 +25,7 @@ public:
 	void playSound(const std::string& name, bool loop);
 	void StopSound(const std::string& name);
 	void SetVolume(const std::string& name, float value);
+	bool IsStarted(const std::string& name);
 
 	std::map<std::string, HCHANNEL> channels;
 	std::map<std::string, HSAMPLE> samples;
