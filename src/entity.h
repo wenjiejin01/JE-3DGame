@@ -6,7 +6,6 @@
 #include "texture.h"
 #include "shader.h"
 #include "animation.h"
-#include "pathfinders.h"
 #include "soundmanager.h"
 
 enum ENTITY_TYPE_ID {
@@ -54,7 +53,6 @@ class Entity
         virtual void onCollision(float seconds_elapsed);
         ////some useful methods...
         virtual bool renderButton(float x, float y, float w, float h, bool uvs); 
-        void pathfinder(int startx, int starty, int targety, int targetx);
         //Vector3 getPosition();
 };
 

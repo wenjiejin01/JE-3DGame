@@ -58,6 +58,7 @@ class PlayStage : public Stage {
 public:
 	FBO* fbo = NULL;
 	std::vector<Entity*> mesh_List;
+	bool arrested;
 
 	PlayStage();
 	virtual void render(Camera* camera);

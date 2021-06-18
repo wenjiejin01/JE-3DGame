@@ -1,4 +1,4 @@
-#include "game.h"
+﻿#include "game.h"
 #include "input.h"
 #include "stage.h"
 #include "entity.h"
@@ -186,10 +186,12 @@ void Stage::restartGame() {
 
 	// reset car state
 	world->player_car->ResetCar();
+	world->enemy_car->pos = Vector3(0.0f, 0.0f, 30.0f);
 
 	// reset world state
 	world->live_time = 250.0f;
 	world->target_visited = 0;
+	Game::instance->play_stage->arrested = false;
 
 	// reset object broken
 	int size = world->static_list.size();
@@ -258,6 +260,7 @@ void IntroStage::render(Camera* camera) {
 		restartGame();
 		sound->StopSound("BSO");
 		game->current_Stage = game->play_stage;
+
 	}
 
 	if (TutorialButton->renderButton(game->window_width / 2 + 60, game->window_height / 2 + 150, 100, 100, true)) {
@@ -303,11 +306,6 @@ PlayStage::PlayStage() {
 	road->model.translate(0.0f, 0.0f, 0.0f);
 	// example of shader loading using the shaders manager
 	road->shader = world->global_Shader;
-	world->map_width = world->road->mesh->box.halfsize.x * 2;
-	world->map_height = world->road->mesh->box.halfsize.z * 2;
-	int size = world->map_width * world->map_height;
-	world->map = new uint8[size];
-	for (size_t i = 0; i < size; i++) world->map[i] = 1;
 
 	//SKY
 	EntityMesh* sky = new EntityMesh();
@@ -328,7 +326,7 @@ PlayStage::PlayStage() {
 	world->enemy_car->texture = Texture::Get("data/assets/PoliceCar.tga");
 	// example of loading Mesh from Mesh Manager
 	world->enemy_car->mesh = Mesh::Get("data/assets/coches/PoliceCar.obj");
-	world->enemy_car->pos = Vector3(0.0f, 0.0f, 20.0f);
+	world->enemy_car->pos = Vector3(0.0f, 0.0f, 30.0f);
 	world->enemy_car->model.translate(world->enemy_car->pos.x, world->enemy_car->pos.y, world->enemy_car->pos.z);
 	// example of shader loading using the shaders manager
 	world->enemy_car->shader = world->global_Shader;
@@ -414,7 +412,7 @@ void PlayStage::render(Camera* camera){
 	world->grass->render(camera);
 	world->road->render(camera);
 	//renderMiniMap();
-
+	
 	// render static list
 	for (size_t i = 0; i < count; i++)
 	{
@@ -473,20 +471,6 @@ void PlayStage::render(Camera* camera){
 	currentCar->getModel(currentCar->pos, currentCar->yaw); // actualizar model
 	currentCar->render(currentCar->mesh, currentCar->model, camera, currentCar->texture);
 
-	if (world->current_map_steps > 0)
-	{
-		Mesh mesh;
-		for (size_t i = 0; i < world->current_map_steps; i++)
-		{
-			int gridIndex = world->output[i];
-			int posxgrid = gridIndex % world->map_width;
-			int posygrid = gridIndex / world->map_width;
-
-			world->enemy_car->pos = Vector3(posxgrid, 1.0f, posygrid);
-		}
-
-	}
-
 	// render information
 	std::string text = "Target visited: " + std::to_string(world->target_visited) + "/" + std::to_string(world->target_num);
 	std::string text2 = "Time: " + std::to_string(world->live_time);
@@ -508,10 +492,69 @@ void PlayStage::update(float seconds_elapsed) {
 	world->live_time -= seconds_elapsed;
 
 	// When time to line is upper than 0, we can play the game. 
-	if (world->live_time > 0.0)
+	if (world->live_time > 0.0 && !this->arrested)
 	{
 		world->player_car->update(seconds_elapsed);
-		std::cout << world->current_map_steps << std::endl;
+
+		// enemycar moviment
+		Vector3 targetDir = world->player_car->pos - world->enemy_car->pos;
+		Vector3 playerRight = world->enemy_car->model.rotateVector(Vector3(1.0f, 0.0f, 0.0f));
+		float distance = targetDir.length();
+
+		if (distance > 3.0f)
+		{
+			targetDir.normalize();
+			float dot = playerRight.dot(targetDir);
+			if (dot > 0.0f)
+			{
+				world->enemy_car->yaw += seconds_elapsed * 40.0f;
+			}
+			else {
+				world->enemy_car->yaw -= seconds_elapsed * 40.0f;
+			}
+
+			Vector3 carForward = world->enemy_car->getModel(world->enemy_car->pos, world->enemy_car->yaw).rotateVector(Vector3(0.0f, 0.0f, -1.0f));
+			
+			/******************* check colision  *****************************/
+			{
+				Vector3 checkTarget = world->enemy_car->pos + (carForward * seconds_elapsed * 10.0f);
+				Entity* currentMesh = NULL;
+				//Variable para chequear colision
+				Vector3 coll;
+				Vector3 collNorm;
+				Vector3 characterTargetCenter = checkTarget + Vector3(0, 1, 0);
+
+				//check for any static entity if there is a collision
+				for (size_t i = 0; i < world->static_list.size(); i++)
+				{
+					// Break the game and show error.
+					assert(world->static_list.at(i) != NULL);
+
+					// Check entity type
+					if (world->static_list.at(i)->getType() == ENTITY_TYPE_ID::MESH)
+					{
+						//DOWNCAST, BY STATIC_CAST
+						currentMesh = world->static_list.at(i);
+					}
+
+					bool result = currentMesh->mesh->testSphereCollision(currentMesh->model, characterTargetCenter, 2.0, coll, collNorm);
+					if (result)
+					{
+						//si la esfera est�� colisionando muevela a su posicion anterior alejandola del objeto
+						Vector3 push_away = normalize(coll - characterTargetCenter) * seconds_elapsed;
+						//move to previous pos but a little bit further
+						checkTarget = world->enemy_car->pos - push_away * 10.0f;
+						checkTarget.y = world->enemy_car->pos.y;
+					}
+				}
+				world->enemy_car->pos = checkTarget;
+			}
+		}
+		// policia capturado nuestro coche
+		else {
+			std::cout << "alto " << std::endl;
+			this->arrested = true;
+		}
 	}
 	else {
 		world->live_time = 0.0;
@@ -542,7 +585,7 @@ void PlayStage::renderMiniMap() {
 	floor.createPlane(100);
 	minimap->Entity::render(&floor, Matrix44(), &minimapCam, Vector4(1, 1, 1, 1), minimap->texture, world->global_Shader, 4, 1.0f);
 
-	// render player posicion en minimap
+	// render player posicion en minimapn
 	carmodel.scale(0.2, 0.2, 0.2);
 	minimap->Entity::render(Mesh::Get("data/sphere.ASE"), carmodel, &minimapCam, Vector4(1, 1, 1, 1),NULL, minimap->shader, 4, 1.0f);
 
