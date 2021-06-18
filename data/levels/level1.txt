@@ -720,7 +720,7 @@
 
 	 -ENTITY: 47.5782 0       -270.858     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png   
 	
-           -ENTITY: 192.395 0       -24.8126     data/assets/edificios/museum.obj     data/assets/color-atlas-new.png  
+         -ENTITY: 192.395 0       -24.8126     data/assets/edificios/museum.obj     data/assets/color-atlas-new.png  
 
 	 -ENTITY: 207.923 0       -10.0174     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
 
@@ -784,6 +784,591 @@
 
 	 -ENTITY: -182.948 0       -77.6116     data/assets/edificios/farm.obj     data/assets/color-atlas-new.png
 
+ 	 -ENTITY: 105.45 0       272.684     data/assets/edificios/cinema.obj     data/assets/color-atlas-new.png
+
+	 -ENTITY: 179.787 0       53.2688     data/assets/edificios/estadio2.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 316.087 0       56.4939     data/assets/edificios/cinema.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 273.744 0       -241.77     data/assets/edificios/hospital.obj     data/assets/color-atlas-new.png 
+	 
+         -ENTITY: -23.5428 -1.90735e-06       406.767     data/assets/edificios/building-house-middle_7.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -36.6759 0       406.344     data/assets/edificios/building-house-middle_7.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -52.3389 0       407.361     data/assets/edificios/building-house-middle_7.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -70.2509 0       406.188     data/assets/edificios/building-house-middle_7.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 88.9123 0       403.547     data/assets/edificios/building-house-middle_7.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 104.732 0       403.878     data/assets/edificios/building-house-middle_7.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 122.738 0       405.073     data/assets/edificios/building-house-middle_7.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 139.447 0       404.463     data/assets/edificios/building-house-middle_7.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 155.438 0       405.043     data/assets/edificios/building-house-middle_7.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 168.997 0       405.526     data/assets/edificios/building-house-middle_7.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 187.01 1.90735e-06       406.879     data/assets/edificios/building-house-middle_7.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 205.735 0       407.584     data/assets/edificios/building-house-middle_7.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 220.335 0       406.556     data/assets/edificios/building-house-middle_7.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 236.883 0       406.975     data/assets/edificios/building-house-middle_7.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 251.068 0       405.055     data/assets/edificios/building-house-middle_7.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 266.344 0       405.18     data/assets/edificios/building-house-middle_7.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 280.744 0       405.397     data/assets/edificios/building-house-middle_7.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 294.346 0       405.287     data/assets/edificios/building-house-middle_7.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 310.456 0       405.202     data/assets/edificios/building-house-middle_7.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 78.5932 -9.53674e-07       405.698     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 97.0802 0       405.073     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 113.885 0       405.539     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 131.058 0       405.376     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 147.388 0       405.789     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 177.831 0       405.452     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 196.553 0       406.691     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 228.339 0       407.052     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 302.918 0       406.504     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -8.99641 0       409.062     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -8.06627 0       401.134     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -6.02433 0       387.662     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -3.53773 0       367.812     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 65.8543 0       405.998     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 66.9272 0       396.687     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 68.0701 0       383.275     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 68.8805 0       364.386     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 316.8 0       432.164     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 300.961 0       433.58     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 288.934 0       433.825     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 278.642 0       433.544     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 267.651 0       434.106     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 254.457 0       434.686     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 242.282 0       435.267     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 230.709 0       435.041     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 213.966 0       435.471     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 197.705 0       435.745     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 179.551 0       435.112     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 161.267 0       435.516     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 143.328 0       436.664     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 124.643 0       436.381     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 109.168 0       435.82     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 94.4423 0       436.569     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 78.2141 0       435.48     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 59.7258 0       435.435     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 40.8275 0       435.862     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 19.1411 0       436.239     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 1.66907 0       434.09     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -16.738 0       435.593     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -34.5099 0       435.148     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -52.3487 0       436.048     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -75.4064 0       435.415     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -88.7186 0       431.008     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -99.6686 0       421.5     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -103.629 0       412.522     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -65.0519 -3.8147e-06       442.37     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -40.8558 0       446.145     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -4.49572 -3.8147e-06       445.612     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 34.276 0       446.001     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 70.3326 0       446.945     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 103.735 0       450.673     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 121.973 3.8147e-06       450.264     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 140.18 0       447.835     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 159.129 -3.8147e-06       446.777     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 193.28 -3.8147e-06       445.522     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 173.049 0       448.946     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 207.867 0       442.281     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 223.269 0       452.995     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 230.582 0       444.778     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 244.73 0       449.482     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 248.006 0       442.135     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 261.388 0       446.069     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 275.864 0       443.671     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 294.35 0       448.688     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 309.918 0       444.02     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 329.992 0       443.397     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 328.576 0       429.966     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 341.279 0       436.855     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 282.133 0       464.882     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 243.472 0       471.643     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 309.311 0       466.309     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 328.939 0       459.135     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 195.9 7.62939e-06       464.067     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 147.36 0       476.592     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 140.313 0       460.009     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 173.907 0       466.036     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 215.228 0       473.943     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 266.061 0       464.535     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 315.445 0       461.859     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 346.572 0       452.66     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 114.847 -7.62939e-06       477.307     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 71.6082 0       487.547     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 73.3609 0       462.862     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 97.8186 0       469.82     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 37.4972 0       457.668     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -34.2242 0       503.594     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 19.4959 0       489.077     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -45.0425 0       478.382     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -5.37292 0       459.406     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -72.2761 0       463.614     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -131.898 0       459.892     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -140.145 0       442.365     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -2.06015 0       476.765     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -28.3118 0       464.53     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -48.747 0       454.748     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -97.364 0       450.965     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -110.033 0       435.568     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 286.487 0       249.839     data/assets/edificios/museum.obj     data/assets/color-atlas-new.png    
+
+	 -ENTITY: -311.254 0       -20.9549     data/assets/edificios/museum.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 59.5745 0       104.403     data/assets/edificios/building-office-big_13.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 96.1286 -7.62939e-06       104.908     data/assets/edificios/building-office-big_13.obj     data/assets/color-atlas-new.png   
+
+	 -ENTITY: 64.293 0       139.936     data/assets/edificios/building-office-big_13.obj     data/assets/color-atlas-new.png
+
+	 -ENTITY: 100.443 0       136.053     data/assets/edificios/building-office-big_13.obj     data/assets/color-atlas-new.png 
+ 
+	 -ENTITY: -405.88 0       65.2877     data/assets/edificios/castillo.obj     data/assets/color-atlas-new.png
+
+	 -ENTITY: 447.304 0       5.74631     data/assets/edificios/estacion.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 358.285 0       -50.7926     data/assets/edificios/building-office-big_13.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 361.427 0       -101.961     data/assets/edificios/building-office-big_13.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 361.069 0       -150.048     data/assets/edificios/building-office-big_13.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 358.465 0       -183.866     data/assets/edificios/building-office-big_13.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 298.189 0       -145.621     data/assets/edificios/building-office-big_13.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 257.91 0       -146.505     data/assets/edificios/building-office-big_13.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 218.879 0       -146.247     data/assets/edificios/building-office-big_13.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 181.961 0       -148.534     data/assets/edificios/building-office-big_13.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 177.611 0       -189.801     data/assets/edificios/building-office-big_13.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 177.109 0       -237.871     data/assets/edificios/building-office-big_13.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 176.822 0       -287.807     data/assets/edificios/building-office-big_13.obj     data/assets/color-atlas-new.png 
+
+         -ENTITY: 380.122 0       214.599     data/assets/edificios/fabrica2.obj     data/assets/color-atlas-new.png 
+
+         -ENTITY: -110.247 0       371.055     data/assets/edificios/cinema.obj     data/assets/color-atlas-new.png
+
+	 -ENTITY: -416.002 0       -46.918     data/assets/edificios/balcony.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -413.643 0       -68.8777     data/assets/edificios/balcony.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -414.642 0       -18.3396     data/assets/edificios/balcony.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -340.039 0       272.501     data/assets/edificios/balcony.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -479.703 0       269.502     data/assets/edificios/balcony.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -392.589 0       419.757     data/assets/edificios/balcony.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -366.502 3.8147e-06       416.344     data/assets/edificios/balcony.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -336.868 0       386.239     data/assets/edificios/balcony.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -309.22 0       363.973     data/assets/edificios/balcony.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -308.064 0       332.276     data/assets/edificios/balcony.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -300.764 0       249.423     data/assets/edificios/balcony.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -261.744 0       293.66     data/assets/edificios/balcony.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -289.922 0       308.105     data/assets/edificios/balcony.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -430.44 0       371.51     data/assets/edificios/balcony.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -454.636 0       349.114     data/assets/edificios/balcony.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 280.058 3.8147e-06       -15.4117     data/assets/edificios/balcony.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 245.667 0       -16.8726     data/assets/edificios/balcony.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 46.002 0       -129.358     data/assets/edificios/balcony.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 69.0853 0       -132.019     data/assets/edificios/balcony.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 90.6762 0       -128.712     data/assets/edificios/balcony.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 111.899 0       -130.907     data/assets/edificios/balcony.obj     data/assets/color-atlas-new.png
+
+
+	 -ENTITY: 366.409 -3.8147e-06       -67.5547     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 352.562 -3.8147e-06       -66.3208     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 352.531 3.8147e-06       -86.6359     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 368.786 -3.8147e-06       -88.5464     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 366.241 0       -34.3132     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 360.306 0       -21.9318     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 355.147 0       -32.672     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 349.954 0       -21.9268     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 364.34 0       -134.033     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 356.217 0       -133.153     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 350.79 0       -127.098     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 356.641 0       -115.897     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 368.427 3.8147e-06       -116.588     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 366.017 3.8147e-06       -125.136     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 361.959 0       -171.123     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 357.842 0       -165.251     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 351.313 0       -168.564     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 273.059 0       -150.287     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 283.252 0       -146.186     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 277.964 0       -139.576     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 234.704 0       -147.638     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 241.525 0       -139.732     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 236.173 0       -139.581     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 199.584 0       -149.038     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 201.252 0       -141.864     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 198.968 0       -138.698     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 179.585 0       -174.83     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 177.319 0       -164.5     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 174.746 0       -170.667     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 168.38 0       -164.537     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 179.248 0       -223.053     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 171.46 0       -213.22     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 180.596 0       -206.12     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 167.401 0       -203.103     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 169.201 0       -220.664     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 187.672 0       -213.739     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 168.703 0       -207.947     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 179.235 0       -272.319     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 178.044 0       -256.052     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 170.094 0       -266.783     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 169.696 0       -254.081     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 170.395 0       -272.942     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 185.191 0       -261.993     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 181.927 0       -309.673     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 173.734 0       -300.09     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 169.711 0       -306.079     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 209.114 0       -251.83     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 208.714 0       -243.073     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 207.824 0       -232.132     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 207.231 0       -218.408     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 217.84 0       -216.152     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 228.682 0       -215.126     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 240.479 0       -214.205     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 253.245 0       -212.81     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 263.391 0       -212.9     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 274.641 0       -212.23     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 286.84 0       -211.523     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 298.836 0       -212.147     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 311.004 0       -211.44     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 333.06 0       -251.042     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 335.849 0       -240.408     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 335.712 0       -230.215     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 260.561 0       -21.231     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 266.544 0       -15.9656     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 260.598 0       -13.0429     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -439.118 0       11.7638     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -417.426 0       -2.72531     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -414.227 0       -1.11171     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -410.101 0       8.47097     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -400.491 0       5.05636     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -406.542 0       -0.75998     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -387.961 0       -4.89519     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -386.566 0       -6.42791     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -382.242 0       11.0194     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -384.724 0       11.2751     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -387.726 0       2.82595     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -383.16 0       -1.92201     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -403.463 0       14.8866     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -382.326 0       128.954     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -387.936 0       139.635     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -397.081 0       139.137     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -402.958 0       124.472     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -405.099 0       127.031     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -432.957 0       139.71     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -421.465 0       133.687     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -494.812 0       121.356     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -452.991 0       120.935     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -450.213 0       122.758     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -475.432 0       136.319     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -415.246 0       123.133     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -409.939 0       120.321     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -388.052 0       121.092     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -387.658 0       121.072     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -381.033 0       142.372     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -464.994 0       1.4979     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -466.196 0       -8.79287     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -460.661 0       -2.65077     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -410.444 0       400.293     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -410.231 0       389.329     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -416.452 0       384.091     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -413.332 0       378.976     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -408.121 0       380.964     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -348.685 0       410.529     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -342.389 0       425.832     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -385.859 0       309.871     data/assets/edificios/cinema.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -370.346 0       276.759     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -356.19 0       278.983     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -363.497 3.8147e-06       255.349     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -373.999 0       259.155     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -433.431 0       297.65     data/assets/edificios/balcony.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -428.806 0       254.802     data/assets/edificios/balcony.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -423.214 3.8147e-06       273.626     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -428.737 0       276.655     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -437.872 3.8147e-06       273.312     data/assets/arboles/tree-birch-tall_40.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -430.371 0       283.347     data/assets/arboles/tree-birch_42.obj     data/assets/color-atlas-new.png 
+
+	 -ENTITY: 349.963 0       84.0077     data/assets/edificios/mansion.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 349.584 0       32.7435     data/assets/edificios/mansion.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -55.3618 0       308.836     data/assets/edificios/balcony.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -85.0347 0       310.434     data/assets/edificios/balcony.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -65.1715 0       350.893     data/assets/edificios/balcony.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -29.7436 0       350.095     data/assets/edificios/balcony.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -4.79401 0       322.352     data/assets/edificios/balcony.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: 32.0671 0       321.52     data/assets/edificios/balcony.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -337.845 0       170.981     data/assets/edificios/mansion.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -341.581 0       119.283     data/assets/edificios/mansion.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -343.428 0       68.5218     data/assets/edificios/mansion.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -337.086 3.8147e-06       68.8737     data/assets/edificios/mansion.obj     data/assets/color-atlas-new.png  
+
+	 -ENTITY: -341.779 0       69.9526     data/assets/edificios/mansion.obj     data/assets/color-atlas-new.png  
+  
+  
+         
+
+	  
 
 ///////////////////////////////////////////////checkpoints level1 ///////////////////////////////////////////////////////////////////////
 

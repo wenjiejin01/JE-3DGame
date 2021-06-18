@@ -18,11 +18,11 @@ void Stage::getKeyDownEvent(Camera* camera, int key_num) {
 
 	switch (key_num)
 	{
-	case 1: AddObjectInFont(camera, "data/assets/edificios/building-office-big_13.obj", "data/assets/color-atlas-new.png"); break;
-	case 2: AddObjectInFont(camera, "data/assets/arboles/tree-birch_42.obj", "data/assets/color-atlas-new.png"); break;
-	case 3: AddObjectInFont(camera, "data/assets/edificios/farm.obj", "data/assets/color-atlas-new.png"); break;
-	case 4: AddObjectInFont(camera, "data/assets/edificios/museum.obj", "data/assets/color-atlas-new.png"); break;
-	case 5: AddObjectInFont(camera, "data/assets/edificios/police_office.obj", "data/assets/color-atlas-new.png"); break;
+	case 1: AddObjectInFont(camera, "data/assets/edificios/balcony.obj", "data/assets/color-atlas-new.png"); break;
+	case 2: AddObjectInFont(camera, "data/assets/edificios/cinema.obj", "data/assets/color-atlas-new.png"); break;
+	case 3: AddObjectInFont(camera, "data/assets/edificios/mansion.obj", "data/assets/color-atlas-new.png"); break;
+	case 4: AddObjectInFont(camera, "data/assets/arboles/tree-birch-tall_40.obj", "data/assets/color-atlas-new.png"); break;
+	case 5: AddObjectInFont(camera, "data/assets/arboles/tree-birch_42.obj", "data/assets/color-atlas-new.png"); break;
 		//case 6: AddObjectInFont(camera, "data/assets/edificios/police2.obj", "data/assets/color-atlas-new.png"); break;
 		/*case 5: AddObjectInFont(camera, "data/assets/checkpoints/check.obj", "data/assets/checkpoints/check.mtl"); break;
 		case 6: AddObjectInFont(camera, "data/assets/checkpoints/check_v2.obj", "data/assets/checkpoints/check.mtl"); break;*/
@@ -188,7 +188,7 @@ void Stage::restartGame() {
 	world->player_car->ResetCar();
 
 	// reset world state
-	world->live_time = 10.0f;
+	world->live_time = 250.0f;
 	world->target_visited = 0;
 
 	// reset object broken
@@ -357,19 +357,30 @@ PlayStage::PlayStage() {
 	persona->shader = Shader::Get("data/shaders/skinning.vs", "data/shaders/texture.fs");
 	persona->animation = Animation::Get("data/animation/animations_walking.skanim");
 
-	//// CHAR2
+	// CHAR2
 
-	//EntityAnimation* persona2 = new EntityAnimation();
-	//persona2->meshType = EntityMesh::PERSONA;  // EntityMesh::ANIMATION;
-	//world->dynamic_list.push_back(persona2);
-	//persona2->texture = new Texture();
-	//persona2->texture->load("data/assets/personas/texture_char.png");
-	//persona2->mesh = Mesh::Get("data/animation/walking.mesh");
-	//persona2->pos = Vector3(7.0f, 0.0f, 20.0f);
-	//persona2->model.translate(persona2->pos.x, persona2->pos.y, persona2->pos.z);
-	//// example of shader loading using the shaders manager
-	//persona2->shader = Shader::Get("data/shaders/skinning.vs", "data/shaders/texture.fs");
-	//persona2->animation = Animation::Get("data/animation/animations_walking.skanim");
+	EntityAnimation* persona2 = new EntityAnimation();
+	persona2->meshType = EntityMesh::PERSONA;  // EntityMesh::ANIMATION;
+	world->dynamic_list.push_back(persona2);
+	persona2->texture = new Texture();
+	persona2->texture->load("data/assets/color-atlas-new.png");
+	persona2->mesh = Mesh::Get("data/animation/women.mesh");
+	persona2->pos = Vector3(7.0f, 0.0f, 25.0f);
+	persona2->model.translate(persona2->pos.x, persona2->pos.y, persona2->pos.z);
+	// example of shader loading using the shaders manager
+	persona2->shader = Shader::Get("data/shaders/skinning.vs", "data/shaders/texture.fs");
+	persona2->animation = Animation::Get("data/animation/women_hello.skanim");
+
+	EntityAnimation* persona3 = new EntityAnimation();
+	persona3 = persona2;
+	world->dynamic_list.push_back(persona3);
+	persona3->pos = Vector3(7.0f, 0.0f, 15.0f);
+
+	EntityAnimation* persona4 = new EntityAnimation();
+	persona4 = persona2;
+	world->dynamic_list.push_back(persona4);
+	persona4->pos = Vector3(7.0f, 0.0f, 10.0f);
+
 
 	//CHAR 2,3,4,5
 	/*EntityAnimation* persona2 = new EntityAnimation();
