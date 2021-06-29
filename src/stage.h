@@ -21,7 +21,7 @@ public:
 	int number_level = 1;
 	SoundManager* sound;
 	bool havesound;
-
+	EntityMesh* logo;
 	Stage();
 
 	virtual void render(Camera* camera) {}; //empty body
@@ -48,6 +48,9 @@ public:
 class TutorialStage : public Stage {
 public:
 	EntityMesh* goInit;
+	EntityMesh* tutorial_tx;
+	EntityMesh* startButton;
+	
 
 	TutorialStage();
 	virtual void render(Camera* camera);

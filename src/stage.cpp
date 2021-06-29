@@ -11,7 +11,11 @@
 #include <cmath>
 
 
-Stage::Stage() {}
+Stage::Stage() {
+	logo = new EntityMesh();
+	logo->texture = Texture::Get("data/logo.png");
+	logo->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/gui.fs");
+}
 
 void Stage::getKeyDownEvent(Camera* camera, int key_num) {
 	Scene* world = Scene::instance;
@@ -189,7 +193,7 @@ void Stage::restartGame() {
 	world->enemy_car->pos = Vector3(0.0f, 0.0f, 30.0f);
 
 	// reset world state
-	world->live_time = 250.0f;
+	world->live_time = 60.0f;
 	world->target_visited = 0;
 	Game::instance->play_stage->arrested = false;
 
@@ -199,6 +203,9 @@ void Stage::restartGame() {
 	{
 		world->static_list.at(i)->isBroken = false;
 	}
+
+	//reset sound
+	havesound = false;
 }
 /********************************************************* Introstage *********************************************************/
 IntroStage::IntroStage() {
@@ -216,14 +223,14 @@ IntroStage::IntroStage() {
 	world->player_car->shader = world->global_Shader;
 
 	// Create button info.
+	Shader* gui = Shader::Get("data/shaders/basic.vs", "data/shaders/gui.fs");
 	startButton = new EntityMesh();
 	startButton->texture = Texture::Get("data/play-button.png");
-	startButton->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/gui.fs");
+	startButton->shader = gui;
 
 	TutorialButton = new EntityMesh();
 	TutorialButton->texture = Texture::Get("data/read.png");
-	TutorialButton->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/gui.fs");
-
+	TutorialButton->shader = gui;
 	//Init sounds
 	havesound = false;
 }
@@ -232,6 +239,7 @@ void IntroStage::render(Camera* camera) {
 	Scene* world = Scene::instance;
 	Game* game = Game::instance;
 
+	// render a rotate car. 
 	Matrix44 model;
 	Vector3 eye = model * Vector3(5.0f, 2.0, 0.0);
 	Vector3 center = model * Vector3(0.0f, 0.0f, 0.0f);
@@ -253,26 +261,26 @@ void IntroStage::render(Camera* camera) {
 		havesound = true;
 	}
 
+	// start button -> play stage
 	if (startButton->renderButton(game->window_width / 2 - 60, game->window_height / 2 + 150, 100, 100, true))
 	{
 		world->free_camera = false;
-		havesound = false;
 		restartGame();
 		sound->StopSound("BSO");
 		game->current_Stage = game->play_stage;
 
 	}
 
+	// Tutorial button -> tutorial stage
 	if (TutorialButton->renderButton(game->window_width / 2 + 60, game->window_height / 2 + 150, 100, 100, true)) {
 		game->current_Stage = game->tutorial_stage;
 	}
 
+	logo->renderButton(game->window_width / 2, game->window_height / 2 - 200, 600, 200, true);
+
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 	glDisable(GL_BLEND);
-
-	std::string Title = "Car Game 3D";
-	drawText(game->window_width/2 - 150, 40, Title, Vector3(0.5, 1, 0.5), 4);
 }
 
 void IntroStage::update(float elapse_time) {
@@ -552,7 +560,6 @@ void PlayStage::update(float seconds_elapsed) {
 		}
 		// policia capturado nuestro coche
 		else {
-			std::cout << "alto " << std::endl;
 			this->arrested = true;
 		}
 	}
@@ -604,24 +611,49 @@ void PlayStage::renderMiniMap() {
 
 /********************************************************* End Stage *********************************************************/
 TutorialStage::TutorialStage() {
+	// Create button info.
+	Shader* gui = Shader::Get("data/shaders/basic.vs", "data/shaders/gui.fs");
+	startButton = new EntityMesh();
+	startButton->texture = Texture::Get("data/play-button.png");
+	startButton->shader = gui;
+
 	goInit = new EntityMesh();
 	goInit->texture = Texture::Get("data/INIT.png");
-	goInit->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/gui.fs");
+	goInit->shader = gui;
+
+	tutorial_tx = new EntityMesh();
+	tutorial_tx->texture = Texture::Get("data/tutorial.png");
+	tutorial_tx->shader = gui;
 }
 
 void TutorialStage::render(Camera* camera) {
 	Game* game = Game::instance;
 	Scene* world = Scene::instance;
 
+
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_CULL_FACE);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	if (goInit->renderButton(game->window_width / 2 + 105, game->window_height / 2 + 150, 100, 100, true))
+	// start button -> play stage
+	if (startButton->renderButton(game->window_width / 2 - 60, game->window_height / 2 + 170, 100, 100, true))
+	{
+		world->free_camera = false;
+		havesound = false;
+		restartGame();
+		game->current_Stage = game->play_stage;
+
+	}
+	// go Init buton back to init stage
+	if (goInit->renderButton(game->window_width / 2 + 60, game->window_height / 2 + 170, 100, 100, true))
 	{
 		game->current_Stage = game->intro_stage;
 	}
+
+	tutorial_tx->renderButton(game->window_width / 2, game->window_height / 2, 800, 300, true);
+	logo->renderButton(game->window_width / 2, game->window_height / 2 - 200, 600, 200, true);
+
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 	glDisable(GL_BLEND);
@@ -673,6 +705,7 @@ void EndStage::render(Camera* camera) {
 	{
 		game->current_Stage = game->intro_stage;
 	}
+
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 	glDisable(GL_BLEND);

@@ -1,53 +1,60 @@
 ﻿  stage.cpp
 D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\framework.h(372,105): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(35,55): warning C4305: 'argument': truncation from 'double' to 'float'
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(39,56): warning C4305: 'argument': truncation from 'double' to 'float'
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(50,114): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(50,94): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(50,86): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(50,61): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(106,21): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(107,21): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(108,21): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(130,21): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(131,21): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(132,21): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(111,3): warning C4996: 'strlwr': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _strlwr. See online help for details.
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(112,3): warning C4996: 'strlwr': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _strlwr. See online help for details.
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(135,3): warning C4996: 'strlwr': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _strlwr. See online help for details.
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(136,3): warning C4996: 'strlwr': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _strlwr. See online help for details.
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(157,114): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(157,94): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(157,86): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(157,61): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(164,23): warning C4018: '<': signed/unsigned mismatch
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(198,23): warning C4018: '<': signed/unsigned mismatch
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(240,45): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(256,85): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(256,55): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(266,88): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(266,58): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(275,32): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(417,23): warning C4018: '<': signed/unsigned mismatch
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(429,69): warning C4305: 'argument': truncation from 'double' to 'float'
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(477,44): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(478,44): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(484,31): warning C4305: 'argument': truncation from 'double' to 'float'
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(410,11): warning C4101: 'usedTex': unreferenced local variable
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(409,8): warning C4101: 'usedMesh': unreferenced local variable
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(502,18): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(589,30): warning C4305: 'argument': truncation from 'double' to 'float'
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(594,39): warning C4305: 'argument': truncation from 'double' to 'float'
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(621,81): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(621,50): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(659,73): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(659,44): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(666,82): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(666,51): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(672,81): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(672,50): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(681,61): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(681,34): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(39,55): warning C4305: 'argument': truncation from 'double' to 'float'
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(43,56): warning C4305: 'argument': truncation from 'double' to 'float'
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(54,114): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(54,94): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(54,86): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(54,61): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(110,21): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(111,21): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(112,21): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(134,21): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(135,21): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(136,21): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(115,3): warning C4996: 'strlwr': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _strlwr. See online help for details.
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(116,3): warning C4996: 'strlwr': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _strlwr. See online help for details.
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(139,3): warning C4996: 'strlwr': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _strlwr. See online help for details.
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(140,3): warning C4996: 'strlwr': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _strlwr. See online help for details.
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(161,114): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(161,94): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(161,86): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(161,61): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(168,23): warning C4018: '<': signed/unsigned mismatch
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(202,23): warning C4018: '<': signed/unsigned mismatch
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(248,45): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(265,85): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(265,55): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(275,88): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(275,58): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(279,69): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(279,40): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(425,23): warning C4018: '<': signed/unsigned mismatch
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(437,69): warning C4305: 'argument': truncation from 'double' to 'float'
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(485,44): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(486,44): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(492,31): warning C4305: 'argument': truncation from 'double' to 'float'
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(418,11): warning C4101: 'usedTex': unreferenced local variable
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(417,8): warning C4101: 'usedMesh': unreferenced local variable
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(510,18): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(596,30): warning C4305: 'argument': truncation from 'double' to 'float'
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(601,39): warning C4305: 'argument': truncation from 'double' to 'float'
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(640,85): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(640,55): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(649,80): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(649,50): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(654,72): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(654,47): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(655,69): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(655,40): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(691,73): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(691,44): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(698,82): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(698,51): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(704,81): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(704,50): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(714,61): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\src\stage.cpp(714,34): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 animation.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/INCREMENTAL:NO' specification
 LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
 glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'D:\UPF\3Tercero\3Trimestre\Electronic Game\Juego3D\JE-3DGame\vc120.pdb'; linking object as if no debug info
