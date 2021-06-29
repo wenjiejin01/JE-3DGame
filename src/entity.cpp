@@ -42,7 +42,7 @@ void Entity::update(float elapsed_time) {
 	std::cout << "this is entity update" << std::endl;
 }
 
-bool Entity::renderButton(float x, float y, float w, float h, bool flipuvs) {
+bool Entity::renderButton(float x, float y, float w, float h, bool flipuvs, bool button) {
 	Camera cam2D;
 	cam2D.setOrthographic(0, Game::instance->window_width, Game::instance->window_height, 0, -1, 1);
 	cam2D.enable();
@@ -62,7 +62,7 @@ bool Entity::renderButton(float x, float y, float w, float h, bool flipuvs) {
 	bool hover = mouse.x > min_x && mouse.y > min_y && mouse.x < max_x&& mouse.y < max_y;
 	bool pressed = Input::wasMouseButtonDown; 
 
-	Vector4 normalColor = Vector4(1, 1, 1, 0.6);
+	Vector4 normalColor = button ? Vector4(1, 1, 1, 0.6) : Vector4(1, 1, 1, 1);
 	Vector4 hoverColor = Vector4(1, 1, 1, 1);
 
 

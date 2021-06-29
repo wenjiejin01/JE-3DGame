@@ -52,7 +52,7 @@ class Entity
         bool isCollision(Entity* target, Matrix44 sentModel, float radio = 2.1);
         virtual void onCollision(float seconds_elapsed);
         ////some useful methods...
-        virtual bool renderButton(float x, float y, float w, float h, bool uvs); 
+        virtual bool renderButton(float x, float y, float w, float h, bool uvs, bool button = true); 
         //Vector3 getPosition();
 };
 

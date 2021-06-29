@@ -273,10 +273,11 @@ void IntroStage::render(Camera* camera) {
 
 	// Tutorial button -> tutorial stage
 	if (TutorialButton->renderButton(game->window_width / 2 + 60, game->window_height / 2 + 150, 100, 100, true)) {
+		sound->StopSound("BSO");
 		game->current_Stage = game->tutorial_stage;
 	}
 
-	logo->renderButton(game->window_width / 2, game->window_height / 2 - 200, 600, 200, true);
+	logo->renderButton(game->window_width / 2, game->window_height / 2 - 200, 600, 200, true, false);
 
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
@@ -651,8 +652,8 @@ void TutorialStage::render(Camera* camera) {
 		game->current_Stage = game->intro_stage;
 	}
 
-	tutorial_tx->renderButton(game->window_width / 2, game->window_height / 2, 800, 300, true);
-	logo->renderButton(game->window_width / 2, game->window_height / 2 - 200, 600, 200, true);
+	tutorial_tx->renderButton(game->window_width / 2, game->window_height / 2, 800, 300, true, false);
+	logo->renderButton(game->window_width / 2, game->window_height / 2 - 200, 600, 200, true, false);
 
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
