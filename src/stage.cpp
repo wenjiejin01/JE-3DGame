@@ -187,7 +187,7 @@ void Stage::restartGame() {
 	world->enemy_car->pos = Vector3(0.0f, 0.0f, 30.0f);
 
 	// reset world state
-	world->live_time = 40.0f;
+	world->live_time = 60.0f;
 	world->target_visited = 0;
 	Game::instance->play_stage->arrested = false;
 
