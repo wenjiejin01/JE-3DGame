@@ -47,13 +47,11 @@ class Entity
         virtual void render(Mesh* mesh, Matrix44 model, Camera* camera, Vector4 color, Texture* texture, Shader* shader, int primitive, float tiling);
         virtual void update(float elapsed_time);
         virtual ENTITY_TYPE_ID getType() = 0;
+        ////some useful methods
         Matrix44 getGlobalMatrix(); //returns transform in world coordinates
         Matrix44 getModel(Vector3 pos, float yaw); //get transformated matrix
         bool isCollision(Entity* target, Matrix44 sentModel, float radio = 2.1);
-        virtual void onCollision(float seconds_elapsed);
-        ////some useful methods...
         virtual bool renderButton(float x, float y, float w, float h, bool uvs, bool button = true); 
-        //Vector3 getPosition();
 };
 
 class EntityMesh : public Entity

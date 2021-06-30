@@ -38,9 +38,7 @@ void Entity::render(Mesh* sentmesh, Matrix44 sentmodel, Camera* camera, Vector4 
 	}
 }
 
-void Entity::update(float elapsed_time) {
-	std::cout << "this is entity update" << std::endl;
-}
+void Entity::update(float elapsed_time) {}
 
 bool Entity::renderButton(float x, float y, float w, float h, bool flipuvs, bool button) {
 	Camera cam2D;
@@ -91,7 +89,6 @@ bool Entity::isCollision(Entity* entity, Matrix44 sentModel, float radio) {
 	
 	Vector3 coll, collnorm;
 	//sacar posicion de entity que recibimos
-	//Matrix44 global_matrix = entity->getGlobalMatrix();
 	Vector3 position = sentModel.getTranslation();
 	
 	//calculamos el centro de la esfera de colisi��n del player elevandola hasta la cintura
@@ -103,12 +100,6 @@ bool Entity::isCollision(Entity* entity, Matrix44 sentModel, float radio) {
 	// False = no hay colision
 	// True = hay colision
 	return iscollision;
-}
-
-void Entity::onCollision(float seconds_elapsed) {
-	//model.getTranslation();
-	//model.rotate(90.0f * DEG2RAD, Vector3(0.0f, 1.0f, 0.0f));
-	
 }
 
 void EntityMesh::render(Camera* camera, Vector4 color, float tiling)
@@ -208,51 +199,6 @@ void EntityCar::render(Mesh* mesh, Matrix44 model, Camera* camera, Texture* text
 		//disable shader
 		shader->disable();
 	}
-
-	//Render Sound
-	//if (Input::isKeyPressed(SDL_SCANCODE_W)) {
-	//	sound->SetVolume("RALENTI", 0.1);
-	//	/*sound2 = new SoundManager();*/
-	///*	if (sound2->IsStarted("CAR_ACC") == false) {
-	//		sound2->playSound("CAR_ACC", false);
-	//		havesound = true;
-	//	}*/
-	//}
-	//else if (Input::isKeyPressed(SDL_SCANCODE_S)) {}
-	//else {
-	//}
-	//// freno
-	//if (Input::isKeyPressed(SDL_SCANCODE_LSHIFT))
-	//{
-	//	//sonido giro
-	//	sound->SetVolume("RALENTI", 0.25);
-	//	/*			sound2 = new SoundManager();
-	//				sound2->playSound("FRENO_MANO", false);
-	//				sound2->SetVolume("FRENO_MANO", 0.6);*/
-	//}
-	//if (Input::isKeyPressed(SDL_SCANCODE_D)) {
-	//	sound->SetVolume("RALENTI", 0.25);
-	//	sound2->StopSound("CAR_ACC");
-	//	/*sound2 = new SoundManager();
-	//	if (sound2->IsStarted("GIRO") == false) {
-	//		sound2->playSound("GIRO", false);
-	//		sound2->SetVolume("GIRO", 0.6);
-	//	}*/
-	//}
-	//else if (Input::isKeyPressed(SDL_SCANCODE_A)) {
-	//	sound->SetVolume("RALENTI", 0.25);
-	//	sound2->StopSound("CAR_ACC");
-	//	sound2 = new SoundManager();
-	//	/*if (sound2->IsStarted("GIRO") == false) {
-	//		sound2->playSound("GIRO", false);
-	//		sound2->SetVolume("GIRO", 0.6);
-	//	}*/
-	//}
-	//else {
-	//	sound->SetVolume("RALENTI", 0.5);
-
-	//}
-
 }
 
 void EntityCar::update(float seconds_elapsed) {

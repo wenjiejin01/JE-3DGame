@@ -58,8 +58,6 @@ void Stage::AddObjectInFont(Camera* camera, const char* mesh, const char* textur
 	EntityMesh* entity = new EntityMesh();
 	entity->model.setTranslation(pos.x, pos.y, pos.z);
 	entity->mesh = Mesh::Get(mesh);
-	/*entity->texture = new Texture();;
-	entity->texture->load(texture);*/
 	entity->texture = Texture::Get(texture);
 	entity->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/texture.fs");
 	entity->meshType = EntityMesh::HOUSE;
@@ -78,7 +76,7 @@ void Stage::AddObjectInFont(Camera* camera, const char* mesh, const char* textur
 	}
 
 	myfile << "\t -ENTITY: " << pos.x << " " << pos.y << "       " << pos.z << "     " << mesh << "     " << texture << "  " << "\n\n";
-	//myfile << "\t -target: " << pos.x << " " << pos.y << "       " << pos.z << "     " << mesh << "     " << texture << "  " << "\n\n";
+	myfile.close();
 	myfile.close();
 }
 
@@ -95,7 +93,6 @@ void Stage::LoadFile()
 	filename << "data/levels/level" << number_level << ".txt";
 	TextParser t = TextParser(filename.str().c_str());
 	std::fstream myfile;
-	//FILE* file = fopen(filename.str().c_str(), "rb");
 	if (!t.create(filename.str().c_str())) {
 		std::cout << "File not found " << filename.str() << std::endl;
 		exit(0);
@@ -103,7 +100,6 @@ void Stage::LoadFile()
 
 
 	int count = t.countword("-ENTITY:");
-	//std::cout << "debug de pos" << 0 << " " << 0 << " " << 0 << "\n\n ";
 
 	for (int i = 0; i < count; i++) {
 		t.seek("-ENTITY:");
@@ -125,8 +121,6 @@ void Stage::LoadFile()
 	}
 
 	//igual para target
-	//t = TextParser(filename.str().c_str());
-
 	int count2 = t.countword("-TARGET:");
 
 	for (int i = 0; i < count2; i++) {
@@ -193,7 +187,7 @@ void Stage::restartGame() {
 	world->enemy_car->pos = Vector3(0.0f, 0.0f, 30.0f);
 
 	// reset world state
-	world->live_time = 60.0f;
+	world->live_time = 40.0f;
 	world->target_visited = 0;
 	Game::instance->play_stage->arrested = false;
 
@@ -207,6 +201,7 @@ void Stage::restartGame() {
 	//reset sound
 	havesound = false;
 }
+
 /********************************************************* Introstage *********************************************************/
 IntroStage::IntroStage() {
 	Scene* world = Scene::instance;
@@ -299,7 +294,6 @@ PlayStage::PlayStage() {
 	grass->mesh = new Mesh();
 	grass->mesh->createPlane(600.0f);
 	grass->texture = new Texture();
-	//grass->texture->load("data/grass.tga");
 	grass->texture->load("data/grass2.png");
 	grass->model.translate(0.0f, -0.5f, 0.0f);
 	grass->shader = world->global_Shader;
@@ -308,19 +302,15 @@ PlayStage::PlayStage() {
 	world->road = new EntityMesh();
 	EntityMesh* road = world->road;
 	road->meshType = EntityMesh::ROAD;
-	//load one texture without using the Texture Manager (Texture::Get would use the manager)
 	road->texture = world->global_texture;
-	// example of loading Mesh from Mesh Manager
 	road->mesh = Mesh::Get("data/assets/carretera/mapa_carretera.obj");
 	road->model.translate(0.0f, 0.0f, 0.0f);
-	// example of shader loading using the shaders manager
 	road->shader = world->global_Shader;
 
 	//SKY
 	EntityMesh* sky = new EntityMesh();
 	sky->meshType = EntityMesh::SKY;
 	world->static_list.push_back(sky);
-	//load one texture without using the Texture Manager (Texture::Get would use the manager)
 	sky->texture = new Texture();
 	sky->mesh = Mesh::Get("data/assets/cielo/cielo.ASE");
 	sky->texture->load("data/assets/cielo/cielo.tga");
@@ -331,23 +321,17 @@ PlayStage::PlayStage() {
 	//CAR2
 	world->enemy_car = new EntityCar();
 	world->enemy_car->meshType = EntityMesh::CAR;
-	//load one texture without using the Texture Manager (Texture::Get would use the manager)
 	world->enemy_car->texture = Texture::Get("data/assets/PoliceCar.tga");
-	// example of loading Mesh from Mesh Manager
 	world->enemy_car->mesh = Mesh::Get("data/assets/coches/PoliceCar.obj");
 	world->enemy_car->pos = Vector3(0.0f, 0.0f, 30.0f);
 	world->enemy_car->model.translate(world->enemy_car->pos.x, world->enemy_car->pos.y, world->enemy_car->pos.z);
-	// example of shader loading using the shaders manager
 	world->enemy_car->shader = world->global_Shader;
 
 	/* Minimap */
 	world->minimap = new EntityMesh();
 	world->minimap->meshType = EntityMesh::MINIMAP;
-	//load one texture without using the Texture Manager (Texture::Get would use the manager)
 	world->minimap->texture = world->global_texture;
-	// example of loading Mesh from Mesh Manager
 	world->minimap->mesh = Mesh::Get("data/sphere.ASE");
-	// example of shader loading using the shaders manager
 	world->minimap->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/flat.fs");
 
 	// CHAR1
@@ -358,9 +342,8 @@ PlayStage::PlayStage() {
 	persona->texture = new Texture();
 	persona->texture->load("data/assets/personas/texture_char.png");
 	persona->mesh = Mesh::Get("data/animation/walking.mesh");
-	persona->pos = Vector3(7.0f, 0.0f, 20.0f);
+	persona->pos = Vector3(7.0f, 0.0f, -60.0f);
 	persona->model.translate(persona->pos.x, persona->pos.y, persona->pos.z);
-	// example of shader loading using the shaders manager
 	persona->shader = Shader::Get("data/shaders/skinning.vs", "data/shaders/texture.fs");
 	persona->animation = Animation::Get("data/animation/animations_walking.skanim");
 
@@ -374,28 +357,8 @@ PlayStage::PlayStage() {
 	persona2->mesh = Mesh::Get("data/animation/women.mesh");
 	persona2->pos = Vector3(7.0f, 0.0f, 25.0f);
 	persona2->model.translate(persona2->pos.x, persona2->pos.y, persona2->pos.z);
-	// example of shader loading using the shaders manager
 	persona2->shader = Shader::Get("data/shaders/skinning.vs", "data/shaders/texture.fs");
 	persona2->animation = Animation::Get("data/animation/women_hello.skanim");
-
-	EntityAnimation* persona3 = new EntityAnimation();
-	persona3 = persona2;
-	world->dynamic_list.push_back(persona3);
-	persona3->pos = Vector3(7.0f, 0.0f, 15.0f);
-
-	EntityAnimation* persona4 = new EntityAnimation();
-	persona4 = persona2;
-	world->dynamic_list.push_back(persona4);
-	persona4->pos = Vector3(7.0f, 0.0f, 10.0f);
-
-
-	//CHAR 2,3,4,5
-	/*EntityAnimation* persona2 = new EntityAnimation();
-	persona2 = persona;
-	world->dynamic_list.push_back(persona2);
-	persona2->pos = Vector3(7.0f, 0.0f, 15.0f);*/
-	/*EntityAnimation* persona3 = new EntityAnimation();
-	EntityAnimation* persona4 = new EntityAnimation();*/
 
 	//OBJECTS
 	LoadFile();
@@ -499,8 +462,14 @@ void PlayStage::update(float seconds_elapsed) {
 	Scene* world = Scene::instance;
 
 	world->live_time -= seconds_elapsed;
+	
+	//Case you are visited all the target, stop game and go to end stage
+	if (world->target_visited == world->target_num)
+	{
+		world->live_time = 0.0;
+	}
 
-	// When time to line is upper than 0, we can play the game. 
+	// When time to line is upper than 0 and not arrested, we can play the game. 
 	if (world->live_time > 0.0 && !this->arrested)
 	{
 		world->player_car->update(seconds_elapsed);
