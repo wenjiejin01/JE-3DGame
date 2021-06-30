@@ -205,9 +205,6 @@ void EntityCar::render(Mesh* mesh, Matrix44 model, Camera* camera, Texture* text
 		//disable shader
 		shader->disable();
 	}
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 
 	//Render Sound
 	//if (Input::isKeyPressed(SDL_SCANCODE_W)) {
@@ -263,9 +260,6 @@ void EntityCar::render(Mesh* mesh, Matrix44 model, Camera* camera, Texture* text
 		sound4->SetVolume("GIRO", 0);
 	}
 	
-=======
->>>>>>> 3a56c20251b847cc290816f3c6d2b3432300c62e
->>>>>>> Stashed changes
 }
 
 void EntityCar::update(float seconds_elapsed) {

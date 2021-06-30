@@ -72,9 +72,6 @@ bool SoundManager::IsStarted(const std::string& name) {
 	HCHANNEL hSampleChannel = channels[name];
 	if (BASS_ChannelIsActive(hSampleChannel) == BASS_ACTIVE_PLAYING) { return true; }
 	else { return false; }
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 
 	//auto it = samples.find(name);
 	//if (it != samples.end())
@@ -103,7 +100,5 @@ void SoundManager::clear(const std::string& name)
 	//BASS_ChannelFree(hSampleChannel);
 	BASS_ChannelUpdate(hSampleChannel,0);
 	//channels[name] = 0;
-=======
->>>>>>> 3a56c20251b847cc290816f3c6d2b3432300c62e
->>>>>>> Stashed changes
+
 }
