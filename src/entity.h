@@ -33,6 +33,9 @@ class Entity
         bool havesound;
         SoundManager* sound;
         SoundManager* sound2;
+        SoundManager* sound3;
+        SoundManager* sound4;
+        SoundManager* sound5;
 
         //pointer to my parent entity 
         Entity* parent;

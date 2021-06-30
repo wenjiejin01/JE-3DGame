@@ -176,8 +176,14 @@ void EntityCar::render(Mesh* mesh, Matrix44 model, Camera* camera, Texture* text
 	if (havesound == false) {
 		sound = new SoundManager();
 		sound->playSound("RALENTI", true);
-		sound->SetVolume("RALENTI", 0.5);
+		sound->SetVolume("RALENTI", 0.6);
 		havesound = true;
+		sound3 = new SoundManager();
+		sound3->playSound("CAR_ACC", true);
+		sound3->SetVolume("CAR_ACC", 0);
+		sound4 = new SoundManager();
+		sound4->playSound("GIRO", true);
+		sound3->SetVolume("CAR_ACC", 0);
 	}
 
 	if (shader)
@@ -199,6 +205,67 @@ void EntityCar::render(Mesh* mesh, Matrix44 model, Camera* camera, Texture* text
 		//disable shader
 		shader->disable();
 	}
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+
+	//Render Sound
+	//if (Input::isKeyPressed(SDL_SCANCODE_W)) {
+	//	sound->SetVolume("RALENTI", 0.1);
+	//	/*sound2 = new SoundManager();*/
+	///*	if (sound2->IsStarted("CAR_ACC") == false) {
+	//		sound2->playSound("CAR_ACC", false);
+	//		havesound = true;
+	//	}*/
+	//}
+	//else if (Input::isKeyPressed(SDL_SCANCODE_S)) {}
+	//else {
+	//}
+	//// freno
+	//if (Input::isKeyPressed(SDL_SCANCODE_LSHIFT))
+	//{
+	//	//sonido giro
+	//	sound->SetVolume("RALENTI", 0.25);
+	//	/*			sound2 = new SoundManager();
+	//				sound2->playSound("FRENO_MANO", false);
+	//				sound2->SetVolume("FRENO_MANO", 0.6);*/
+	//}
+	//if (Input::isKeyPressed(SDL_SCANCODE_D)) {
+	//	sound->SetVolume("RALENTI", 0.25);
+	//	sound2->StopSound("CAR_ACC");
+	//	/*sound2 = new SoundManager();
+	//	if (sound2->IsStarted("GIRO") == false) {
+	//		sound2->playSound("GIRO", false);
+	//		sound2->SetVolume("GIRO", 0.6);
+	//	}*/
+	//}
+	//else if (Input::isKeyPressed(SDL_SCANCODE_A)) {
+	//	sound->SetVolume("RALENTI", 0.25);
+	//	sound2->StopSound("CAR_ACC");
+	//	sound2 = new SoundManager();
+	//	/*if (sound2->IsStarted("GIRO") == false) {
+	//		sound2->playSound("GIRO", false);
+	//		sound2->SetVolume("GIRO", 0.6);
+	//	}*/
+	//}
+	//else {
+	//	sound->SetVolume("RALENTI", 0.5);
+
+	if (Input::isKeyPressed(SDL_SCANCODE_W)) {
+		sound3->SetVolume("CAR_ACC", 0.5);
+	}
+	else{ sound3->SetVolume("CAR_ACC", 0); }
+
+	if (Input::isKeyPressed(SDL_SCANCODE_LSHIFT)) {
+		sound4->SetVolume("GIRO", 0.5);
+	}
+	else { 
+		sound4->SetVolume("GIRO", 0);
+	}
+	
+=======
+>>>>>>> 3a56c20251b847cc290816f3c6d2b3432300c62e
+>>>>>>> Stashed changes
 }
 
 void EntityCar::update(float seconds_elapsed) {
@@ -246,6 +313,7 @@ void EntityCar::update(float seconds_elapsed) {
 	if (!world->free_camera){
 
 		Vector3 target;
+		sound = new SoundManager();
 
 		//Movimiento fisica
 		{
@@ -253,7 +321,10 @@ void EntityCar::update(float seconds_elapsed) {
 			Vector3 carForward = Vector3(0.0f, 0.0f, -1.0f);
 			// Convertir cordenada mundo
 			carForward = model.rotateVector(carForward);
-
+			//if (moving = true) {
+			//	sound = new SoundManager();
+			//	sound->playSound("CAR_ACC", false);
+			//}
 			if (Input::isKeyPressed(SDL_SCANCODE_W)) { 
 				vel = vel + (carForward * seconds_elapsed * acc_front); 
 				moving = true;
@@ -265,7 +336,7 @@ void EntityCar::update(float seconds_elapsed) {
 			// freno
 			if (Input::isKeyPressed(SDL_SCANCODE_LSHIFT))
 			{
-				vel = vel * 0;
+				vel = vel * 0.3;
 			}
 
 			target = pos + (vel * seconds_elapsed);

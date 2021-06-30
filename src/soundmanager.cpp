@@ -72,4 +72,38 @@ bool SoundManager::IsStarted(const std::string& name) {
 	HCHANNEL hSampleChannel = channels[name];
 	if (BASS_ChannelIsActive(hSampleChannel) == BASS_ACTIVE_PLAYING) { return true; }
 	else { return false; }
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+
+	//auto it = samples.find(name);
+	//if (it != samples.end())
+	//{
+	//	// stop if the sound is being played //
+	//	StopSound(name);
+
+	//	HCHANNEL hSampleChannel;
+	//	if (channels[name] == -1)
+	//	{
+	//		hSampleChannel = BASS_SampleGetChannel(samples[name], false);
+	//		channels[name] = hSampleChannel;
+	//	}
+	//	else
+	//	{
+	//		hSampleChannel = channels[name];
+	//	}
+	//	BASS_ChannelPlay(hSampleChannel, loop);
+	//	return;
+	//}
+}
+
+void SoundManager::clear(const std::string& name)
+{
+	HCHANNEL hSampleChannel = channels[name];
+	//BASS_ChannelFree(hSampleChannel);
+	BASS_ChannelUpdate(hSampleChannel,0);
+	//channels[name] = 0;
+=======
+>>>>>>> 3a56c20251b847cc290816f3c6d2b3432300c62e
+>>>>>>> Stashed changes
 }

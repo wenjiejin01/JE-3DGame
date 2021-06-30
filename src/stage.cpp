@@ -15,6 +15,8 @@ Stage::Stage() {
 	logo = new EntityMesh();
 	logo->texture = Texture::Get("data/logo.png");
 	logo->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/gui.fs");
+	sound = new SoundManager();
+	sound2 = new SoundManager();
 }
 
 void Stage::getKeyDownEvent(Camera* camera, int key_num) {
@@ -200,6 +202,7 @@ void Stage::restartGame() {
 
 	//reset sound
 	havesound = false;
+
 }
 
 /********************************************************* Introstage *********************************************************/
@@ -250,7 +253,7 @@ void IntroStage::render(Camera* camera) {
 
 	//Render Sound
 	if (havesound == false) {
-		sound = new SoundManager();
+		//sound = new SoundManager();
 		sound->playSound("BSO", true);
 		sound->SetVolume("BSO", 0.5);
 		havesound = true;
@@ -259,16 +262,18 @@ void IntroStage::render(Camera* camera) {
 	// start button -> play stage
 	if (startButton->renderButton(game->window_width / 2 - 60, game->window_height / 2 + 150, 100, 100, true))
 	{
+		sound->StopSound("BSO");
 		world->free_camera = false;
 		restartGame();
-		sound->StopSound("BSO");
+		sound->playSound("BSO2",true);
+		sound->SetVolume("BSO2", 0.5);
+		havesound = true;
 		game->current_Stage = game->play_stage;
 
 	}
 
 	// Tutorial button -> tutorial stage
 	if (TutorialButton->renderButton(game->window_width / 2 + 60, game->window_height / 2 + 150, 100, 100, true)) {
-		sound->StopSound("BSO");
 		game->current_Stage = game->tutorial_stage;
 	}
 
@@ -385,6 +390,9 @@ void PlayStage::render(Camera* camera){
 	world->road->render(camera);
 	//renderMiniMap();
 	
+	//sound
+	//sound->StopSound("BSO");
+
 	// render static list
 	for (size_t i = 0; i < count; i++)
 	{
@@ -450,12 +458,13 @@ void PlayStage::render(Camera* camera){
 	drawText(2, Game::instance->window_height - 40, text2, Vector3(1, 1, 1), 2);
 
 	//render sound
-	if (havesound == false) {
+	
+	/*if (havesound == false) {
 		sound = new SoundManager();
 		sound->playSound("BSO2", true);
 		sound->SetVolume("BSO2", 0.2);
 		havesound = true;
-	}
+	}*/
 }
 
 void PlayStage::update(float seconds_elapsed) {
@@ -535,7 +544,9 @@ void PlayStage::update(float seconds_elapsed) {
 	}
 	else {
 		world->live_time = 0.0;
-		sound->StopSound("BSO2");
+		sound->clear("BSO2");
+		//sound->StopSound("BSO2");
+		havesound = false;
 		Game::instance->current_Stage = Game::instance->end_stage;
 	}
 }
@@ -594,6 +605,9 @@ TutorialStage::TutorialStage() {
 	tutorial_tx = new EntityMesh();
 	tutorial_tx->texture = Texture::Get("data/tutorial.png");
 	tutorial_tx->shader = gui;
+
+	//init sound
+	havesound = false;
 }
 
 void TutorialStage::render(Camera* camera) {
@@ -610,9 +624,11 @@ void TutorialStage::render(Camera* camera) {
 	if (startButton->renderButton(game->window_width / 2 - 60, game->window_height / 2 + 170, 100, 100, true))
 	{
 		world->free_camera = false;
-		havesound = false;
 		restartGame();
+		sound->StopSound("BSO");
+		sound->playSound("BSO2", true);
 		game->current_Stage = game->play_stage;
+		havesound = false;
 
 	}
 	// go Init buton back to init stage
@@ -627,6 +643,7 @@ void TutorialStage::render(Camera* camera) {
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 	glDisable(GL_BLEND);
+
 }
 
 void TutorialStage::update(float elapse_time) {
@@ -657,6 +674,7 @@ EndStage::EndStage() {
 void EndStage::render(Camera* camera) {
 	Game* game = Game::instance;
 	Scene* world = Scene::instance;
+	//sound = new SoundManager();
 
 	gameOver->renderButton(game->window_width / 2, game->window_height / 2 - 150, 400, 200, true);
 
@@ -667,12 +685,18 @@ void EndStage::render(Camera* camera) {
 
 	if (restart->renderButton(game->window_width / 2 - 105, game->window_height / 2 + 150, 100, 100, true))
 	{
+		sound->StopSound("GAMEOVER");
+		havesound = false;
 		restartGame();
 		game->current_Stage = game->play_stage;
+		
 	}
 
 	if (goInit->renderButton(game->window_width / 2 + 105, game->window_height / 2 + 150, 100, 100, true))
 	{
+
+		sound->StopSound("BSO2");
+		havesound = false;
 		game->current_Stage = game->intro_stage;
 	}
 
@@ -686,11 +710,9 @@ void EndStage::render(Camera* camera) {
 
 	//Render sound 
 	if (havesound == false) {
-		sound = new SoundManager();
 		sound->playSound("GAMEOVER",false);
 		sound->SetVolume("GAMEOVER", 0.5);
 		havesound = true;
-		
 	}
 }
 
